@@ -50,6 +50,7 @@ public class AControlable : MonoBehaviour
                     if ((objectType & destActionable.objectActionable) != ObjectType.Undefined)
                     {
                         canDoAction = true;
+                        Debug.Log($"ACTION: '{objectType}' is actioning '{controlable.objectType}'.");
                         destActionable.DoAction();
                     }
                 }
@@ -65,7 +66,7 @@ public class AControlable : MonoBehaviour
 
     public void DoAction()
     {
-        Debug.Log("Action " + gameObject.name);
+        Debug.Log($"ACTION: '{objectType}' is self actioning.");
         selfActionable.DoAction();
     }
 }
