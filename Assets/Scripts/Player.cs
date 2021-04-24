@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    _controlledObject.DoAction();
+                    _controlledObject.TryDoAction();
                 }
                 else if (Input.GetMouseButtonDown(1))
                 {
