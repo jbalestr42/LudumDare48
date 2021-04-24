@@ -1,13 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
-{
+public class Player : MonoBehaviour {
     AControlable _controlledObject = null;
     [SerializeField] Camera _camera = null;
 
-    enum PlayerState
-    {
+    enum PlayerState {
         ControllingPlayer,
         TransitionCameraToObject,
         ControllingObject,
@@ -31,89 +29,70 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        switch (_state)
-        {
-            case PlayerState.ControllingPlayer:
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    RaycastHit hit; 
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        switch (_state) {
+            case PlayerState.ControllingPlayer: {
+                    if (Input.GetMouseButtonDown(0)) {
+                        RaycastHit hit;
+                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                    if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-                    {
-                        AControlable controlable = hit.collider.gameObject.GetComponent<AControlable>();
-                        if (controlable != null)
-                        {
-                            Debug.Log("Object Selected: " + controlable);
-                            _controlledObject = controlable;
-                            _state = PlayerState.TransitionCameraToObject;
-                            StartCoroutine(TransitionCameraToObject());
+                        if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
+                            AControlable controlable = hit.collider.gameObject.GetComponent<AControlable>();
+                            if (controlable != null) {
+                                Debug.Log("Object Selected: " + controlable);
+                                _controlledObject = controlable;
+                                _state = PlayerState.TransitionCameraToObject;
+                                StartCoroutine(TransitionCameraToObject());
+                            }
                         }
+                    } else {
+                        FPSMovement();
                     }
+                    break;
                 }
-                else
-                {
-                    FPSMovement();
-                }
-                break;
-            }
             // TODO add state to transition camera
-            case PlayerState.ControllingObject:
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    _controlledObject.TryDoAction();
+            case PlayerState.ControllingObject: {
+                    if (Input.GetMouseButtonDown(0)) {
+                        _controlledObject.TryDoAction();
+                    } else if (Input.GetMouseButtonDown(1)) {
+                        ReleaseObject();
+                        _state = PlayerState.ControllingPlayer;
+                        // TODO move camera
+                    } else {
+                        // TODO object movement
+                        Vector3 movement = new Vector3();
+                        if (Input.GetKey(KeyCode.Q)) {
+                            movement.x = -10f;
+                        } else if (Input.GetKey(KeyCode.D)) {
+                            movement.x = 10f;
+                        }
+                        if (Input.GetKey(KeyCode.Z)) {
+                            movement.z = 10f;
+                        } else if (Input.GetKey(KeyCode.S)) {
+                            movement.z = -10f;
+                        }
+                        _controlledObject.transform.Translate(movement * Time.deltaTime);
+                    }
+                    break;
                 }
-                else if (Input.GetMouseButtonDown(1))
-                {
-                    ReleaseObject();
-                    _state = PlayerState.ControllingPlayer;
-                    // TODO move camera
+            default: {
+                    break;
                 }
-                else
-                {
-                    // TODO object movement
-                    Vector3 movement = new Vector3();
-                    if (Input.GetKey(KeyCode.Q))
-                    {
-                        movement.x = -10f;
-                    }
-                    else if (Input.GetKey(KeyCode.D))
-                    {
-                        movement.x = 10f;
-                    }
-                    if (Input.GetKey(KeyCode.Z))
-                    {
-                        movement.z = 10f;
-                    }
-                    else if (Input.GetKey(KeyCode.S))
-                    {
-                        movement.z = -10f;
-                    }
-                    _controlledObject.transform.Translate(movement * Time.deltaTime);
-                }
-                break;
-            }
-            default:
-            {
-                break;
-            }
         }
     }
 
-    private Vector3 GetBaseInput() {
+    private Vector3 GetBaseInput()
+    {
         Vector3 p_Velocity = new Vector3();
-        if (Input.GetKey (KeyCode.Z)) {
-            p_Velocity += new Vector3(0, 0 , 1);
+        if (Input.GetKey(KeyCode.Z)) {
+            p_Velocity += new Vector3(0, 0, 1);
         }
-        if (Input.GetKey (KeyCode.S)) {
+        if (Input.GetKey(KeyCode.S)) {
             p_Velocity += new Vector3(0, 0, -1);
         }
-        if (Input.GetKey (KeyCode.Q)) {
+        if (Input.GetKey(KeyCode.Q)) {
             p_Velocity += new Vector3(-1, 0, 0);
         }
-        if (Input.GetKey (KeyCode.D)) {
+        if (Input.GetKey(KeyCode.D)) {
             p_Velocity += new Vector3(1, 0, 0);
         }
         return p_Velocity;
@@ -123,38 +102,36 @@ public class Player : MonoBehaviour
     {
         lastMouse = Input.mousePosition - lastMouse;
         lastMouse = new Vector3(-lastMouse.y * camSens, lastMouse.x * camSens, 0);
-        lastMouse = new Vector3(transform.eulerAngles.x + lastMouse.x , transform.eulerAngles.y + lastMouse.y, 0);
+        lastMouse = new Vector3(transform.eulerAngles.x + lastMouse.x, transform.eulerAngles.y + lastMouse.y, 0);
         transform.eulerAngles = lastMouse;
         lastMouse = Input.mousePosition;
-       
+
         Vector3 p = GetBaseInput();
         if (Input.GetKey(KeyCode.LeftShift)) {
             totalRun += Time.deltaTime;
-            p  = p * totalRun * shiftAdd;
+            p = p * totalRun * shiftAdd;
             p.x = Mathf.Clamp(p.x, -maxShift, maxShift);
             p.y = Mathf.Clamp(p.y, -maxShift, maxShift);
             p.z = Mathf.Clamp(p.z, -maxShift, maxShift);
-        }
-        else {
+        } else {
             totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
             p = p * mainSpeed;
         }
-       
+
         p = p * Time.deltaTime;
         Vector3 newPosition = transform.position;
         //If player wants to move on X and Z axis only
-        if (true) {
+        if (false) {
             transform.Translate(p);
             newPosition.x = transform.position.x;
             newPosition.z = transform.position.z;
             transform.position = newPosition;
-        }
-        else {
+        } else {
             transform.Translate(p);
         }
     }
 
-    IEnumerator TransitionCameraToObject() 
+    IEnumerator TransitionCameraToObject()
     {
         float duration = 1f;
         float timer = 0f;
@@ -166,8 +143,7 @@ public class Player : MonoBehaviour
         Vector3 direction = end - _camera.transform.position;
         end = start + direction - direction.normalized * 2f; // keep the camera at N unit from the object
 
-        while (timer < duration)
-        {
+        while (timer < duration) {
             _camera.transform.position = Vector3.Lerp(start, end, timer / duration);
             _camera.transform.rotation = Quaternion.Lerp(_camera.transform.rotation, Quaternion.LookRotation(_controlledObject.transform.position - _camera.transform.position), timer / duration);
             timer += Time.deltaTime;
