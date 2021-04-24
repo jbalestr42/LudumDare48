@@ -1,0 +1,3 @@
+[submodule "Assets/ProjectManager"]
+	path = Assets/ProjectManager
+	url = https://github.com/fcvalise/ProjectManager.git
