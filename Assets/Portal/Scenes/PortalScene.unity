@@ -644,6 +644,7 @@ MonoBehaviour:
   portal: {fileID: 362604576}
   otherPortal: {fileID: 381649762}
   isRevert: 1
+  divide: 0
 --- !u!124 &1190813185
 Behaviour:
   m_ObjectHideFlags: 0
@@ -848,6 +849,7 @@ MonoBehaviour:
   portal: {fileID: 381649762}
   otherPortal: {fileID: 362604576}
   isRevert: 1
+  divide: 1
 --- !u!124 &2138472432
 Behaviour:
   m_ObjectHideFlags: 0
