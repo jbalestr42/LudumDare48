@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
         _camera.transform.LookAt(transform.position);
     }
 
@@ -52,11 +51,10 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    FPSMovement();
+                    FPSMovement(transform);
                 }
                 break;
             }
-            // TODO add state to transition camera
             case PlayerState.ControllingObject:
             {
                 if (Input.GetMouseButtonDown(0))
@@ -67,29 +65,10 @@ public class Player : MonoBehaviour
                 {
                     ReleaseObject();
                     _state = PlayerState.ControllingPlayer;
-                    // TODO move camera
                 }
                 else
                 {
-                    // TODO object movement
-                    Vector3 movement = new Vector3();
-                    if (Input.GetKey(KeyCode.Q))
-                    {
-                        movement.x = -10f;
-                    }
-                    else if (Input.GetKey(KeyCode.D))
-                    {
-                        movement.x = 10f;
-                    }
-                    if (Input.GetKey(KeyCode.Z))
-                    {
-                        movement.z = 10f;
-                    }
-                    else if (Input.GetKey(KeyCode.S))
-                    {
-                        movement.z = -10f;
-                    }
-                    _controlledObject.transform.Translate(movement * Time.deltaTime);
+                    TPSMovement(_controlledObject.transform, _camera.transform);
                 }
                 break;
             }
@@ -117,18 +96,49 @@ public class Player : MonoBehaviour
         return p_Velocity;
     }
 
-    void FPSMovement()
+    void TPSMovement(Transform transformTarget, Transform transformCamera)
+    {
+        lastMouse = Input.mousePosition - lastMouse;
+        transformCamera.RotateAround(transformTarget.position, Vector3.up, lastMouse.x * camSens);
+        transformCamera.RotateAround(transformTarget.position, -transformCamera.right, lastMouse.y * camSens);
+        lastMouse = Input.mousePosition;
+
+        Vector3 dir = Vector3.zero;
+        if (Input.GetKey(KeyCode.Z)) {
+            dir += new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized;
+        }
+        else if (Input.GetKey(KeyCode.S)) {
+            dir += new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized * -1f;
+        }
+        if (Input.GetKey(KeyCode.Q)) {
+            Vector3 tmp = new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized;
+            dir += Vector3.Cross(tmp, Vector3.up).normalized;
+        }
+        else if (Input.GetKey(KeyCode.D)) {
+            Vector3 tmp = new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized;
+            dir += Vector3.Cross(tmp, Vector3.up).normalized * -1;
+        }
+
+        Vector3 p = dir.normalized * mainSpeed * Time.deltaTime;
+        Vector3 newPosition = transformTarget.position;
+        transformTarget.Translate(p);
+        newPosition.x = transformTarget.position.x;
+        newPosition.z = transformTarget.position.z;
+        transformTarget.position = newPosition;
+    }
+
+    void FPSMovement(Transform transformTarget)
     {
         lastMouse = Input.mousePosition - lastMouse;
         lastMouse = new Vector3(-lastMouse.y * camSens, lastMouse.x * camSens, 0);
-        lastMouse = new Vector3(transform.eulerAngles.x + lastMouse.x , transform.eulerAngles.y + lastMouse.y, 0);
-        transform.eulerAngles = lastMouse;
+        lastMouse = new Vector3(transformTarget.eulerAngles.x + lastMouse.x , transformTarget.eulerAngles.y + lastMouse.y, 0);
+        transformTarget.eulerAngles = lastMouse;
         lastMouse = Input.mousePosition;
        
         Vector3 p = GetBaseInput();
         if (Input.GetKey(KeyCode.LeftShift)) {
             totalRun += Time.deltaTime;
-            p  = p * totalRun * shiftAdd;
+            p = p * totalRun * shiftAdd;
             p.x = Mathf.Clamp(p.x, -maxShift, maxShift);
             p.y = Mathf.Clamp(p.y, -maxShift, maxShift);
             p.z = Mathf.Clamp(p.z, -maxShift, maxShift);
@@ -139,17 +149,11 @@ public class Player : MonoBehaviour
         }
        
         p = p * Time.deltaTime;
-        Vector3 newPosition = transform.position;
-        //If player wants to move on X and Z axis only
-        if (true) {
-            transform.Translate(p);
-            newPosition.x = transform.position.x;
-            newPosition.z = transform.position.z;
-            transform.position = newPosition;
-        }
-        else {
-            transform.Translate(p);
-        }
+        Vector3 newPosition = transformTarget.position;
+        transformTarget.Translate(p);
+        newPosition.x = transformTarget.position.x;
+        newPosition.z = transformTarget.position.z;
+        transformTarget.position = newPosition;
     }
 
     IEnumerator TransitionCameraToObject() 
@@ -186,6 +190,7 @@ public class Player : MonoBehaviour
 
     void ReleaseObject()
     {
+        _camera.transform.SetParent(null);
         _controlledObject = null;
     }
 }
