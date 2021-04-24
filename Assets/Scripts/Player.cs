@@ -38,9 +38,7 @@ public class Player : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     RaycastHit hit; 
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                    if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                    if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity))
                     {
                         AControlable controlable = hit.collider.gameObject.GetComponent<AControlable>();
                         if (controlable != null)
