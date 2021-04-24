@@ -357,6 +357,7 @@ GameObject:
   - component: {fileID: 730019782}
   - component: {fileID: 730019783}
   - component: {fileID: 730019784}
+  - component: {fileID: 730019785}
   m_Layer: 0
   m_Name: Camera_Player
   m_TagString: Player
@@ -537,12 +538,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730019776}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 851349dc1ec2c8548a5a676a8261414a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+--- !u!114 &730019785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730019776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab641d6145b76814bb064b23acc8c534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 0}
 --- !u!1 &930227909
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,10 +655,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 959c50d8d834c2042a284fd28d7227d6, type: 2}
   playerCamera: {fileID: 730019781}
-  portal: {fileID: 362604576}
-  otherPortal: {fileID: 381649762}
+  portal: {fileID: 381649762}
+  otherPortal: {fileID: 362604576}
   isRevert: 1
-  divide: 0
 --- !u!124 &1190813185
 Behaviour:
   m_ObjectHideFlags: 0
@@ -846,10 +859,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 32c27e8a04985124e86a10e6f7425cea, type: 2}
   playerCamera: {fileID: 730019781}
-  portal: {fileID: 381649762}
-  otherPortal: {fileID: 362604576}
+  portal: {fileID: 362604576}
+  otherPortal: {fileID: 381649762}
   isRevert: 1
-  divide: 1
 --- !u!124 &2138472432
 Behaviour:
   m_ObjectHideFlags: 0
@@ -1047,6 +1059,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5617083642287270279, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 959c50d8d834c2042a284fd28d7227d6, type: 2}
     - target: {fileID: 6201818870705756221, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
       propertyPath: m_Name
       value: Portal_Small_Inside_House_A
