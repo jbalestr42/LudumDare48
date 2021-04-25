@@ -35,7 +35,7 @@ public class PlayerScalePortal : MonoBehaviour {
             if (distance <= maxDistance) {
                 lerpValue = distance / maxDistance;
             } else {
-                lerpValue = Mathf.Min(1f, lerpValue + Time.deltaTime);
+                lerpValue = 1f;//Mathf.Min(1f, lerpValue + Time.deltaTime);
             }
             controller.center = new Vector3(0f, Mathf.Lerp(playerMinus.centerY, playerBase.centerY, lerpValue), 0f);
             controller.radius = Mathf.Lerp(playerMinus.radius, playerBase.radius, lerpValue);

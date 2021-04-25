@@ -38,7 +38,7 @@ public class PortalTeleporter : MonoBehaviour {
                 Vector3 positionOffset = portalToPlayer;
                 positionOffset *= (reciever.lossyScale.x / transform.lossyScale.x);
                 // overlappingPlayer.position = reciever.position + positionOffset + reciever.forward;
-                Vector3 position = reciever.position + positionOffset + reciever.forward;
+                Vector3 position = reciever.position + positionOffset;
                 overlappingPlayer.position = position;
 
                 playerIsOverlapping = false;
