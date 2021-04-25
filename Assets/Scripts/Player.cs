@@ -17,9 +17,14 @@ public class Player : MonoBehaviour {
 
     public UnityEvent<AControlable> OnObjectReleased = new UnityEvent<AControlable>();
 
+    private Rigidbody rb;
+    private Collider boxCollider;
+
     void Start()
     {
         _camera.transform.LookAt(transform.position);
+        rb = GetComponent<Rigidbody>();
+        boxCollider = GetComponent<Collider>();
     }
 
     float mainSpeed = 10.0f; //regular speed
@@ -107,7 +112,8 @@ public class Player : MonoBehaviour {
         transformTarget.Translate(p);
         newPosition.x = transformTarget.position.x;
         newPosition.z = transformTarget.position.z;
-        transformTarget.position = newPosition;
+        // transformTarget.position = newPosition;
+        rb.MovePosition(newPosition);
     }
 
     void FPSMovement(Transform transformTarget)
@@ -135,7 +141,8 @@ public class Player : MonoBehaviour {
         transformTarget.Translate(p);
         newPosition.x = transformTarget.position.x;
         newPosition.z = transformTarget.position.z;
-        transformTarget.position = newPosition;
+        // transformTarget.position = newPosition;
+        rb.MovePosition(newPosition);
     }
 
     IEnumerator TransitionCameraToObject()
@@ -166,11 +173,13 @@ public class Player : MonoBehaviour {
 
     void ControlObject(AControlable obj)
     {
+        boxCollider.enabled = false;
         _controlledObject = obj;
     }
 
     void ReleaseObject()
     {
+        boxCollider.enabled = true;
         OnObjectReleased.Invoke(_controlledObject);
         _camera.transform.SetParent(null);
         _controlledObject = null;
