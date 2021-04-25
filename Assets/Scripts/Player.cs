@@ -39,36 +39,34 @@ public class Player : MonoBehaviour {
     void FixedUpdate()
     {
         switch (_state) {
-            case PlayerState.ControllingPlayer:
-            {
-                if (Input.GetMouseButtonDown(0)) {
-                    RaycastHit hit;
-                    if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity)) {
-                        AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
-                        if (controlable != null) {
-                            Debug.Log("Object Selected: " + controlable);
-                            _controlledObject = controlable;
-                            _state = PlayerState.TransitionCameraToObject;
-                            StartCoroutine(TransitionCameraToObject());
+            case PlayerState.ControllingPlayer: {
+                    if (Input.GetMouseButtonDown(0)) {
+                        RaycastHit hit;
+                        if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity)) {
+                            AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
+                            if (controlable != null) {
+                                Debug.Log("Object Selected: " + controlable);
+                                _controlledObject = controlable;
+                                _state = PlayerState.TransitionCameraToObject;
+                                StartCoroutine(TransitionCameraToObject());
+                            }
                         }
+                    } else {
+                        FPSMovement(transform);
                     }
-                } else {
-                    FPSMovement(transform);
+                    break;
                 }
-                break;
-            }
-            case PlayerState.ControllingObject:
-            {
-                if (Input.GetMouseButtonDown(0)) {
-                    _controlledObject.TryDoAction();
-                } else if (Input.GetMouseButtonDown(1)) {
-                    ReleaseObject();
-                    _state = PlayerState.ControllingPlayer;
-                } else {
-                    TPSMovement(_controlledObject.transform, _camera.transform);
+            case PlayerState.ControllingObject: {
+                    if (Input.GetMouseButtonDown(0)) {
+                        _controlledObject.TryDoAction();
+                    } else if (Input.GetMouseButtonDown(1)) {
+                        ReleaseObject();
+                        _state = PlayerState.ControllingPlayer;
+                    } else {
+                        TPSMovement(_controlledObject.transform, _camera.transform);
+                    }
+                    break;
                 }
-                break;
-            }
         }
     }
 
@@ -90,34 +88,47 @@ public class Player : MonoBehaviour {
         return p_Velocity;
     }
 
+    Rigidbody tpsRb = null;
     void TPSMovement(Transform transformTarget, Transform transformCamera)
     {
+        if (tpsRb == null) {
+            tpsRb = transformTarget.GetComponent<Rigidbody>();
+            if (tpsRb == null) {
+                tpsRb = transformTarget.gameObject.AddComponent<Rigidbody>();
+                tpsRb.constraints = RigidbodyConstraints.FreezeRotation;
+                tpsRb.useGravity = false;
+            }
+        }
         lastMouse = Input.mousePosition - lastMouse;
-        transformCamera.RotateAround(transformTarget.position, Vector3.up, lastMouse.x * camSens);
-        transformCamera.RotateAround(transformTarget.position, -transformCamera.right, lastMouse.y * camSens);
+        transformTarget.RotateAround(transformTarget.position, Vector3.up, lastMouse.x * camSens);
+        rb.rotation = transformTarget.rotation;
         lastMouse = Input.mousePosition;
 
-        Vector3 dir = Vector3.zero;
-        if (Input.GetKey(KeyCode.Z)) {
-            dir += new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized;
-        } else if (Input.GetKey(KeyCode.S)) {
-            dir += new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized * -1f;
-        }
-        if (Input.GetKey(KeyCode.Q)) {
-            Vector3 tmp = new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized;
-            dir += Vector3.Cross(tmp, Vector3.up).normalized;
-        } else if (Input.GetKey(KeyCode.D)) {
-            Vector3 tmp = new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized;
-            dir += Vector3.Cross(tmp, Vector3.up).normalized * -1;
-        }
+        Vector3 p = GetBaseInput() * mainSpeed;
+        Vector3 cameraNextPosition = (tpsRb.position - transformTarget.forward * 5f + transformTarget.up * 4f);
+        rb.velocity = cameraNextPosition - rb.position;
+        RigidBodyLookAt(tpsRb.transform, rb);
 
-        Vector3 p = dir.normalized * mainSpeed;
-        p = Vector3.ProjectOnPlane(transform.forward * p.z + transform.right * p.x, Vector3.up);
-        rb.velocity = p;
+        p = Vector3.ProjectOnPlane(rb.transform.forward * p.z + rb.transform.right * p.x, Vector3.up);
+        tpsRb.velocity = p;
+    }
+
+    void RigidBodyLookAt(Transform target, Rigidbody rb)
+    {
+        var targetDir = target.position - rb.transform.position;
+        var forward = rb.transform.forward;
+        var localTarget = rb.transform.InverseTransformPoint(target.position);
+
+        float angle = Mathf.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
+
+        var eulerAngleVelocity = new Vector3(0, angle, 0);
+        var deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime);
+        rb.MoveRotation(rb.rotation * deltaRotation);
     }
 
     void FPSMovement(Transform transformTarget)
     {
+        tpsRb = null;
         lastMouse = Input.mousePosition - lastMouse;
         lastMouse = new Vector3(-lastMouse.y * camSens, lastMouse.x * camSens, 0);
         lastMouse = new Vector3(transformTarget.eulerAngles.x + lastMouse.x, transformTarget.eulerAngles.y + lastMouse.y, 0);
@@ -125,16 +136,7 @@ public class Player : MonoBehaviour {
         lastMouse = Input.mousePosition;
 
         Vector3 p = GetBaseInput();
-        // if (Input.GetKey(KeyCode.LeftShift)) {
-        //     totalRun += Time.deltaTime;
-        //     p = p * totalRun * shiftAdd;
-        //     p.x = Mathf.Clamp(p.x, -maxShift, maxShift);
-        //     p.y = Mathf.Clamp(p.y, -maxShift, maxShift);
-        //     p.z = Mathf.Clamp(p.z, -maxShift, maxShift);
-        // } else {
-        totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
         p = p * mainSpeed;
-        // }
 
         p = Vector3.ProjectOnPlane(transform.forward * p.z + transform.right * p.x, Vector3.up);
         rb.velocity = p;

@@ -826,6 +826,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3750835304528261064, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9d07f2280e3cfb840a1c38a49b3ee4b8, type: 2}
     - target: {fileID: 3851831582176723875, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1039,6 +1043,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3750835304528261064, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3dfc4bf5d29e69343b72f95706f411fc, type: 2}
     - target: {fileID: 3851831582176723875, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3272,10 +3280,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal_Big_Inside_House_A
       objectReference: {fileID: 0}
+    - target: {fileID: 3750835304528261064, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b4cc1b2c754c45a4bbf5e9c5d21d27fd, type: 2}
     - target: {fileID: 3851831582176723875, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6734b4d96945b674ab21c5b1c29475a3, type: 2}
+    - target: {fileID: 6045370224515170259, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045370224515170259, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.034
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045370224515170259, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7703050009358991515, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: baseName
       value: Portal_Big
@@ -3283,6 +3307,10 @@ PrefabInstance:
     - target: {fileID: 7837371648244925333, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993994247124042950, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.081
       objectReference: {fileID: 0}
     - target: {fileID: 8428270464984303717, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: player
@@ -3421,6 +3449,10 @@ PrefabInstance:
       propertyPath: baseName
       value: Portal_Small
       objectReference: {fileID: 0}
+    - target: {fileID: 8675013058329697390, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9d07f2280e3cfb840a1c38a49b3ee4b8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
 --- !u!1001 &7296135915801800373
