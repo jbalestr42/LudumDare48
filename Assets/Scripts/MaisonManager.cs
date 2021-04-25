@@ -5,6 +5,9 @@ using UnityEngine;
 public class MaisonManager : MonoBehaviour
 {
     List<AControlable> _controlables = new List<AControlable>();
+    public GameObject _door;
+    public GameObject _smallDoorCollider;
+    public GameObject _nextDoorCollider;
 
     void Start()
     {
@@ -36,5 +39,12 @@ public class MaisonManager : MonoBehaviour
     public AControlable GetObject(ObjectType type)
     {
         return _controlables.Find(o => o.objectType == type);
+    }
+
+    public void OpenDoor()
+    {
+        _door.transform.RotateAround(_door.transform.position, transform.up, -90f);
+        _smallDoorCollider.SetActive(false);
+        _nextDoorCollider.SetActive(false);
     }
 }

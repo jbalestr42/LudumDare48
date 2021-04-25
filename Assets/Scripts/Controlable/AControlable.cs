@@ -27,6 +27,7 @@ public enum ObjectType {
 public class AControlable : MonoBehaviour
 {
     [SerializeField] float _radius = 1f;
+    [SerializeField] float _distanceMinimum = 0.1f;
     public ObjectType objectType = ObjectType.Undefined;
     public List<AActionable> actionables { get; private set; } = new List<AActionable>();
     AActionable selfActionable = null;
@@ -93,11 +94,10 @@ public class AControlable : MonoBehaviour
 
     public virtual bool IsSameState(AControlable controlable)
     {
-        //TODO: check other state, is lamp turned on ?
-
         // Check position
         Vector3 diff = transform.localPosition - controlable.transform.localPosition;
+        Debug.Log("position " + transform.localPosition  + " - " + controlable.transform.localPosition);
         Debug.Log("Diff " + diff  + " - " + diff.magnitude);
-        return diff.magnitude < 1f;
+        return diff.magnitude < _distanceMinimum;
     }
 }
