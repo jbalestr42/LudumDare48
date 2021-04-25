@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PortalTeleporter : MonoBehaviour {
+    private static float imunePortal = 0f;
 
     public Transform player;
     public Transform reciever;
@@ -12,6 +13,10 @@ public class PortalTeleporter : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (imunePortal >= 0f) {
+            imunePortal -= Time.deltaTime;
+            return;
+        }
         if (playerIsOverlapping) {
             Vector3 portalToPlayer = player.position - transform.position;
             float dotProduct = Vector3.Dot(transform.up, portalToPlayer);
@@ -28,6 +33,7 @@ public class PortalTeleporter : MonoBehaviour {
                 player.position = reciever.position + positionOffset;
 
                 playerIsOverlapping = false;
+                imunePortal = 0.5f;
             }
         }
     }
