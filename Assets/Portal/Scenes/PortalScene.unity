@@ -1807,6 +1807,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 0}
+  OnObjectReleased:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &779848418 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 362604576, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
