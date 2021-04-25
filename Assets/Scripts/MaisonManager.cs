@@ -43,8 +43,17 @@ public class MaisonManager : MonoBehaviour
 
     public void OpenDoor()
     {
-        _door.transform.RotateAround(_door.transform.position, transform.up, -90f);
+        StartCoroutine(OpenDoorCor());
         _smallDoorCollider.SetActive(false);
         _nextDoorCollider.SetActive(false);
+    }
+
+    IEnumerator OpenDoorCor()
+    {
+        while (_door.transform.localRotation.y > -0.60f)
+        {
+            _door.transform.RotateAround(_door.transform.position, transform.up, -Time.deltaTime * 20f);
+            yield return new WaitForEndOfFrame();
+        }
     }
 }
