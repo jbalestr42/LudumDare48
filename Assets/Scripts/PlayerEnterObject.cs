@@ -34,7 +34,7 @@ public class PlayerEnterObject : MonoBehaviour {
                                 transform.position = positionControlledObject;
                                 _controlledObject.transform.SetParent(transform);
                                 _camera.GetComponent<CameraOcclusionProtector>().distanceToTarget = 8f;
-                                // Change character controller here
+                                _state = PlayerState.ControllingObject;
                             }
                         }
                     }
@@ -44,7 +44,13 @@ public class PlayerEnterObject : MonoBehaviour {
                     if (Input.GetMouseButtonDown(0)) {
                         _controlledObject.TryDoAction();
                     } else if (Input.GetMouseButtonDown(1)) {
-                        ReleaseObject();
+                        Vector3 positionCamera = _camera.transform.position;
+                        positionCamera.y = transform.position.y;
+                        transform.position = positionCamera;
+                        _controlledObject.transform.SetParent(null);
+                        _camera.GetComponent<CameraOcclusionProtector>().distanceToTarget = 0f;
+                        _controlledObject = null;
+                        OnObjectReleased.Invoke(_controlledObject);
                         _state = PlayerState.ControllingPlayer;
                     }
                     break;
@@ -61,12 +67,5 @@ public class PlayerEnterObject : MonoBehaviour {
     void ControlObject(AControlable obj)
     {
         _controlledObject = obj;
-    }
-
-    void ReleaseObject()
-    {
-        OnObjectReleased.Invoke(_controlledObject);
-        _camera.transform.SetParent(null);
-        _controlledObject = null;
     }
 }
