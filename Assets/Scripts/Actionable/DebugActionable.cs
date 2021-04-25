@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DebugControlable : AActionable
+public class DebugActionable : AActionable
 {
     public override void DoAction()
     {

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour {
     AControlable _controlledObject = null;
@@ -13,6 +14,8 @@ public class Player : MonoBehaviour {
     }
 
     PlayerState _state = PlayerState.ControllingPlayer;
+
+    public UnityEvent<AControlable> OnObjectReleased = new UnityEvent<AControlable>();
 
     void Start()
     {
@@ -40,10 +43,7 @@ public class Player : MonoBehaviour {
                                 _state = PlayerState.TransitionCameraToObject;
                                 StartCoroutine(TransitionCameraToObject());
                             }
-                        } else {
-                            FPSMovement(null);
                         }
-                        break;
                     } else {
                         FPSMovement(transform);
                     }
@@ -61,117 +61,118 @@ public class Player : MonoBehaviour {
                 }
                 break;
         }
+    }
 
-        Vector3 GetBaseInput()
-        {
-            Vector3 p_Velocity = new Vector3();
-            if (Input.GetKey(KeyCode.Z)) {
-                p_Velocity += new Vector3(0, 0, 1);
-            }
-            if (Input.GetKey(KeyCode.S)) {
-                p_Velocity += new Vector3(0, 0, -1);
-            }
-            if (Input.GetKey(KeyCode.Q)) {
-                p_Velocity += new Vector3(-1, 0, 0);
-            }
-            if (Input.GetKey(KeyCode.D)) {
-                p_Velocity += new Vector3(1, 0, 0);
-            }
-            return p_Velocity;
+    Vector3 GetBaseInput()
+    {
+        Vector3 p_Velocity = new Vector3();
+        if (Input.GetKey(KeyCode.Z)) {
+            p_Velocity += new Vector3(0, 0, 1);
+        }
+        if (Input.GetKey(KeyCode.S)) {
+            p_Velocity += new Vector3(0, 0, -1);
+        }
+        if (Input.GetKey(KeyCode.Q)) {
+            p_Velocity += new Vector3(-1, 0, 0);
+        }
+        if (Input.GetKey(KeyCode.D)) {
+            p_Velocity += new Vector3(1, 0, 0);
+        }
+        return p_Velocity;
+    }
+
+    void TPSMovement(Transform transformTarget, Transform transformCamera)
+    {
+        lastMouse = Input.mousePosition - lastMouse;
+        transformCamera.RotateAround(transformTarget.position, Vector3.up, lastMouse.x * camSens);
+        transformCamera.RotateAround(transformTarget.position, -transformCamera.right, lastMouse.y * camSens);
+        lastMouse = Input.mousePosition;
+
+        Vector3 dir = Vector3.zero;
+        if (Input.GetKey(KeyCode.Z)) {
+            dir += new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized;
+        } else if (Input.GetKey(KeyCode.S)) {
+            dir += new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized * -1f;
+        }
+        if (Input.GetKey(KeyCode.Q)) {
+            Vector3 tmp = new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized;
+            dir += Vector3.Cross(tmp, Vector3.up).normalized;
+        } else if (Input.GetKey(KeyCode.D)) {
+            Vector3 tmp = new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized;
+            dir += Vector3.Cross(tmp, Vector3.up).normalized * -1;
         }
 
-        void TPSMovement(Transform transformTarget, Transform transformCamera)
-        {
-            lastMouse = Input.mousePosition - lastMouse;
-            transformCamera.RotateAround(transformTarget.position, Vector3.up, lastMouse.x * camSens);
-            transformCamera.RotateAround(transformTarget.position, -transformCamera.right, lastMouse.y * camSens);
-            lastMouse = Input.mousePosition;
+        Vector3 p = dir.normalized * mainSpeed * Time.deltaTime;
+        Vector3 newPosition = transformTarget.position;
+        transformTarget.Translate(p);
+        newPosition.x = transformTarget.position.x;
+        newPosition.z = transformTarget.position.z;
+        transformTarget.position = newPosition;
+    }
 
-            Vector3 dir = Vector3.zero;
-            if (Input.GetKey(KeyCode.Z)) {
-                dir += new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized;
-            } else if (Input.GetKey(KeyCode.S)) {
-                dir += new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized * -1f;
-            }
-            if (Input.GetKey(KeyCode.Q)) {
-                Vector3 tmp = new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized;
-                dir += Vector3.Cross(tmp, Vector3.up).normalized;
-            } else if (Input.GetKey(KeyCode.D)) {
-                Vector3 tmp = new Vector3(transformCamera.forward.x, 0f, transformCamera.forward.z).normalized;
-                dir += Vector3.Cross(tmp, Vector3.up).normalized * -1;
-            }
+    void FPSMovement(Transform transformTarget)
+    {
+        lastMouse = Input.mousePosition - lastMouse;
+        lastMouse = new Vector3(-lastMouse.y * camSens, lastMouse.x * camSens, 0);
+        lastMouse = new Vector3(transformTarget.eulerAngles.x + lastMouse.x, transformTarget.eulerAngles.y + lastMouse.y, 0);
+        transformTarget.eulerAngles = lastMouse;
+        lastMouse = Input.mousePosition;
 
-            Vector3 p = dir.normalized * mainSpeed * Time.deltaTime;
-            Vector3 newPosition = transformTarget.position;
-            transformTarget.Translate(p);
-            newPosition.x = transformTarget.position.x;
-            newPosition.z = transformTarget.position.z;
-            transformTarget.position = newPosition;
+        Vector3 p = GetBaseInput();
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            totalRun += Time.deltaTime;
+            p = p * totalRun * shiftAdd;
+            p.x = Mathf.Clamp(p.x, -maxShift, maxShift);
+            p.y = Mathf.Clamp(p.y, -maxShift, maxShift);
+            p.z = Mathf.Clamp(p.z, -maxShift, maxShift);
+        } else {
+            totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
+            p = p * mainSpeed;
         }
 
-        void FPSMovement(Transform transformTarget)
-        {
-            lastMouse = Input.mousePosition - lastMouse;
-            lastMouse = new Vector3(-lastMouse.y * camSens, lastMouse.x * camSens, 0);
-            lastMouse = new Vector3(transformTarget.eulerAngles.x + lastMouse.x, transformTarget.eulerAngles.y + lastMouse.y, 0);
-            transformTarget.eulerAngles = lastMouse;
-            lastMouse = Input.mousePosition;
+        p = p * Time.deltaTime;
+        Vector3 newPosition = transformTarget.position;
+        transformTarget.Translate(p);
+        newPosition.x = transformTarget.position.x;
+        newPosition.z = transformTarget.position.z;
+        transformTarget.position = newPosition;
+    }
 
-            Vector3 p = GetBaseInput();
-            if (Input.GetKey(KeyCode.LeftShift)) {
-                totalRun += Time.deltaTime;
-                p = p * totalRun * shiftAdd;
-                p.x = Mathf.Clamp(p.x, -maxShift, maxShift);
-                p.y = Mathf.Clamp(p.y, -maxShift, maxShift);
-                p.z = Mathf.Clamp(p.z, -maxShift, maxShift);
-            } else {
-                totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
-                p = p * mainSpeed;
-            }
+    IEnumerator TransitionCameraToObject()
+    {
+        float duration = 1f;
+        float timer = 0f;
 
-            p = p * Time.deltaTime;
-            Vector3 newPosition = transformTarget.position;
-            transformTarget.Translate(p);
-            newPosition.x = transformTarget.position.x;
-            newPosition.z = transformTarget.position.z;
-            transformTarget.position = newPosition;
+        _camera.transform.SetParent(_controlledObject.transform);
+        Vector3 start = _camera.transform.position;
+        Vector3 end = _controlledObject.transform.position;
+        end.y = start.y;
+        Vector3 direction = end - _camera.transform.position;
+        end = start + direction - direction.normalized * 2f; // keep the camera at N unit from the object
+
+        while (timer < duration) {
+            _camera.transform.position = Vector3.Lerp(start, end, timer / duration);
+            _camera.transform.rotation = Quaternion.Lerp(_camera.transform.rotation, Quaternion.LookRotation(_controlledObject.transform.position - _camera.transform.position), timer / duration);
+            timer += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
         }
+        _state = PlayerState.ControllingObject;
+    }
 
-        IEnumerator TransitionCameraToObject()
-        {
-            float duration = 1f;
-            float timer = 0f;
+    bool IsControllingObject()
+    {
+        return _controlledObject != null;
+    }
 
-            _camera.transform.SetParent(_controlledObject.transform);
-            Vector3 start = _camera.transform.position;
-            Vector3 end = _controlledObject.transform.position;
-            end.y = start.y;
-            Vector3 direction = end - _camera.transform.position;
-            end = start + direction - direction.normalized * 2f; // keep the camera at N unit from the object
+    void ControlObject(AControlable obj)
+    {
+        _controlledObject = obj;
+    }
 
-            while (timer < duration) {
-                _camera.transform.position = Vector3.Lerp(start, end, timer / duration);
-                _camera.transform.rotation = Quaternion.Lerp(_camera.transform.rotation, Quaternion.LookRotation(_controlledObject.transform.position - _camera.transform.position), timer / duration);
-                timer += Time.deltaTime;
-                yield return new WaitForEndOfFrame();
-            }
-            _state = PlayerState.ControllingObject;
-        }
-
-        bool IsControllingObject()
-        {
-            return _controlledObject != null;
-        }
-
-        void ControlObject(AControlable obj)
-        {
-            _controlledObject = obj;
-        }
-
-        void ReleaseObject()
-        {
-            _camera.transform.SetParent(null);
-            _controlledObject = null;
-        }
+    void ReleaseObject()
+    {
+        OnObjectReleased.Invoke(_controlledObject);
+        _camera.transform.SetParent(null);
+        _controlledObject = null;
     }
 }

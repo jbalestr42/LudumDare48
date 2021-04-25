@@ -1,6 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8969107458315197051
+--- !u!114 &2142422678500491826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451224860280093337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a63e19c91f5b774ebb493b37d18e26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 1
+  objectType: 8
+  _hasSelfAction: 1
+  isTurnedOn: 1
+--- !u!1 &3668295467771323590
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +24,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6818092355116371332}
-  - component: {fileID: 3553129524053572494}
+  - component: {fileID: 8428116331400502101}
+  - component: {fileID: 1786491732272437418}
   m_Layer: 31
-  m_Name: Self
+  m_Name: SelfAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6818092355116371332
+--- !u!4 &8428116331400502101
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8969107458315197051}
+  m_GameObject: {fileID: 3668295467771323590}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8751402546817625947}
+  m_Father: {fileID: 1451224860280093332}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3553129524053572494
+--- !u!114 &1786491732272437418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8969107458315197051}
+  m_GameObject: {fileID: 3668295467771323590}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46fca3bf2f766e04483772fcdf724e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectActionable: 1
---- !u!1001 &6520680409668318847
+  objectActionable: 8
+--- !u!1001 &3976378464542811056
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -95,18 +111,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2525717258595178792, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: objectType
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178793, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_Name
-      value: ChairControllableObject
+      value: LampControllableObject
       objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178794, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ec3f5efb862e7624eb7afda75be7a825, type: 2}
-    m_RemovedComponents: []
+      objectReference: {fileID: 2100000, guid: 4fe9778b5cbbef64f9274259ac204fde, type: 2}
+    m_RemovedComponents:
+    - {fileID: 2525717258595178792, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
---- !u!4 &8751402546817625947 stripped
+--- !u!1 &1451224860280093337 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2525717258595178793, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+  m_PrefabInstance: {fileID: 3976378464542811056}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1451224860280093332 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2525717258595178788, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
-  m_PrefabInstance: {fileID: 6520680409668318847}
+  m_PrefabInstance: {fileID: 3976378464542811056}
   m_PrefabAsset: {fileID: 0}
