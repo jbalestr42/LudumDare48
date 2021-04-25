@@ -28,15 +28,26 @@ public class PlayerScalePortal : MonoBehaviour {
 
     private void Update()
     {
+        float distance = 0f;
+        bool isClosePortal = false;
+
         foreach (var teleporter in portalTeleporterList) {
             Vector3 teleporterPosition = teleporter.transform.position;
-            float distance = Vector3.Distance(teleporterPosition, transform.position);
-
+            distance = Vector3.Distance(teleporterPosition, transform.position);
             if (distance <= maxDistance) {
-                lerpValue = distance / maxDistance;
-            } else {
-                lerpValue = 1f;//Mathf.Min(1f, lerpValue + Time.deltaTime);
+                isClosePortal = true;
+                break;
             }
+
+        }
+        if (isClosePortal) {
+            lerpValue = distance / maxDistance;
+            controller.center = new Vector3(0f, Mathf.Lerp(playerMinus.centerY, playerBase.centerY, lerpValue), 0f);
+            controller.radius = Mathf.Lerp(playerMinus.radius, playerBase.radius, lerpValue);
+            controller.height = Mathf.Lerp(playerMinus.height, playerBase.height, lerpValue);
+            head.localPosition = new Vector3(0f, Mathf.Lerp(playerMinus.height, playerBase.height, lerpValue), 0f);
+        } else if (lerpValue < 1f) {
+            lerpValue = 1f;//Mathf.Min(1f, lerpValue + Time.deltaTime);
             controller.center = new Vector3(0f, Mathf.Lerp(playerMinus.centerY, playerBase.centerY, lerpValue), 0f);
             controller.radius = Mathf.Lerp(playerMinus.radius, playerBase.radius, lerpValue);
             controller.height = Mathf.Lerp(playerMinus.height, playerBase.height, lerpValue);
