@@ -1638,9 +1638,9 @@ GameObject:
   - component: {fileID: 730019779}
   - component: {fileID: 730019778}
   - component: {fileID: 730019782}
-  - component: {fileID: 730019783}
   - component: {fileID: 730019785}
   - component: {fileID: 730019777}
+  - component: {fileID: 730019783}
   m_Layer: 0
   m_Name: Camera_Player
   m_TagString: Player
@@ -1778,11 +1778,11 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!65 &730019783
-BoxCollider:
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 3
+--- !u!135 &730019783
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1792,7 +1792,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &730019785
 MonoBehaviour:
@@ -1806,7 +1806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab641d6145b76814bb064b23acc8c534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 0}
+  _camera: {fileID: 730019780}
   OnObjectReleased:
     m_PersistentCalls:
       m_Calls: []
@@ -2854,6 +2854,10 @@ PrefabInstance:
       propertyPath: baseName
       value: Portal_Big
       objectReference: {fileID: 0}
+    - target: {fileID: 7837371648244925333, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8428270464984303717, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: player
       value: 
@@ -2862,6 +2866,10 @@ PrefabInstance:
       propertyPath: reciever
       value: 
       objectReference: {fileID: 779848418}
+    - target: {fileID: 8673967698604916830, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 9209125754519903153, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_RootOrder
       value: 1
