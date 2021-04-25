@@ -105,6 +105,8 @@ public class Player : MonoBehaviour {
         lastMouse = Input.mousePosition;
 
         Vector3 p = GetBaseInput() * mainSpeed;
+        transformTarget.GetComponent<AControlable>()?.SetWalking(p != Vector3.zero);
+
         Vector3 cameraNextPosition = (tpsRb.position - transformTarget.forward * 5f + transformTarget.up * 4f);
         rb.velocity = cameraNextPosition - rb.position;
         rb.transform.LookAt(tpsRb.position);

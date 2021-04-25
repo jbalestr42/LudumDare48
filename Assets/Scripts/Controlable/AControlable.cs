@@ -33,6 +33,8 @@ public class AControlable : MonoBehaviour
     AActionable selfActionable = null;
     public bool _hasSelfAction = false;
 
+    Animator _animator;
+
     void Start()
     {
         // Get all actionables in children only
@@ -49,6 +51,8 @@ public class AControlable : MonoBehaviour
                 actionables.Add(actionable);
             }
         }
+
+        _animator = GetComponentInChildren<Animator>();
     }
 
     public void TryDoAction()
@@ -85,6 +89,7 @@ public class AControlable : MonoBehaviour
     {
         Debug.Log($"ACTION: '{objectType}' is self actioning.");
         selfActionable.DoAction();
+        TriggerAction();
     }
 
     public virtual void DoChildAction()
@@ -99,5 +104,15 @@ public class AControlable : MonoBehaviour
         Debug.Log("position " + transform.localPosition  + " - " + controlable.transform.localPosition);
         Debug.Log("Diff " + diff  + " - " + diff.magnitude);
         return diff.magnitude < _distanceMinimum;
+    }
+
+    public void SetWalking(bool isWalking)
+    {
+        _animator?.SetBool("Walk", isWalking);
+    }
+
+    public void TriggerAction()
+    {
+        _animator?.SetTrigger("Action");
     }
 }
