@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 0.01
+  _distanceMinimum: 1
   objectType: 1
   _hasSelfAction: 0
