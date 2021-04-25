@@ -35,12 +35,7 @@ public class MaisonManager : MonoBehaviour
 
     public bool IsSameState(AControlable refControlable, AControlable controlable)
     {
-        //TODO: return refControlable.IsSameState(controlable); check other state
-
-        // Is position near the reference controlable
-        Vector3 diff = refControlable.transform.localPosition - controlable.transform.localPosition;
-        Debug.Log("Diff " + diff  + " - " + diff.magnitude);
-        return diff.magnitude < 1f;
+        return refControlable.IsSameState(controlable);
     }
 
     public AControlable GetObject(ObjectType type)

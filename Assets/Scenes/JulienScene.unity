@@ -182,6 +182,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.24
       objectReference: {fileID: 0}
+    - target: {fileID: 4879384956399289178, guid: 9d86a7c1d767d4e40a723a4ffdd4c9e2, type: 3}
+      propertyPath: isTurnedOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5345682071340071932, guid: 9d86a7c1d767d4e40a723a4ffdd4c9e2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.93
+      objectReference: {fileID: 0}
     - target: {fileID: 6040708832589263677, guid: 9d86a7c1d767d4e40a723a4ffdd4c9e2, type: 3}
       propertyPath: m_Name
       value: House (1)
