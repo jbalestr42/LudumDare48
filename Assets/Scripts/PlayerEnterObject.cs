@@ -12,6 +12,7 @@ public class PlayerEnterObject : MonoBehaviour {
     }
 
     AControlable _controlledObject = null;
+    Transform _controlledObjectParent = null;
     [SerializeField] Camera _camera = null;
     PlayerState _state = PlayerState.ControllingPlayer;
 
@@ -32,13 +33,16 @@ public class PlayerEnterObject : MonoBehaviour {
                                 Vector3 positionControlledObject = _controlledObject.transform.position;
                                 CharacterController controller = GetComponent<CharacterController>();
                                 positionControlledObject.y = transform.position.y;
+
                                 controller.enabled = false;
                                 transform.position = positionControlledObject;
                                 controller.enabled = true;
+                                _controlledObjectParent = _controlledObject.transform.parent;
                                 _controlledObject.transform.SetParent(transform);
                                 _controlledObject.transform.forward = transform.forward;
                                 _camera.GetComponent<CameraOcclusionProtector>().distanceToTarget = 8f;
                                 _state = PlayerState.ControllingObject;
+                                _controlledObject.SetWalking(true);
                             }
                         }
                     }
@@ -53,12 +57,13 @@ public class PlayerEnterObject : MonoBehaviour {
                         positionCamera.y = transform.position.y;
                         gameObject.GetComponent<CharacterController>().Move(positionCamera - transform.position);
                         // transform.position = positionCamera;
-                        _controlledObject.transform.SetParent(null);
+                        _controlledObject.transform.SetParent(_controlledObjectParent);
                         _controlledObject.transform.position = controledPosition;
                         _camera.GetComponent<CameraOcclusionProtector>().distanceToTarget = 0f;
-                        _controlledObject = null;
+                        _controlledObject.SetWalking(false);
                         OnObjectReleased.Invoke(_controlledObject);
                         _state = PlayerState.ControllingPlayer;
+                        _controlledObject = null;
                     }
                     break;
                 }

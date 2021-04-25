@@ -25,10 +25,9 @@ public enum ObjectType {
     Carafe = 131072,
 }
 
-public class AControlable : MonoBehaviour
-{
+public class AControlable : MonoBehaviour {
     [SerializeField] float _radius = 1f;
-    [SerializeField] float _distanceMinimum = 0.1f;
+    [SerializeField] float _distanceMinimum = 1f;
     public ObjectType objectType = ObjectType.Undefined;
     public List<AActionable> actionables { get; private set; } = new List<AActionable>();
     AActionable selfActionable = null;
@@ -40,15 +39,11 @@ public class AControlable : MonoBehaviour
     {
         // Get all actionables in children only
         AActionable[] actionablesArray = GetComponentsInChildren<AActionable>();
-        foreach (AActionable actionable in actionablesArray)
-        {
+        foreach (AActionable actionable in actionablesArray) {
             // If the object type is this one, it's the self action
-            if ((actionable.objectActionable & objectType) != ObjectType.Undefined)
-            {
+            if ((actionable.objectActionable & objectType) != ObjectType.Undefined) {
                 selfActionable = actionable;
-            }
-            else
-            {
+            } else {
                 actionables.Add(actionable);
             }
         }
@@ -61,15 +56,11 @@ public class AControlable : MonoBehaviour
         bool canDoAction = false;
         int layerMask = 1;// << LayerMask.NameToLayer("Controlable");
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, _radius, Vector3.up, 10f, layerMask);
-        foreach (RaycastHit hit in hits)
-        {
+        foreach (RaycastHit hit in hits) {
             AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
-            if (controlable && hit.collider.gameObject != gameObject)
-            {
-                foreach (AActionable destActionable in controlable.actionables)
-                {
-                    if ((objectType & destActionable.objectActionable) != ObjectType.Undefined)
-                    {
+            if (controlable && hit.collider.gameObject != gameObject) {
+                foreach (AActionable destActionable in controlable.actionables) {
+                    if ((objectType & destActionable.objectActionable) != ObjectType.Undefined) {
                         canDoAction = true;
                         Debug.Log($"ACTION: '{objectType}' is actioning '{controlable.objectType}'.");
                         destActionable.DoAction();
@@ -79,8 +70,7 @@ public class AControlable : MonoBehaviour
         }
 
         // Use bool to avoid doing action multiple times
-        if (canDoAction || _hasSelfAction)
-        {
+        if (canDoAction || _hasSelfAction) {
             DoAction();
             DoChildAction();
         }
@@ -102,8 +92,8 @@ public class AControlable : MonoBehaviour
     {
         // Check position
         Vector3 diff = transform.localPosition - controlable.transform.localPosition;
-        Debug.Log("position " + transform.localPosition  + " - " + controlable.transform.localPosition);
-        Debug.Log("Diff " + diff  + " - " + diff.magnitude);
+        Debug.Log("position " + transform.localPosition + " - " + controlable.transform.localPosition);
+        Debug.Log("Diff " + diff + " - " + diff.magnitude);
         return diff.magnitude < _distanceMinimum;
     }
 
