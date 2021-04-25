@@ -7,6 +7,7 @@ public class PortalTeleporter : MonoBehaviour {
     public Transform reciever;
 
     private bool playerIsOverlapping = false;
+    private Transform overlappingPlayer;
     public float imunePortal = 0f;
 
     public PortalTeleporter[] portalTeleporterList;
@@ -23,7 +24,7 @@ public class PortalTeleporter : MonoBehaviour {
             return;
         }
         if (playerIsOverlapping) {
-            Vector3 portalToPlayer = player.position - transform.position;
+            Vector3 portalToPlayer = overlappingPlayer.position - transform.position;
             float dotProduct = Vector3.Dot(transform.up, portalToPlayer);
 
             // If this is true: The player has moved across the portal
@@ -36,7 +37,9 @@ public class PortalTeleporter : MonoBehaviour {
 
                 Vector3 positionOffset = portalToPlayer;
                 positionOffset *= (reciever.lossyScale.x / transform.lossyScale.x);
-                player.position = reciever.position + positionOffset + reciever.forward;
+                // overlappingPlayer.position = reciever.position + positionOffset + reciever.forward;
+                Vector3 position = reciever.position + positionOffset + reciever.forward;
+                overlappingPlayer.position = position;
 
                 playerIsOverlapping = false;
                 SetImunePortal();
@@ -54,6 +57,7 @@ public class PortalTeleporter : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player") {
+            overlappingPlayer = other.transform;
             playerIsOverlapping = true;
         }
     }
@@ -61,6 +65,7 @@ public class PortalTeleporter : MonoBehaviour {
     void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player") {
+            overlappingPlayer = null;
             playerIsOverlapping = false;
         }
     }
