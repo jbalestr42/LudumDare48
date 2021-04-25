@@ -397,7 +397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7188654428239753289
 Transform:
   m_ObjectHideFlags: 0
@@ -1149,6 +1149,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a1466772501d8fd4ca7b748342e19b0c, type: 2}
+    - target: {fileID: -3230359877503427227, guid: c90cc06c71899374ab5200b333c14d97, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1466772501d8fd4ca7b748342e19b0c, type: 2}
     - target: {fileID: -1952233991374429874, guid: c90cc06c71899374ab5200b333c14d97, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1162,6 +1166,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: a1466772501d8fd4ca7b748342e19b0c, type: 2}
     - target: {fileID: -678588488315902003, guid: c90cc06c71899374ab5200b333c14d97, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1466772501d8fd4ca7b748342e19b0c, type: 2}
+    - target: {fileID: -85744201872177665, guid: c90cc06c71899374ab5200b333c14d97, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a1466772501d8fd4ca7b748342e19b0c, type: 2}
@@ -1182,6 +1190,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: a1466772501d8fd4ca7b748342e19b0c, type: 2}
     - target: {fileID: 2141592168795546477, guid: c90cc06c71899374ab5200b333c14d97, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1466772501d8fd4ca7b748342e19b0c, type: 2}
+    - target: {fileID: 3126654241599814598, guid: c90cc06c71899374ab5200b333c14d97, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a1466772501d8fd4ca7b748342e19b0c, type: 2}
