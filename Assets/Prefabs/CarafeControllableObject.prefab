@@ -43,7 +43,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46fca3bf2f766e04483772fcdf724e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectActionable: 0
+  objectActionable: 131072
+--- !u!65 &2283618038075886145
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4611337771802974578}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2114621, y: 0.261736, z: 0.3989306}
+  m_Center: {x: -0.000000007450581, y: -0.025136944, z: 0.19705987}
 --- !u!95 &1472570373525526604
 Animator:
   serializedVersion: 3
@@ -226,7 +239,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178792, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: objectType
-      value: 0
+      value: 131072
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525717258595178792, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: _hasSelfAction
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178793, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_Name

@@ -1032,6 +1032,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FrigoControllableObject
       objectReference: {fileID: 0}
+    - target: {fileID: 6825260395972220538, guid: f84a5472fbd6af0488bdb7f09f29cd5d, type: 3}
+      propertyPath: objectActionable
+      value: 131072
+      objectReference: {fileID: 0}
     - target: {fileID: 6867812648603716701, guid: f84a5472fbd6af0488bdb7f09f29cd5d, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2

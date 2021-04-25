@@ -2,7 +2,7 @@
 
 public class CameraOcclusionProtector : MonoBehaviour {
     private const float MIN_DISTANCE_TO_PLAYER = 0f;
-    private const float MAX_DISTANCE_TO_PLAYER = 5f;
+    private const float MAX_DISTANCE_TO_PLAYER = 10f;
     private const float MIN_NEAR_CLIP_PLANE_EXTENT_MULTIPLIER = 1f;
     private const float MAX_NEAR_CLIP_PLANE_EXTENT_MULTIPLIER = 2f;
     private const float MIN_OCCLUSION_MOVE_TIME = 0f;
@@ -22,7 +22,7 @@ public class CameraOcclusionProtector : MonoBehaviour {
     [SerializeField]
     [Range(MIN_DISTANCE_TO_PLAYER, MAX_DISTANCE_TO_PLAYER)]
     [Tooltip("The original distance to target (in meters)")]
-    private float distanceToTarget = 2.5f; // In meters
+    public float distanceToTarget = 2.5f; // In meters
 
     [SerializeField]
     [Range(MIN_NEAR_CLIP_PLANE_EXTENT_MULTIPLIER, MAX_NEAR_CLIP_PLANE_EXTENT_MULTIPLIER)]
