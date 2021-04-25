@@ -39,7 +39,10 @@ public class PortalTeleporter : MonoBehaviour {
                 positionOffset *= (reciever.lossyScale.x / transform.lossyScale.x);
                 // overlappingPlayer.position = reciever.position + positionOffset + reciever.forward;
                 Vector3 position = reciever.position + positionOffset;
+                CharacterController controller = overlappingPlayer.GetComponent<CharacterController>();
+                controller.enabled = false;
                 overlappingPlayer.position = position;
+                controller.enabled = true;
 
                 playerIsOverlapping = false;
                 SetImunePortal();

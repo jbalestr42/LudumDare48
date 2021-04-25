@@ -30,9 +30,13 @@ public class PlayerEnterObject : MonoBehaviour {
                                 _controlledObject = controlable;
 
                                 Vector3 positionControlledObject = _controlledObject.transform.position;
+                                CharacterController controller = GetComponent<CharacterController>();
                                 positionControlledObject.y = transform.position.y;
+                                controller.enabled = false;
                                 transform.position = positionControlledObject;
+                                controller.enabled = true;
                                 _controlledObject.transform.SetParent(transform);
+                                _controlledObject.transform.forward = transform.forward;
                                 _camera.GetComponent<CameraOcclusionProtector>().distanceToTarget = 8f;
                                 _state = PlayerState.ControllingObject;
                             }
@@ -45,9 +49,12 @@ public class PlayerEnterObject : MonoBehaviour {
                         _controlledObject.TryDoAction();
                     } else if (Input.GetMouseButtonDown(1)) {
                         Vector3 positionCamera = _camera.transform.position;
+                        Vector3 controledPosition = _controlledObject.transform.position;
                         positionCamera.y = transform.position.y;
-                        transform.position = positionCamera;
+                        gameObject.GetComponent<CharacterController>().Move(positionCamera - transform.position);
+                        // transform.position = positionCamera;
                         _controlledObject.transform.SetParent(null);
+                        _controlledObject.transform.position = controledPosition;
                         _camera.GetComponent<CameraOcclusionProtector>().distanceToTarget = 0f;
                         _controlledObject = null;
                         OnObjectReleased.Invoke(_controlledObject);
@@ -62,10 +69,5 @@ public class PlayerEnterObject : MonoBehaviour {
     bool IsControllingObject()
     {
         return _controlledObject != null;
-    }
-
-    void ControlObject(AControlable obj)
-    {
-        _controlledObject = obj;
     }
 }
