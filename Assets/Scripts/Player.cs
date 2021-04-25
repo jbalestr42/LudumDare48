@@ -17,10 +17,6 @@ public class Player : MonoBehaviour {
 
     public UnityEvent<AControlable> OnObjectReleased = new UnityEvent<AControlable>();
 
-    void Start()
-    {
-        _camera.transform.LookAt(transform.position);
-    }
 
     float mainSpeed = 10.0f; //regular speed
     float shiftAdd = 25.0f; //multiplied by how long shift is held.  Basically running
@@ -29,7 +25,18 @@ public class Player : MonoBehaviour {
     private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
     private float totalRun = 1.0f;
 
-    void Update()
+    private Rigidbody rb;
+    private Collider colliderPlayer;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        Debug.Log("RigidBody : " + rb);
+        colliderPlayer = GetComponent<Collider>();
+        _camera.transform.LookAt(transform.position);
+    }
+
+    void FixedUpdate()
     {
         switch (_state) {
             case PlayerState.ControllingPlayer:
@@ -104,12 +111,9 @@ public class Player : MonoBehaviour {
             dir += Vector3.Cross(tmp, Vector3.up).normalized * -1;
         }
 
-        Vector3 p = dir.normalized * mainSpeed * Time.deltaTime;
-        Vector3 newPosition = transformTarget.position;
-        transformTarget.Translate(p);
-        newPosition.x = transformTarget.position.x;
-        newPosition.z = transformTarget.position.z;
-        transformTarget.position = newPosition;
+        Vector3 p = dir.normalized * mainSpeed;
+        p = Vector3.ProjectOnPlane(transform.forward * p.z + transform.right * p.x, Vector3.up);
+        rb.velocity = p;
     }
 
     void FPSMovement(Transform transformTarget)
@@ -121,23 +125,19 @@ public class Player : MonoBehaviour {
         lastMouse = Input.mousePosition;
 
         Vector3 p = GetBaseInput();
-        if (Input.GetKey(KeyCode.LeftShift)) {
-            totalRun += Time.deltaTime;
-            p = p * totalRun * shiftAdd;
-            p.x = Mathf.Clamp(p.x, -maxShift, maxShift);
-            p.y = Mathf.Clamp(p.y, -maxShift, maxShift);
-            p.z = Mathf.Clamp(p.z, -maxShift, maxShift);
-        } else {
-            totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
-            p = p * mainSpeed;
-        }
+        // if (Input.GetKey(KeyCode.LeftShift)) {
+        //     totalRun += Time.deltaTime;
+        //     p = p * totalRun * shiftAdd;
+        //     p.x = Mathf.Clamp(p.x, -maxShift, maxShift);
+        //     p.y = Mathf.Clamp(p.y, -maxShift, maxShift);
+        //     p.z = Mathf.Clamp(p.z, -maxShift, maxShift);
+        // } else {
+        totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
+        p = p * mainSpeed;
+        // }
 
-        p = p * Time.deltaTime;
-        Vector3 newPosition = transformTarget.position;
-        transformTarget.Translate(p);
-        newPosition.x = transformTarget.position.x;
-        newPosition.z = transformTarget.position.z;
-        transformTarget.position = newPosition;
+        p = Vector3.ProjectOnPlane(transform.forward * p.z + transform.right * p.x, Vector3.up);
+        rb.velocity = p;
     }
 
     IEnumerator TransitionCameraToObject()
@@ -168,11 +168,13 @@ public class Player : MonoBehaviour {
 
     void ControlObject(AControlable obj)
     {
+        colliderPlayer.enabled = false;
         _controlledObject = obj;
     }
 
     void ReleaseObject()
     {
+        colliderPlayer.enabled = true;
         OnObjectReleased.Invoke(_controlledObject);
         _camera.transform.SetParent(null);
         _controlledObject = null;
