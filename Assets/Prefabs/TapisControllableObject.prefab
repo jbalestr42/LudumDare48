@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46fca3bf2f766e04483772fcdf724e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectActionable: 9192
+  objectActionable: 8192
 --- !u!1001 &3976378464542811056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -192,7 +192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178792, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: objectType
-      value: 9192
+      value: 8192
       objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178793, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_Name

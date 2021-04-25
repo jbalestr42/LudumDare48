@@ -74,7 +74,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46fca3bf2f766e04483772fcdf724e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectActionable: 129072
+  objectActionable: 65536
+--- !u!1 &3840687725305031815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3780237462396599267}
+  - component: {fileID: 757886010941138286}
+  - component: {fileID: 9104687276062747677}
+  m_Layer: 31
+  m_Name: ActionCarafe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3780237462396599267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3840687725305031815}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1451224860280093332}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &757886010941138286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3840687725305031815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d90af878f036a840a88f7117d1b4d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectActionable: 258144
+--- !u!114 &9104687276062747677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3840687725305031815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46fca3bf2f766e04483772fcdf724e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectActionable: 131072
 --- !u!1001 &3976378464542811056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -128,7 +186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178792, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: objectType
-      value: 129072
+      value: 65536
       objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178793, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_Name

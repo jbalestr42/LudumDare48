@@ -18,10 +18,11 @@ public enum ObjectType {
     Four = 1024,
     Table = 2048,
     Canape = 4096,
-    Tapis = 9192,
+    Tapis = 8192,
     TableBasse = 16384,
     Plante = 32768,
-    Verre = 129072,
+    Verre = 65536,
+    Carafe = 131072,
 }
 
 public class AControlable : MonoBehaviour
@@ -58,11 +59,11 @@ public class AControlable : MonoBehaviour
     public void TryDoAction()
     {
         bool canDoAction = false;
-        int layerMask = 1 << LayerMask.NameToLayer("Controlable");
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, _radius, Vector3.up, 1f, layerMask);
+        int layerMask = 1;// << LayerMask.NameToLayer("Controlable");
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, _radius, Vector3.up, 10f, layerMask);
         foreach (RaycastHit hit in hits)
         {
-            AControlable controlable = hit.collider.gameObject.GetComponent<AControlable>();
+            AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
             if (controlable && hit.collider.gameObject != gameObject)
             {
                 foreach (AActionable destActionable in controlable.actionables)
