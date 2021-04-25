@@ -32,34 +32,36 @@ public class Player : MonoBehaviour {
     void Update()
     {
         switch (_state) {
-            case PlayerState.ControllingPlayer: {
-                    if (Input.GetMouseButtonDown(0)) {
-                        RaycastHit hit;
-                        if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity)) {
-                            AControlable controlable = hit.collider.gameObject.GetComponent<AControlable>();
-                            if (controlable != null) {
-                                Debug.Log("Object Selected: " + controlable);
-                                _controlledObject = controlable;
-                                _state = PlayerState.TransitionCameraToObject;
-                                StartCoroutine(TransitionCameraToObject());
-                            }
+            case PlayerState.ControllingPlayer:
+            {
+                if (Input.GetMouseButtonDown(0)) {
+                    RaycastHit hit;
+                    if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity)) {
+                        AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
+                        if (controlable != null) {
+                            Debug.Log("Object Selected: " + controlable);
+                            _controlledObject = controlable;
+                            _state = PlayerState.TransitionCameraToObject;
+                            StartCoroutine(TransitionCameraToObject());
                         }
-                    } else {
-                        FPSMovement(transform);
                     }
-                    break;
-                }
-            case PlayerState.ControllingObject: {
-                    if (Input.GetMouseButtonDown(0)) {
-                        _controlledObject.TryDoAction();
-                    } else if (Input.GetMouseButtonDown(1)) {
-                        ReleaseObject();
-                        _state = PlayerState.ControllingPlayer;
-                    } else {
-                        TPSMovement(_controlledObject.transform, _camera.transform);
-                    }
+                } else {
+                    FPSMovement(transform);
                 }
                 break;
+            }
+            case PlayerState.ControllingObject:
+            {
+                if (Input.GetMouseButtonDown(0)) {
+                    _controlledObject.TryDoAction();
+                } else if (Input.GetMouseButtonDown(1)) {
+                    ReleaseObject();
+                    _state = PlayerState.ControllingPlayer;
+                } else {
+                    TPSMovement(_controlledObject.transform, _camera.transform);
+                }
+                break;
+            }
         }
     }
 

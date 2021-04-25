@@ -8,7 +8,20 @@ public enum ObjectType {
     Chair = 1,
     Mug = 2,
     Closet = 4,
-    Lamp = 8
+    Lamp = 8,
+    TV = 16,
+    Ventilo = 32,
+    Frigo = 64,
+    Platine = 128,
+    Vynil = 256,
+    Poulet = 512,
+    Four = 1024,
+    Table = 2048,
+    Canape = 4096,
+    Tapis = 9192,
+    TableBasse = 16384,
+    Plante = 32768,
+    Verre = 129072,
 }
 
 public class AControlable : MonoBehaviour
