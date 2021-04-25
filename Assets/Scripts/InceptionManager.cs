@@ -12,6 +12,7 @@ public class InceptionManager : MonoBehaviour
 
     [SerializeField]
     Player _player = null;
+    int _currentHouse = 0;
 
     void Start()
     {
@@ -29,6 +30,22 @@ public class InceptionManager : MonoBehaviour
         {
             Debug.Log("Object placed properly -> TODO add feedback");
             SnapObject(controlable);
+
+            if (_refMaison.CheckObjects(_maisons[_currentHouse]))
+            {
+                Debug.Log("All objects are ok, opening next house.");
+                OpenNextHouse();
+            }
+        }
+    }
+
+    void OpenNextHouse()
+    {
+        _currentHouse++;
+        _maisons[_currentHouse - 1].OpenDoor();
+        if (_currentHouse >= _maisons.Count)
+        {
+            Debug.Log("GAME Is DONE, yeaahhhhh");
         }
     }
 
