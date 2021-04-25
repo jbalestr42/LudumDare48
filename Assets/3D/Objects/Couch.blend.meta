@@ -73,8 +73,8 @@ ModelImporter:
       name: Walk
       takeName: Scene
       internalID: 0
-      firstFrame: 1
-      lastFrame: 250
+      firstFrame: 10
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -102,8 +102,8 @@ ModelImporter:
       name: Action
       takeName: Scene
       internalID: 0
-      firstFrame: 1
-      lastFrame: 250
+      firstFrame: 50
+      lastFrame: 61
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
