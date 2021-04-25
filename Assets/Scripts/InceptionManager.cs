@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InceptionManager : MonoBehaviour
-{
+public class InceptionManager : MonoBehaviour {
     [SerializeField]
     MaisonManager _refMaison = null;
 
@@ -11,7 +10,7 @@ public class InceptionManager : MonoBehaviour
     List<MaisonManager> _maisons = new List<MaisonManager>();
 
     [SerializeField]
-    Player _player = null;
+    PlayerEnterObject _player = null;
     int _currentHouse = 0;
 
     void Start()
@@ -26,13 +25,11 @@ public class InceptionManager : MonoBehaviour
 
     void CheckObjectState(AControlable controlable)
     {
-        if (_refMaison.CheckObject(controlable))
-        {
+        if (_refMaison.CheckObject(controlable)) {
             Debug.Log("Object placed properly -> TODO add feedback");
             SnapObject(controlable);
 
-            if (_refMaison.CheckObjects(_maisons[_currentHouse]))
-            {
+            if (_refMaison.CheckObjects(_maisons[_currentHouse])) {
                 Debug.Log("All objects are ok, opening next house.");
                 OpenNextHouse();
             }
@@ -43,14 +40,14 @@ public class InceptionManager : MonoBehaviour
     {
         _currentHouse++;
         _maisons[_currentHouse - 1].OpenDoor();
-        if (_currentHouse >= _maisons.Count)
-        {
+        if (_currentHouse >= _maisons.Count) {
             Debug.Log("GAME Is DONE, yeaahhhhh");
         }
     }
 
     void SnapObject(AControlable controlable)
     {
+        Debug.Log("Snap Object");
         AControlable refControlable = _refMaison.GetObject(controlable.objectType);
         controlable.transform.localPosition = refControlable.transform.localPosition;
         controlable.transform.localRotation = refControlable.transform.localRotation;

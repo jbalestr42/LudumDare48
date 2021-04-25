@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MaisonManager : MonoBehaviour
-{
+public class MaisonManager : MonoBehaviour {
     List<AControlable> _controlables = new List<AControlable>();
     public GameObject _door;
     public GameObject _smallDoorCollider;
@@ -17,10 +16,8 @@ public class MaisonManager : MonoBehaviour
 
     public bool CheckObjects(MaisonManager maison)
     {
-        foreach (AControlable controlable in _controlables)
-        {
-            if (!IsSameState(controlable, maison.GetObject(controlable.objectType)))
-            {
+        foreach (AControlable controlable in _controlables) {
+            if (!IsSameState(controlable, maison.GetObject(controlable.objectType))) {
                 return false;
             }
         }
@@ -52,8 +49,7 @@ public class MaisonManager : MonoBehaviour
     IEnumerator OpenDoorCor()
     {
         _doorSound.Play();
-        while (_door.transform.localRotation.y > -0.60f)
-        {
+        while (_door.transform.localRotation.y > -0.60f) {
             _door.transform.RotateAround(_door.transform.position, transform.up, -Time.deltaTime * 20f);
             yield return new WaitForEndOfFrame();
         }
