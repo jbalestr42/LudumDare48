@@ -932,6 +932,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1979803603, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
   m_PrefabInstance: {fileID: 381649760}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &393153017 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4053201646578439556, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
+  m_PrefabInstance: {fileID: 401337294}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &401337294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1346,6 +1351,7 @@ MonoBehaviour:
   _door: {fileID: 1554618376}
   _smallDoorCollider: {fileID: 1578226301}
   _nextDoorCollider: {fileID: 212907519}
+  _doorSound: {fileID: 1900721815}
 --- !u!4 &501463191 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3720837133761783831, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
@@ -1963,6 +1969,11 @@ MonoBehaviour:
   OnObjectReleased:
     m_PersistentCalls:
       m_Calls: []
+--- !u!82 &737838136 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4053201646578439556, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
+  m_PrefabInstance: {fileID: 2086229375}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &779848418 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 362604576, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
@@ -2170,6 +2181,12 @@ MonoBehaviour:
   _door: {fileID: 195525857}
   _smallDoorCollider: {fileID: 1672225326}
   _nextDoorCollider: {fileID: 638695024}
+  _doorSound: {fileID: 6362429097655166342}
+--- !u!82 &954051942 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4053201646578439556, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
+  m_PrefabInstance: {fileID: 684830086}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1041953432 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 419971295350575889, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
@@ -2223,6 +2240,7 @@ MonoBehaviour:
   _door: {fileID: 1693966155}
   _smallDoorCollider: {fileID: 429943905}
   _nextDoorCollider: {fileID: 1996907395}
+  _doorSound: {fileID: 954051942}
 --- !u!1 &1121803126 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4668069197404648762, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
@@ -2431,6 +2449,7 @@ MonoBehaviour:
   _door: {fileID: 1456186463}
   _smallDoorCollider: {fileID: 1672185558}
   _nextDoorCollider: {fileID: 1233240819}
+  _doorSound: {fileID: 737838136}
 --- !u!1 &1378161812
 GameObject:
   m_ObjectHideFlags: 0
@@ -2676,6 +2695,7 @@ MonoBehaviour:
   _door: {fileID: 1121803126}
   _smallDoorCollider: {fileID: 886664289}
   _nextDoorCollider: {fileID: 1041953432}
+  _doorSound: {fileID: 393153017}
 --- !u!1 &1672185558 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5312694049717625015, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
@@ -2968,6 +2988,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7412d3ff6b923d4eb5108525417986f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1900721815 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4053201646578439556, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
+  m_PrefabInstance: {fileID: 1819861456}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1996907395 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 419971295350575889, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
@@ -3413,6 +3438,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4053201646578439556, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5312694049717625015, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3435,3 +3464,8 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9d07f2280e3cfb840a1c38a49b3ee4b8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
+--- !u!82 &6362429097655166342 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4053201646578439556, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
+  m_PrefabInstance: {fileID: 6362429097655166341}
+  m_PrefabAsset: {fileID: 0}

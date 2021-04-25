@@ -8,6 +8,7 @@ public class MaisonManager : MonoBehaviour
     public GameObject _door;
     public GameObject _smallDoorCollider;
     public GameObject _nextDoorCollider;
+    public AudioSource _doorSound;
 
     void Start()
     {
@@ -50,6 +51,7 @@ public class MaisonManager : MonoBehaviour
 
     IEnumerator OpenDoorCor()
     {
+        _doorSound.Play();
         while (_door.transform.localRotation.y > -0.60f)
         {
             _door.transform.RotateAround(_door.transform.position, transform.up, -Time.deltaTime * 20f);
