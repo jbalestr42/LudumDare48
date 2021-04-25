@@ -7,14 +7,21 @@ public class PortalTeleporter : MonoBehaviour {
     public Transform reciever;
 
     private bool playerIsOverlapping = false;
-    // public float imunePortal = 0f;
+    public float imunePortal = 0f;
+
+    public PortalTeleporter[] portalTeleporterList;
+
+    private void Start()
+    {
+        portalTeleporterList = FindObjectsOfType<PortalTeleporter>();
+    }
 
     void Update()
     {
-        // if (imunePortal >= 0f) {
-        //     imunePortal -= Time.deltaTime;
-        //     return;
-        // }
+        if (imunePortal >= 0f) {
+            imunePortal -= Time.deltaTime;
+            return;
+        }
         if (playerIsOverlapping) {
             Vector3 portalToPlayer = player.position - transform.position;
             float dotProduct = Vector3.Dot(transform.up, portalToPlayer);
@@ -25,18 +32,22 @@ public class PortalTeleporter : MonoBehaviour {
                 // float rotationDiff = -Quaternion.Angle(transform.rotation, reciever.rotation);
                 // rotationDiff += 180;
                 // player.Rotate(Vector3.up, rotationDiff);
-
                 // Vector3 positionOffset = Quaternion.Euler(0f, rotationDiff, 0f) * portalToPlayer;
+
                 Vector3 positionOffset = portalToPlayer;
                 positionOffset *= (reciever.lossyScale.x / transform.lossyScale.x);
-                player.position = reciever.position + positionOffset;
+                player.position = reciever.position + positionOffset + reciever.forward;
 
                 playerIsOverlapping = false;
-
-                // Cheap trick to prevent a bug...
-                // Avoid taking same portal during 1.5 seconds
-                // imunePortal = 1.5f;
+                SetImunePortal();
             }
+        }
+    }
+
+    void SetImunePortal()
+    {
+        foreach (var portal in portalTeleporterList) {
+            portal.imunePortal = 1f;
         }
     }
 
