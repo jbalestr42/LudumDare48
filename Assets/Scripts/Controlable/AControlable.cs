@@ -90,11 +90,13 @@ public class AControlable : MonoBehaviour {
 
     public virtual bool IsSameState(AControlable controlable)
     {
-        // Check position
-        Vector3 diff = transform.localPosition - controlable.transform.localPosition;
-        Debug.Log("position " + transform.localPosition + " - " + controlable.transform.localPosition);
-        Debug.Log("Diff " + diff + " - " + diff.magnitude);
-        return diff.magnitude < _distanceMinimum;
+        Vector3 position1 = transform.root.position - transform.position;
+        Vector3 position2 = controlable.transform.root.position - controlable.transform.position;
+        float distance = Vector3.Distance(position1, position2);
+
+        Debug.Log("position " + position1 + " - " + position2);
+        Debug.Log("Distance " + " - " + distance);
+        return distance < _distanceMinimum;
     }
 
     public void SetWalking(bool isWalking)
