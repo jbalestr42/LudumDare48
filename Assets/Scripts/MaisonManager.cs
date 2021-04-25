@@ -11,11 +11,6 @@ public class MaisonManager : MonoBehaviour
         _controlables.AddRange(GetComponentsInChildren<AControlable>());
     }
 
-    void Update()
-    {
-        
-    }
-
     public bool CheckObjects(MaisonManager maison)
     {
         foreach (AControlable controlable in _controlables)
