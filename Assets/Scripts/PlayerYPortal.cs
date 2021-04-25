@@ -9,6 +9,9 @@ public class PlayerYPortal : MonoBehaviour {
 
     private void Update()
     {
+        if (Player.playerStateAccessor != Player.PlayerState.ControllingPlayer) {
+            return;
+        }
         foreach (var teleporter in portalTeleporterList) {
             Vector3 teleporterPosition = teleporter.transform.position;
             float distance = Vector3.Distance(teleporterPosition, transform.position);

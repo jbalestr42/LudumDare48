@@ -3,10 +3,11 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Player : MonoBehaviour {
+    static public PlayerState playerStateAccessor;
     AControlable _controlledObject = null;
     [SerializeField] Camera _camera = null;
 
-    enum PlayerState {
+    public enum PlayerState {
         ControllingPlayer,
         TransitionCameraToObject,
         ControllingObject,
@@ -66,6 +67,7 @@ public class Player : MonoBehaviour {
                     break;
                 }
         }
+        playerStateAccessor = _state;
     }
 
     Vector3 GetBaseInput()
@@ -97,31 +99,19 @@ public class Player : MonoBehaviour {
                 tpsRb.useGravity = false;
             }
         }
+
         lastMouse = Input.mousePosition - lastMouse;
         transformTarget.RotateAround(transformTarget.position, Vector3.up, lastMouse.x * camSens);
-        rb.rotation = transformTarget.rotation;
         lastMouse = Input.mousePosition;
 
         Vector3 p = GetBaseInput() * mainSpeed;
         Vector3 cameraNextPosition = (tpsRb.position - transformTarget.forward * 5f + transformTarget.up * 4f);
         rb.velocity = cameraNextPosition - rb.position;
-        RigidBodyLookAt(tpsRb.transform, rb);
+        rb.transform.LookAt(tpsRb.position);
+        // RigidBodyLookAt(tpsRb.transform, rb);
 
         p = Vector3.ProjectOnPlane(rb.transform.forward * p.z + rb.transform.right * p.x, Vector3.up);
         tpsRb.velocity = p;
-    }
-
-    void RigidBodyLookAt(Transform target, Rigidbody rb)
-    {
-        var targetDir = target.position - rb.transform.position;
-        var forward = rb.transform.forward;
-        var localTarget = rb.transform.InverseTransformPoint(target.position);
-
-        float angle = Mathf.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
-
-        var eulerAngleVelocity = new Vector3(0, angle, 0);
-        var deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.deltaTime);
-        rb.MoveRotation(rb.rotation * deltaRotation);
     }
 
     void FPSMovement(Transform transformTarget)
