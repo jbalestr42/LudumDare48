@@ -13,6 +13,7 @@ public class TVActionable : AActionable {
 
     private void OnEnable()
     {
+        Debug.Log("On Enable TV" + isValidated);
         if (isValidated) {
             DoAction();
         }

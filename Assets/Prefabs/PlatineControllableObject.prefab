@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectActionable: 256
-  isValidated: 0
+  isValidated: 1
   isReaction: 0
   _animator: {fileID: 4591447396623537154}
   isGrow: 1
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectActionable: 256
-  isValidated: 0
+  isValidated: 1
   isReaction: 0
   _animator: {fileID: 4591447396623537154}
   isGrow: 1
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectActionable: 256
-  isValidated: 0
+  isValidated: 1
   isReaction: 0
   audioSource: {fileID: 4471028155144400202}
 --- !u!82 &4471028155144400202
