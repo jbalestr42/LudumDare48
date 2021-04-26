@@ -1567,6 +1567,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 976905101490070485, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: isValidated
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1449616961285589533, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1587,6 +1591,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b36ea13d137a3704194af2a3fb3b5425, type: 2}
+    - target: {fileID: 4544350293277195813, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: isValidated
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059396031079551887, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: isValidated
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6205153563197442201, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.1188
@@ -1649,11 +1661,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7993994245542201660, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: isLocked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7993994245542201660, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: autoReaction
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7993994245542201660, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: isReactionValidated
@@ -1773,7 +1785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7993994247073556902, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: isLocked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7993994247073556902, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: autoReaction

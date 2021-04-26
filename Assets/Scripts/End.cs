@@ -11,14 +11,6 @@ public class End : MonoBehaviour {
         title.SetActive(false);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            title.SetActive(true);
-            inceptionManager.End();
-        }
-    }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player") {
