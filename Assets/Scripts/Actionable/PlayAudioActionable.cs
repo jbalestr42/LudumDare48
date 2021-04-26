@@ -36,7 +36,6 @@ public class PlayAudioActionable : AActionable {
     {
         if (hasOwnership) {
             playbackTime = audioSource.time;
-            Debug.Log(playbackTime);
         }
     }
 }
