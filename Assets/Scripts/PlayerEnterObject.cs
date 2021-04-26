@@ -18,6 +18,11 @@ public class PlayerEnterObject : MonoBehaviour {
 
     public UnityEvent<AControlable> OnObjectReleased = new UnityEvent<AControlable>();
 
+    private void Start()
+    {
+
+    }
+
     private void Update()
     {
         switch (_state) {

@@ -287,6 +287,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MugControllableObject
       objectReference: {fileID: 0}
+    - target: {fileID: 1451224860280093337, guid: b87f91a8dadb9c6429ab06eced4dd898, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b87f91a8dadb9c6429ab06eced4dd898, type: 3}
 --- !u!4 &8170336384707072193 stripped
@@ -304,6 +308,10 @@ PrefabInstance:
     - target: {fileID: 8751402546817625942, guid: f5456639c51bfc845a6b4b739fa8da03, type: 3}
       propertyPath: m_Name
       value: ChairControllableObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751402546817625942, guid: f5456639c51bfc845a6b4b739fa8da03, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8751402546817625947, guid: f5456639c51bfc845a6b4b739fa8da03, type: 3}
       propertyPath: m_RootOrder
