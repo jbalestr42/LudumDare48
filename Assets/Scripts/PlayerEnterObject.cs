@@ -31,23 +31,28 @@ public class PlayerEnterObject : MonoBehaviour {
                         RaycastHit hit;
                         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity)) {
                             AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
-                            if (controlable != null && !controlable.isLocked) {
-                                Debug.Log("Object Selected: " + controlable);
-                                _controlledObject = controlable;
+                            if (controlable != null) {
+                                if (!controlable.isLocked) {
+                                    Debug.Log("Object Selected: " + controlable);
+                                    _controlledObject = controlable;
 
-                                Vector3 positionControlledObject = _controlledObject.transform.position;
-                                CharacterController controller = GetComponent<CharacterController>();
-                                positionControlledObject.y = transform.position.y;
+                                    Vector3 positionControlledObject = _controlledObject.transform.position;
+                                    CharacterController controller = GetComponent<CharacterController>();
+                                    positionControlledObject.y = transform.position.y;
 
-                                controller.enabled = false;
-                                transform.position = positionControlledObject;
-                                controller.enabled = true;
-                                _controlledObjectParent = _controlledObject.transform.parent;
-                                _controlledObject.transform.SetParent(transform);
-                                _controlledObject.transform.forward = transform.forward;
-                                _camera.GetComponent<CameraOcclusionProtector>().distanceToTarget = 8f;
-                                _state = PlayerState.ControllingObject;
-                                _controlledObject.SetWalking(true);
+                                    controller.enabled = false;
+                                    transform.position = positionControlledObject;
+                                    controller.enabled = true;
+                                    _controlledObjectParent = _controlledObject.transform.parent;
+                                    _controlledObject.transform.SetParent(transform);
+                                    _controlledObject.transform.forward = transform.forward;
+                                    _camera.GetComponent<CameraOcclusionProtector>().distanceToTarget = 8f;
+                                    _state = PlayerState.ControllingObject;
+                                    _controlledObject.SetWalking(true);
+                                    SoundManager.PlaySound("control_1", _controlledObject.transform.position);
+                                } else {
+                                    SoundManager.PlaySound(Random.value > 0.5 ? "lock_1" : "lock_2", hit.point);
+                                }
                             }
                         }
                     }
@@ -68,6 +73,7 @@ public class PlayerEnterObject : MonoBehaviour {
                         _controlledObject.SetWalking(false);
                         OnObjectReleased.Invoke(_controlledObject);
                         _state = PlayerState.ControllingPlayer;
+                        SoundManager.PlaySound("release_1", _controlledObject.transform.position);
                         _controlledObject = null;
                     }
                     break;

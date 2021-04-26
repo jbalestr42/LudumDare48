@@ -33,6 +33,8 @@ public class InceptionManager : MonoBehaviour {
         if (_refMaison.CheckObject(controlable)) {
             Debug.Log("Object placed properly -> TODO add feedback");
             SnapObject(controlable);
+            SoundManager.PlaySound(Random.value > 0.5 ? Random.value > 0.5f ? "snap_1" : "snap_2" : "snap_3", controlable.transform.position);
+
 
             if (_refMaison.CheckObjects(_maisons[_currentHouse])) {
                 Debug.Log("All objects are ok, opening next house.");

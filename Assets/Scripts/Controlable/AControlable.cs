@@ -35,6 +35,7 @@ public class AControlable : MonoBehaviour {
     public bool isLocked = false;
 
     Animator _animator;
+    private float yPosition;
 
     void Start()
     {
@@ -50,6 +51,15 @@ public class AControlable : MonoBehaviour {
         }
 
         _animator = GetComponentInChildren<Animator>();
+        yPosition = transform.position.y;
+    }
+
+    private void LateUpdate()
+    {
+        // Lock y
+        Vector3 position = transform.position;
+        position.y = yPosition;
+        transform.position = position;
     }
 
     public void TryDoAction()

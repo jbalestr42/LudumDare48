@@ -8,6 +8,7 @@ public class PlayerScalePortal : MonoBehaviour {
         public float centerY;
         public float radius;
         public float height;
+        public float stepOffset;
     }
 
     [SerializeField] PlayerControllerData playerBase;
@@ -45,12 +46,14 @@ public class PlayerScalePortal : MonoBehaviour {
             controller.center = new Vector3(0f, Mathf.Lerp(playerMinus.centerY, playerBase.centerY, lerpValue), 0f);
             controller.radius = Mathf.Lerp(playerMinus.radius, playerBase.radius, lerpValue);
             controller.height = Mathf.Lerp(playerMinus.height, playerBase.height, lerpValue);
+            controller.stepOffset = Mathf.Lerp(playerMinus.stepOffset, playerBase.stepOffset, lerpValue);
             head.localPosition = new Vector3(0f, Mathf.Lerp(playerMinus.height, playerBase.height, lerpValue), 0f);
         } else if (lerpValue < 1f) {
             lerpValue = 1f;//Mathf.Min(1f, lerpValue + Time.deltaTime);
             controller.center = new Vector3(0f, Mathf.Lerp(playerMinus.centerY, playerBase.centerY, lerpValue), 0f);
             controller.radius = Mathf.Lerp(playerMinus.radius, playerBase.radius, lerpValue);
             controller.height = Mathf.Lerp(playerMinus.height, playerBase.height, lerpValue);
+            controller.stepOffset = Mathf.Lerp(playerMinus.stepOffset, playerBase.stepOffset, lerpValue);
             head.localPosition = new Vector3(0f, Mathf.Lerp(playerMinus.height, playerBase.height, lerpValue), 0f);
         }
     }
