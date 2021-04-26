@@ -47,6 +47,7 @@ MonoBehaviour:
   isValidated: 0
   isReaction: 0
   _animator: {fileID: 7039156722279996615}
+  isGrow: 1
 --- !u!95 &7039156722279996615
 Animator:
   serializedVersion: 3

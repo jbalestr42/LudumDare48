@@ -49,6 +49,8 @@ MonoBehaviour:
   objectType: 1
   _hasSelfAction: 0
   isLocked: 0
+  autoReaction: 1
+  isReactionValidated: 0
 --- !u!1 &7793558469910152145
 GameObject:
   m_ObjectHideFlags: 0
