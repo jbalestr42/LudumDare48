@@ -86,4 +86,24 @@ public class InceptionManager : MonoBehaviour {
         }
         yield return null;
     }
+
+    public void End()
+    {
+        List<AControlable> controlableList = new List<AControlable>();
+
+        foreach (var controlable in _refMaison._controlables) {
+            controlableList.Add(controlable);
+        }
+        foreach (var maison in _maisons) {
+            foreach (var controlable in maison._controlables) {
+                controlableList.Add(controlable);
+            }
+        }
+        foreach (var controlable in controlableList) {
+            Animator animator = controlable.GetComponentInChildren<Animator>();
+            if (animator != null) {
+                animator.SetBool("Walk", true);
+            }
+        }
+    }
 }
