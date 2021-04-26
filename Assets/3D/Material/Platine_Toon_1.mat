@@ -123,7 +123,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Shadow1Color: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 0.5}
+    - _Shadow1Color: {r: 0.4245283, g: 0.22560546, b: 0.030037375, a: 0.5}
     - _Shadow2Color: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 1, g: 0.8191595, b: 0.4575472, a: 1}
   m_BuildTextureStacks: []
