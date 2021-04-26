@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 656265307917003063}
   - component: {fileID: 4518339986449311378}
   - component: {fileID: 1824143729377792600}
-  - component: {fileID: 1814532808842484696}
   - component: {fileID: 271076689903844770}
   m_Layer: 0
   m_Name: CoffeeTable
@@ -83,19 +82,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1814532808842484696
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 166727188391818125}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8.172524, y: 2.111727, z: 4.264879}
-  m_Center: {x: 0.00013685241, y: 1.0683855, z: -0.6476468}
 --- !u!95 &271076689903844770
 Animator:
   serializedVersion: 3
@@ -257,6 +243,34 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4fe9778b5cbbef64f9274259ac204fde, type: 2}
+    - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3297341
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.052191
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.19706441
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0767
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.031
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
 --- !u!4 &1451224860280093332 stripped

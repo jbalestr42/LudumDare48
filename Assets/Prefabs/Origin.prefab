@@ -377,7 +377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1451224860280093332, guid: 8591b396999c3d142ad135ed40963379, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.53
+      value: 0.652
       objectReference: {fileID: 0}
     - target: {fileID: 1451224860280093332, guid: 8591b396999c3d142ad135ed40963379, type: 3}
       propertyPath: m_LocalPosition.y
@@ -388,15 +388,7 @@ PrefabInstance:
       value: -0.11
       objectReference: {fileID: 0}
     - target: {fileID: 1451224860280093332, guid: 8591b396999c3d142ad135ed40963379, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1451224860280093332, guid: 8591b396999c3d142ad135ed40963379, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1451224860280093332, guid: 8591b396999c3d142ad135ed40963379, type: 3}
-      propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1451224860280093332, guid: 8591b396999c3d142ad135ed40963379, type: 3}
@@ -501,7 +493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1451224860280093332, guid: 228a7db45c3334d4cb0e41a8d5eec981, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.081
       objectReference: {fileID: 0}
     - target: {fileID: 1451224860280093332, guid: 228a7db45c3334d4cb0e41a8d5eec981, type: 3}
       propertyPath: m_LocalPosition.y
@@ -666,6 +658,10 @@ PrefabInstance:
     - target: {fileID: 1451224860280093337, guid: 295ea0d979a287b4b95d0df32c8da8d8, type: 3}
       propertyPath: m_Name
       value: LampControllableObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 1451224860280093337, guid: 295ea0d979a287b4b95d0df32c8da8d8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 295ea0d979a287b4b95d0df32c8da8d8, type: 3}
@@ -996,6 +992,10 @@ PrefabInstance:
     - target: {fileID: 1451224860280093337, guid: f52e0f184beaf6844a7029eeaa6fc225, type: 3}
       propertyPath: m_Name
       value: PouletControllableObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 1451224860280093337, guid: f52e0f184beaf6844a7029eeaa6fc225, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f52e0f184beaf6844a7029eeaa6fc225, type: 3}

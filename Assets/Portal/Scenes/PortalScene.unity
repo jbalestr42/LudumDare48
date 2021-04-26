@@ -3206,6 +3206,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.07
       objectReference: {fileID: 0}
+    - target: {fileID: 7993994247045490827, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993994247124042955, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8428270464984303717, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: player
       value: 
@@ -3262,7 +3270,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BigHouse
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7802706629068190118, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
 --- !u!1001 &6362429097655166341
 PrefabInstance:
