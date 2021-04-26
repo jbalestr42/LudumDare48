@@ -236,6 +236,10 @@ PrefabInstance:
       propertyPath: objectType
       value: 32768
       objectReference: {fileID: 0}
+    - target: {fileID: 2525717258595178792, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: _hasSelfAction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178793, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_Name
       value: PlanteControllableObject
@@ -244,6 +248,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4fe9778b5cbbef64f9274259ac204fde, type: 2}
+    - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
 --- !u!4 &1451224860280093332 stripped

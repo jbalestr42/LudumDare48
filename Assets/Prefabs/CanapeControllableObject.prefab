@@ -149,6 +149,10 @@ PrefabInstance:
       propertyPath: objectType
       value: 4096
       objectReference: {fileID: 0}
+    - target: {fileID: 2525717258595178792, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: _hasSelfAction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178793, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_Name
       value: CanapeControllableObject
