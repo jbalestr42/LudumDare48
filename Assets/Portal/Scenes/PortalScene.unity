@@ -206,6 +206,7 @@ MonoBehaviour:
   portal: {fileID: 49594113}
   otherPortal: {fileID: 404186292}
   isRevert: 1
+  distanceDisableCamera: 18
 --- !u!124 &32661556
 Behaviour:
   m_ObjectHideFlags: 0
@@ -350,6 +351,7 @@ MonoBehaviour:
   portal: {fileID: 404186292}
   otherPortal: {fileID: 49594113}
   isRevert: 1
+  distanceDisableCamera: 18
 --- !u!124 &142062590
 Behaviour:
   m_ObjectHideFlags: 0
@@ -484,6 +486,7 @@ MonoBehaviour:
   portal: {fileID: 410173222}
   otherPortal: {fileID: 609289364}
   isRevert: 1
+  distanceDisableCamera: 18
 --- !u!124 &150984242
 Behaviour:
   m_ObjectHideFlags: 0
@@ -628,6 +631,7 @@ MonoBehaviour:
   portal: {fileID: 424932911}
   otherPortal: {fileID: 1159489452}
   isRevert: 1
+  distanceDisableCamera: 18
 --- !u!124 &303910756
 Behaviour:
   m_ObjectHideFlags: 0
@@ -989,7 +993,7 @@ PrefabInstance:
     - target: {fileID: 8428270464984303717, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: reciever
       value: 
-      objectReference: {fileID: 362604576}
+      objectReference: {fileID: 424932911}
     - target: {fileID: 9209125754519903153, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1882,6 +1886,7 @@ MonoBehaviour:
   portal: {fileID: 1159489452}
   otherPortal: {fileID: 424932911}
   isRevert: 1
+  distanceDisableCamera: 18
 --- !u!124 &429465687
 Behaviour:
   m_ObjectHideFlags: 0
@@ -2448,6 +2453,7 @@ MonoBehaviour:
   portal: {fileID: 609289364}
   otherPortal: {fileID: 410173222}
   isRevert: 1
+  distanceDisableCamera: 18
 --- !u!124 &728608836
 Behaviour:
   m_ObjectHideFlags: 0
@@ -3298,6 +3304,7 @@ MonoBehaviour:
   portal: {fileID: 381649762}
   otherPortal: {fileID: 362604576}
   isRevert: 1
+  distanceDisableCamera: 18
 --- !u!124 &1190813185
 Behaviour:
   m_ObjectHideFlags: 0
@@ -3507,6 +3514,7 @@ MonoBehaviour:
   portal: {fileID: 808321662}
   otherPortal: {fileID: 779848418}
   isRevert: 1
+  distanceDisableCamera: 18
 --- !u!124 &1378161816
 Behaviour:
   m_ObjectHideFlags: 0
@@ -3852,6 +3860,7 @@ MonoBehaviour:
   portal: {fileID: 779848418}
   otherPortal: {fileID: 808321662}
   isRevert: 1
+  distanceDisableCamera: 18
 --- !u!124 &1806408526
 Behaviour:
   m_ObjectHideFlags: 0
@@ -4171,6 +4180,7 @@ MonoBehaviour:
   portal: {fileID: 362604576}
   otherPortal: {fileID: 381649762}
   isRevert: 1
+  distanceDisableCamera: 18
 --- !u!124 &2138472432
 Behaviour:
   m_ObjectHideFlags: 0

@@ -9,10 +9,13 @@ public class PortalCamera : MonoBehaviour {
     public Transform portal;
     public Transform otherPortal;
     public bool isRevert = true;
+    public float distanceDisableCamera = 15f;
+
+    private Camera cam;
 
     private void Start()
     {
-        Camera cam = GetComponent<Camera>();
+        cam = GetComponent<Camera>();
         if (cam.targetTexture != null) {
             cam.targetTexture.Release();
         }
@@ -22,6 +25,14 @@ public class PortalCamera : MonoBehaviour {
 
     void Update()
     {
+        float distance = Vector3.Distance(playerCamera.position, otherPortal.position);
+        var angle = Tools.Radian(playerCamera.forward, otherPortal.position - playerCamera.position);
+        if ((angle < Mathf.PI * 0.33f && distance < distanceDisableCamera)) {
+            cam.enabled = true;
+        } else {
+            cam.enabled = false;
+            return;
+        }
         Vector3 playerOffsetFromPortal = playerCamera.position - otherPortal.position;
         playerOffsetFromPortal *= (portal.lossyScale.x / otherPortal.lossyScale.x);
         transform.position = (portal.position + playerOffsetFromPortal);
