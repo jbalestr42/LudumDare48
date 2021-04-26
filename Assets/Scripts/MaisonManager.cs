@@ -8,10 +8,12 @@ public class MaisonManager : MonoBehaviour {
     public GameObject _smallDoorCollider;
     public GameObject _nextDoorCollider;
     public AudioSource _doorSound;
+    public GameObject _originObject;
 
     void Start()
     {
         _controlables.AddRange(GetComponentsInChildren<AControlable>());
+        _originObject.SetActive(false);
     }
 
     public bool CheckObjects(MaisonManager maison)
@@ -55,6 +57,11 @@ public class MaisonManager : MonoBehaviour {
         StartCoroutine(OpenDoorCor());
         _smallDoorCollider.SetActive(false);
         _nextDoorCollider.SetActive(false);
+    }
+
+    public void ActivateObject()
+    {
+        _originObject.SetActive(true);
     }
 
     IEnumerator OpenDoorCor()

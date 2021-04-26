@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectActionable: 131072
+  isValidated: 0
+  isReaction: 0
   _animator: {fileID: 7039156722279996615}
 --- !u!95 &7039156722279996615
 Animator:
@@ -108,6 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectActionable: 32768
+  isValidated: 0
+  isReaction: 0
 --- !u!1 &5891868683406648266
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,6 +300,14 @@ PrefabInstance:
     - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.14081249
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0775
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}

@@ -5,16 +5,17 @@ using UnityEngine;
 public class AnimatorActionable : AActionable {
     public Animator _animator;
 
-    private void Start()
+    private void Awake()
     {
         isReaction = true;
     }
 
     public override void DoAction()
     {
-        GetComponentInParent<AControlable>().isReactionValidated = true;
+        Debug.Log("DO 'REACTION " + transform.parent.name, this);
         _animator.SetTrigger("Grow");
         _animator.SetBool("IsOn", true);
         isValidated = true;
+        GetComponentInParent<AControlable>().isReactionValidated = true;
     }
 }

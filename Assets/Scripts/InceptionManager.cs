@@ -22,6 +22,8 @@ public class InceptionManager : MonoBehaviour {
         foreach (var controlableClose in _refMaison._controlables) {
             // controlableClose.isLocked = true;
         }
+        _refMaison.ActivateObject();
+        _maisons[0].ActivateObject();
     }
 
     void Destroy()
@@ -55,6 +57,7 @@ public class InceptionManager : MonoBehaviour {
     {
         _currentHouse++;
         _maisons[_currentHouse - 1].OpenDoor();
+        _maisons[_currentHouse].ActivateObject();
         if (_currentHouse >= _maisons.Count) {
             Debug.Log("GAME Is DONE, yeaahhhhh");
         }
