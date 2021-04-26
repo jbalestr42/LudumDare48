@@ -20,7 +20,7 @@ public class InceptionManager : MonoBehaviour {
         _player.OnObjectReleased.AddListener(CheckObjectState);
         _player.OnDoAction.AddListener(CheckObjectState);
         foreach (var controlableClose in _refMaison._controlables) {
-            // controlableClose.isLocked = true;
+            controlableClose.isLocked = true;
         }
         _refMaison.ActivateObject();
         _maisons[0].ActivateObject();
@@ -67,7 +67,23 @@ public class InceptionManager : MonoBehaviour {
     {
         Debug.Log("Snap Object");
         AControlable refControlable = _refMaison.GetObject(controlable.objectType);
-        controlable.transform.localPosition = refControlable.transform.localPosition;
-        controlable.transform.localRotation = refControlable.transform.localRotation;
+        StartCoroutine(SnapObjectCoroutine(controlable, refControlable));
+    }
+
+    IEnumerator SnapObjectCoroutine(AControlable controlable, AControlable refControlable)
+    {
+        Vector3 originPosition = controlable.transform.localPosition;
+        Vector3 refPosition = refControlable.transform.localPosition;
+        Quaternion originRotation = controlable.transform.localRotation;
+        Quaternion refRotation = refControlable.transform.localRotation;
+        float time = 1f;
+
+        while (time > 0f) {
+            time -= Time.deltaTime;
+            controlable.transform.localRotation = Quaternion.Lerp(refRotation, originRotation, time);
+            controlable.transform.localPosition = Vector3.Lerp(refPosition, originPosition, time);
+            yield return null;
+        }
+        yield return null;
     }
 }
