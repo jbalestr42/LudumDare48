@@ -13,6 +13,8 @@ public class InceptionManager : MonoBehaviour {
     PlayerEnterObject _player = null;
     int _currentHouse = 0;
 
+    public bool closeDoorIfValidate = true;
+
     void Start()
     {
         _player.OnObjectReleased.AddListener(CheckObjectState);
@@ -35,8 +37,10 @@ public class InceptionManager : MonoBehaviour {
             if (_refMaison.CheckObjects(_maisons[_currentHouse])) {
                 Debug.Log("All objects are ok, opening next house.");
                 OpenNextHouse();
-                foreach (var controlableClose in _maisons[_currentHouse - 1]._controlables) {
-                    controlableClose.isLocked = true;
+                if (closeDoorIfValidate) {
+                    foreach (var controlableClose in _maisons[_currentHouse - 1]._controlables) {
+                        controlableClose.isLocked = true;
+                    }
                 }
             }
         }
