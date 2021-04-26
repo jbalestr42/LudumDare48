@@ -20,7 +20,7 @@ public class InceptionManager : MonoBehaviour {
         _player.OnObjectReleased.AddListener(CheckObjectState);
         _player.OnDoAction.AddListener(CheckObjectState);
         foreach (var controlableClose in _refMaison._controlables) {
-            // controlableClose.isLocked = true;
+            controlableClose.isLocked = true;
         }
         _refMaison.ActivateObject();
         _maisons[0].ActivateObject();

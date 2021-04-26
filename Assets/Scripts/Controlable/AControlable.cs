@@ -34,7 +34,7 @@ public class AControlable : MonoBehaviour {
     public bool _hasSelfAction = false;
     public bool isLocked = false;
     public bool autoReaction = false;
-    public bool isReactionValidated = false;
+    [HideInInspector] public bool isReactionValidated = false;
 
     Animator _animator;
     private float yPosition;
@@ -70,6 +70,7 @@ public class AControlable : MonoBehaviour {
                 if (autoReaction) {
                     Debug.Log($"ACTION: Auto-actioning '{this.objectType}'.");
                     actionable.DoAction();
+                    actionable.isValidated = true;
                     isValidated = true;
                 } else {
                     isValidated = false;

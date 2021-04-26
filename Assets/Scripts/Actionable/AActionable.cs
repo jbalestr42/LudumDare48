@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class AActionable : MonoBehaviour {
     // Determine chich type can activate this object
     public ObjectType objectActionable = ObjectType.Undefined;
-    public bool isValidated = false;
-    public bool isReaction = false;
+    [HideInInspector] public bool isValidated = false;
+    [HideInInspector] public bool isReaction = false;
     public abstract void DoAction();
 }
