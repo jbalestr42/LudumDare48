@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MaisonManager : MonoBehaviour {
-    List<AControlable> _controlables = new List<AControlable>();
+    public List<AControlable> _controlables = new List<AControlable>();
     public GameObject _door;
     public GameObject _smallDoorCollider;
     public GameObject _nextDoorCollider;

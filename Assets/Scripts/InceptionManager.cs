@@ -16,6 +16,9 @@ public class InceptionManager : MonoBehaviour {
     void Start()
     {
         _player.OnObjectReleased.AddListener(CheckObjectState);
+        foreach (var controlableClose in _refMaison._controlables) {
+            controlableClose.isLocked = true;
+        }
     }
 
     void Destroy()
@@ -32,6 +35,9 @@ public class InceptionManager : MonoBehaviour {
             if (_refMaison.CheckObjects(_maisons[_currentHouse])) {
                 Debug.Log("All objects are ok, opening next house.");
                 OpenNextHouse();
+                foreach (var controlableClose in _maisons[_currentHouse - 1]._controlables) {
+                    controlableClose.isLocked = true;
+                }
             }
         }
     }

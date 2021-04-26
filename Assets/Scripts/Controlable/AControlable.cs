@@ -32,6 +32,7 @@ public class AControlable : MonoBehaviour {
     public List<AActionable> actionables { get; private set; } = new List<AActionable>();
     AActionable selfActionable = null;
     public bool _hasSelfAction = false;
+    public bool isLocked = false;
 
     Animator _animator;
 

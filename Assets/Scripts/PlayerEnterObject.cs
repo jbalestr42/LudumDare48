@@ -31,7 +31,7 @@ public class PlayerEnterObject : MonoBehaviour {
                         RaycastHit hit;
                         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity)) {
                             AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
-                            if (controlable != null) {
+                            if (controlable != null && !controlable.isLocked) {
                                 Debug.Log("Object Selected: " + controlable);
                                 _controlledObject = controlable;
 
