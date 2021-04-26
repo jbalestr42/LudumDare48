@@ -18,30 +18,33 @@ public class InceptionManager : MonoBehaviour {
     void Start()
     {
         _player.OnObjectReleased.AddListener(CheckObjectState);
+        _player.OnDoAction.AddListener(CheckObjectState);
         foreach (var controlableClose in _refMaison._controlables) {
-            controlableClose.isLocked = true;
+            // controlableClose.isLocked = true;
         }
     }
 
     void Destroy()
     {
-        _player.OnObjectReleased.AddListener(CheckObjectState);
+        _player.OnObjectReleased.RemoveListener(CheckObjectState);
+        _player.OnDoAction.RemoveListener(CheckObjectState);
     }
 
     void CheckObjectState(AControlable controlable)
     {
-        if (_refMaison.CheckObject(controlable)) {
+        Debug.Log("Check object " + _refMaison.GetObject(controlable.objectType).isReactionValidated + " " + controlable.isReactionValidated);
+        if (_refMaison.CheckObjectPosisition(controlable)) {
             Debug.Log("Object placed properly -> TODO add feedback");
             SnapObject(controlable);
             SoundManager.PlaySound(Random.value > 0.5 ? Random.value > 0.5f ? "snap_1" : "snap_2" : "snap_3", controlable.transform.position);
-
-
-            if (_refMaison.CheckObjects(_maisons[_currentHouse])) {
-                Debug.Log("All objects are ok, opening next house.");
-                OpenNextHouse();
-                if (closeDoorIfValidate) {
-                    foreach (var controlableClose in _maisons[_currentHouse - 1]._controlables) {
-                        controlableClose.isLocked = true;
+            if (_refMaison.CheckObjectReactionState(controlable)) {
+                if (_refMaison.CheckObjects(_maisons[_currentHouse])) {
+                    Debug.Log("All objects are ok, opening next house.");
+                    OpenNextHouse();
+                    if (closeDoorIfValidate) {
+                        foreach (var controlableClose in _maisons[_currentHouse - 1]._controlables) {
+                            controlableClose.isLocked = true;
+                        }
                     }
                 }
             }

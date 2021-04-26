@@ -26,13 +26,15 @@ public enum ObjectType {
 }
 
 public class AControlable : MonoBehaviour {
-    [SerializeField] float _radius = 1f;
-    [SerializeField] float _distanceMinimum = 1f;
+    [SerializeField] float _actionRadius = 1f;
+    [SerializeField] float _distanceSnapMinimum = 1f;
     public ObjectType objectType = ObjectType.Undefined;
     public List<AActionable> actionables { get; private set; } = new List<AActionable>();
     AActionable selfActionable = null;
     public bool _hasSelfAction = false;
     public bool isLocked = false;
+    public bool autoReaction = false;
+    public bool isReactionValidated = false;
 
     Animator _animator;
     private float yPosition;
@@ -49,9 +51,28 @@ public class AControlable : MonoBehaviour {
                 actionables.Add(actionable);
             }
         }
+        AutoReaction();
 
         _animator = GetComponentInChildren<Animator>();
         yPosition = transform.position.y;
+    }
+
+    private void AutoReaction()
+    {
+        bool isValidated = true;
+        isReactionValidated = true;
+        foreach (AActionable actionable in actionables) {
+            if (actionable.isReaction) {
+                if (autoReaction) {
+                    Debug.Log($"ACTION: Auto-actioning '{this.objectType}'.");
+                    actionable.DoAction();
+                    isValidated = true;
+                } else {
+                    isValidated = false;
+                }
+            }
+        }
+        isReactionValidated = isValidated;
     }
 
     private void LateUpdate()
@@ -65,8 +86,7 @@ public class AControlable : MonoBehaviour {
     public void TryDoAction()
     {
         bool canDoAction = false;
-        int layerMask = 1;// << LayerMask.NameToLayer("Controlable");
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, _radius, Vector3.up, 10f, layerMask);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, _actionRadius, Vector3.up, 10f);
         foreach (RaycastHit hit in hits) {
             AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
             if (controlable && hit.collider.gameObject != gameObject) {
@@ -79,6 +99,7 @@ public class AControlable : MonoBehaviour {
                 }
             }
         }
+
 
         // Use bool to avoid doing action multiple times
         if (canDoAction || _hasSelfAction) {
@@ -99,7 +120,18 @@ public class AControlable : MonoBehaviour {
         Debug.Log("Inehrit in child class if needed");
     }
 
-    public virtual bool IsSameState(AControlable controlable)
+    // public virtual bool IsSameState(AControlable controlable)
+    // {
+    //     Vector3 position1 = transform.root.position - transform.position;
+    //     Vector3 position2 = controlable.transform.root.position - controlable.transform.position;
+    //     float distance = Vector3.Distance(position1, position2);
+
+    //     Debug.Log("position " + position1 + " - " + position2);
+    //     Debug.Log("Distance " + " - " + distance);
+    //     return isReactionValidated == controlable.isReactionValidated && distance < _distanceSnapMinimum;
+    // }
+
+    public virtual bool IsSamePosition(AControlable controlable)
     {
         Vector3 position1 = transform.root.position - transform.position;
         Vector3 position2 = controlable.transform.root.position - controlable.transform.position;
@@ -107,7 +139,12 @@ public class AControlable : MonoBehaviour {
 
         Debug.Log("position " + position1 + " - " + position2);
         Debug.Log("Distance " + " - " + distance);
-        return distance < _distanceMinimum;
+        return distance < _distanceSnapMinimum;
+    }
+
+    public virtual bool IsInSameReactionState(AControlable controlable)
+    {
+        return isReactionValidated == controlable.isReactionValidated;
     }
 
     public void SetWalking(bool isWalking)

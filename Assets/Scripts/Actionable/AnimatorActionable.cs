@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimatorActionable : AActionable
-{
+public class AnimatorActionable : AActionable {
     public Animator _animator;
+
+    private void Start()
+    {
+        isReaction = true;
+    }
 
     public override void DoAction()
     {
-        _animator.SetTrigger("Action");
+        GetComponentInParent<AControlable>().isReactionValidated = true;
+        _animator.SetTrigger("Grow");
+        _animator.SetBool("IsOn", true);
+        isValidated = true;
     }
 }

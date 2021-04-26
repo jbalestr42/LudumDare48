@@ -17,6 +17,7 @@ public class PlayerEnterObject : MonoBehaviour {
     PlayerState _state = PlayerState.ControllingPlayer;
 
     public UnityEvent<AControlable> OnObjectReleased = new UnityEvent<AControlable>();
+    public UnityEvent<AControlable> OnDoAction = new UnityEvent<AControlable>();
 
     private void Start()
     {
@@ -61,6 +62,7 @@ public class PlayerEnterObject : MonoBehaviour {
             case PlayerState.ControllingObject: {
                     if (Input.GetMouseButtonDown(0)) {
                         _controlledObject.TryDoAction();
+                        OnDoAction.Invoke(_controlledObject);
                     } else if (Input.GetMouseButtonDown(1)) {
                         Vector3 positionCamera = _camera.transform.position;
                         Vector3 controledPosition = _controlledObject.transform.position;
