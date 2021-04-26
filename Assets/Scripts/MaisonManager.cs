@@ -19,7 +19,7 @@ public class MaisonManager : MonoBehaviour {
     public bool CheckObjects(MaisonManager maison)
     {
         foreach (AControlable controlable in _controlables) {
-            if (!IsSamePosition(controlable, maison.GetObject(controlable.objectType)) &&
+            if (!IsSamePosition(controlable, maison.GetObject(controlable.objectType)) ||
                 !IsSameReactionState(controlable, maison.GetObject(controlable.objectType))) {
                 return false;
             }
@@ -44,7 +44,7 @@ public class MaisonManager : MonoBehaviour {
 
     public bool IsSameReactionState(AControlable refControlable, AControlable controlable)
     {
-        return refControlable.IsSamePosition(controlable);
+        return refControlable.IsInSameReactionState(controlable);
     }
 
     public AControlable GetObject(ObjectType type)

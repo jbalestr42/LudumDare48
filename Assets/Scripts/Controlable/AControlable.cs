@@ -34,7 +34,7 @@ public class AControlable : MonoBehaviour {
     public bool _hasSelfAction = false;
     public bool isLocked = false;
     public bool autoReaction = false;
-    [HideInInspector] public bool isReactionValidated = false;
+    public bool isReactionValidated = false;
 
     Animator _animator;
     private float yPosition;
