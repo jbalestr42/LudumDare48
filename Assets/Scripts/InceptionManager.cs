@@ -13,6 +13,7 @@ public class InceptionManager : MonoBehaviour {
     PlayerEnterObject _player = null;
     int _currentHouse = 0;
 
+    public bool debugNextHouse = true;
     public bool closeDoorIfValidate = true;
 
     void Start()
@@ -72,9 +73,10 @@ public class InceptionManager : MonoBehaviour {
     {
         _currentHouse++;
         _maisons[_currentHouse - 1].OpenDoor();
-        _maisons[_currentHouse].ActivateObject();
         if (_currentHouse >= _maisons.Count) {
             Debug.Log("GAME Is DONE, yeaahhhhh");
+        } else {
+            _maisons[_currentHouse].ActivateObject();
         }
     }
 
@@ -120,7 +122,7 @@ public class InceptionManager : MonoBehaviour {
             if (animator != null) {
                 animator.SetBool("Walk", true);
             }
-            controlable.isLocked = false;
+            // controlable.isLocked = false;
         }
     }
 }

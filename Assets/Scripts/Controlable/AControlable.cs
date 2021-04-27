@@ -139,8 +139,6 @@ public class AControlable : MonoBehaviour {
         Vector3 position2 = controlable.transform.root.position - controlable.transform.position;
         float distance = Vector3.Distance(position1, position2);
 
-        // Debug.Log("position " + position1 + " - " + position2);
-        // Debug.Log("Distance " + " - " + distance);
         return distance < _distanceSnapMinimum;
     }
 
