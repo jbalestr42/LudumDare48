@@ -1359,7 +1359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7993994247073556902, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: isLocked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7993994247124042954, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: isLocked

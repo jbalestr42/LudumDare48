@@ -119,11 +119,11 @@ Material:
     - _UseSmoothNormal: 0
     - _WorkflowMode: 0
     m_Colors:
-    - _BaseColor: {r: 0.2830189, g: 0, b: 0.12897304, a: 1}
+    - _BaseColor: {r: 0, g: 0.7461715, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Shadow1Color: {r: 0.1792453, g: 0, b: 0, a: 0.5}
+    - _Shadow1Color: {r: 0.14173195, g: 0.36953485, b: 0.6132076, a: 0.5}
     - _Shadow2Color: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 1, g: 0.8191595, b: 0.4575472, a: 1}
   m_BuildTextureStacks: []
