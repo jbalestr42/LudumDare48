@@ -8,6 +8,5 @@ public class DisableGameObjectActionable : AActionable {
     public override void DoAction()
     {
         _gameObject.SetActive(false);
-        Debug.Log("Disalbe gameObject " + _gameObject);
     }
 }

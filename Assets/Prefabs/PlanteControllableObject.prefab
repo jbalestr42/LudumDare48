@@ -45,7 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectActionable: 131072
   isValidated: 0
-  isReaction: 0
   _animator: {fileID: 7039156722279996615}
   isGrow: 1
 --- !u!95 &7039156722279996615
@@ -111,8 +110,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectActionable: 32768
-  isValidated: 0
-  isReaction: 0
 --- !u!1 &5891868683406648266
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,6 +286,10 @@ PrefabInstance:
     - target: {fileID: 2525717258595178792, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: _hasSelfAction
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525717258595178792, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: _distanceSnapMinimum
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178793, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_Name

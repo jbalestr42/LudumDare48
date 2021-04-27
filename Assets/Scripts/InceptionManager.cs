@@ -32,21 +32,36 @@ public class InceptionManager : MonoBehaviour {
         _player.OnDoAction.RemoveListener(CheckObjectState);
     }
 
+    bool IsNeeded(AControlable controlable)
+    {
+        foreach (AControlable houseControlable in _maisons[_currentHouse]._controlables) {
+            if (!houseControlable.ReactionableValidated()) {
+                foreach (AReactionable reactionable in houseControlable.reactionables) {
+                    if (reactionable.objectActionable == controlable.objectType) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     void CheckObjectState(AControlable controlable)
     {
-        Debug.Log("Check object " + _refMaison.GetObject(controlable.objectType).isReactionValidated + " " + controlable.isReactionValidated);
-        if (_refMaison.CheckObjectPosisition(controlable)) {
+        if (_refMaison.CheckObjectState(controlable) && !IsNeeded(controlable)) {
             Debug.Log("Object placed properly -> TODO add feedback");
             SnapObject(controlable);
+            if (!_refMaison.CheckValidated(controlable)) {
+                return;
+            }
+            controlable.isLocked = true;
             SoundManager.PlaySound(Random.value > 0.5 ? Random.value > 0.5f ? "snap_1" : "snap_2" : "snap_3", controlable.transform.position);
-            if (_refMaison.CheckObjectReactionState(controlable)) {
-                if (_refMaison.CheckObjects(_maisons[_currentHouse])) {
-                    Debug.Log("All objects are ok, opening next house.");
-                    OpenNextHouse();
-                    if (closeDoorIfValidate) {
-                        foreach (var controlableClose in _maisons[_currentHouse - 1]._controlables) {
-                            controlableClose.isLocked = true;
-                        }
+            if (_refMaison.CheckObjects(_maisons[_currentHouse])) {
+                Debug.Log("All objects are ok, opening next house.");
+                OpenNextHouse();
+                if (closeDoorIfValidate) {
+                    foreach (var controlableClose in _maisons[_currentHouse - 1]._controlables) {
+                        controlableClose.isLocked = true;
                     }
                 }
             }
@@ -77,6 +92,7 @@ public class InceptionManager : MonoBehaviour {
         Quaternion originRotation = controlable.transform.localRotation;
         Quaternion refRotation = refControlable.transform.localRotation;
         float time = 1f;
+        Renderer renderer = GetComponent<Renderer>();
 
         while (time > 0f) {
             time -= Time.deltaTime;
@@ -104,6 +120,7 @@ public class InceptionManager : MonoBehaviour {
             if (animator != null) {
                 animator.SetBool("Walk", true);
             }
+            controlable.isLocked = false;
         }
     }
 }

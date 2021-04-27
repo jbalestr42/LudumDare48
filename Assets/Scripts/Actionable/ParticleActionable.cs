@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DebugActionable : AActionable
-{
+public class ParticleActionable : AActionable {
+    [SerializeField] private ParticleSystem particle;
+
     public override void DoAction()
     {
-        Debug.Log("DebugControlable ");
+        particle.Play();
     }
 }

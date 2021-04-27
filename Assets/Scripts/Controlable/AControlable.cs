@@ -30,21 +30,25 @@ public class AControlable : MonoBehaviour {
     [SerializeField] float _distanceSnapMinimum = 1f;
     public ObjectType objectType = ObjectType.Undefined;
     public List<AActionable> actionables { get; private set; } = new List<AActionable>();
+    public List<AReactionable> reactionables { get; private set; } = new List<AReactionable>();
     AActionable selfActionable = null;
     public bool _hasSelfAction = false;
     public bool isLocked = false;
-    public bool autoReaction = false;
-    public bool isReactionValidated = false;
 
     Animator _animator;
     private float yPosition;
 
-    void Start()
+    void OnEnable()
     {
         // Get all actionables in children only
         AActionable[] actionablesArray = GetComponentsInChildren<AActionable>();
         foreach (AActionable actionable in actionablesArray) {
             // If the object type is this one, it's the self action
+            if (actionable is AReactionable) {
+                AReactionable reactionable = actionable as AReactionable;
+                reactionable.Init();
+                reactionables.Add(reactionable);
+            }
             if ((actionable.objectActionable & objectType) != ObjectType.Undefined) {
                 selfActionable = actionable;
             } else {
@@ -56,29 +60,18 @@ public class AControlable : MonoBehaviour {
         yPosition = transform.position.y;
     }
 
-    private void OnEnable()
-    {
-        AutoReaction();
-    }
-
-    private void AutoReaction()
+    public bool ReactionableValidated()
     {
         bool isValidated = true;
-        isReactionValidated = true;
-        foreach (AActionable actionable in actionables) {
-            if (actionable.isReaction) {
-                if (autoReaction) {
-                    Debug.Log($"ACTION: Auto-actioning '{this.objectType}'.");
-                    actionable.DoAction();
-                    actionable.isValidated = true;
-                    isValidated = true;
-                } else {
-                    isValidated = false;
-                }
+        foreach (var reactionable in reactionables) {
+            if (!reactionable.isValidated) {
+                isValidated = false;
             }
         }
-        isReactionValidated = isValidated;
+        return isValidated;
     }
+
+    // private GameObject debugValidation;
 
     private void LateUpdate()
     {
@@ -86,6 +79,21 @@ public class AControlable : MonoBehaviour {
         Vector3 position = transform.position;
         position.y = yPosition;
         transform.position = position;
+
+        // if (ReactionableValidated()) {
+        //     if (debugValidation == null) {
+        //         debugValidation = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //         debugValidation.transform.localScale = Vector3.one * 0.1f + Vector3.up * 10f;
+        //         Destroy(debugValidation.GetComponent<Collider>());
+        //     }
+        // } else {
+        //     if (debugValidation != null) {
+        //         Destroy(debugValidation);
+        //     }
+        // }
+        // if (debugValidation != null) {
+        //     debugValidation.transform.position = transform.position;
+        // }
     }
 
     public void TryDoAction()
@@ -125,31 +133,20 @@ public class AControlable : MonoBehaviour {
         Debug.Log("Inehrit in child class if needed");
     }
 
-    // public virtual bool IsSameState(AControlable controlable)
-    // {
-    //     Vector3 position1 = transform.root.position - transform.position;
-    //     Vector3 position2 = controlable.transform.root.position - controlable.transform.position;
-    //     float distance = Vector3.Distance(position1, position2);
-
-    //     Debug.Log("position " + position1 + " - " + position2);
-    //     Debug.Log("Distance " + " - " + distance);
-    //     return isReactionValidated == controlable.isReactionValidated && distance < _distanceSnapMinimum;
-    // }
-
-    public virtual bool IsSamePosition(AControlable controlable)
+    public virtual bool IsSameState(AControlable controlable)
     {
         Vector3 position1 = transform.root.position - transform.position;
         Vector3 position2 = controlable.transform.root.position - controlable.transform.position;
         float distance = Vector3.Distance(position1, position2);
 
-        Debug.Log("position " + position1 + " - " + position2);
-        Debug.Log("Distance " + " - " + distance);
+        // Debug.Log("position " + position1 + " - " + position2);
+        // Debug.Log("Distance " + " - " + distance);
         return distance < _distanceSnapMinimum;
     }
 
-    public virtual bool IsInSameReactionState(AControlable controlable)
+    public virtual bool IsValidated(AControlable controlable)
     {
-        return isReactionValidated == controlable.isReactionValidated;
+        return ReactionableValidated() == controlable.ReactionableValidated();
     }
 
     public void SetWalking(bool isWalking)

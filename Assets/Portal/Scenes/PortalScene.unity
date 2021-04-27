@@ -1569,7 +1569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 976905101490070485, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: isValidated
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1449616961285589533, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1593,11 +1593,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b36ea13d137a3704194af2a3fb3b5425, type: 2}
     - target: {fileID: 4544350293277195813, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: isValidated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658632949483368983, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: isValidated
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6059396031079551887, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: isValidated
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6205153563197442201, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1752,12 +1756,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7993994246963506432, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.156
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993994246963506432, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993994246963506432, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -103.137
-      objectReference: {fileID: 0}
-    - target: {fileID: 7993994246963506444, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
-      propertyPath: isLocked
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7993994246963506444, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: autoReaction

@@ -75,8 +75,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectActionable: 65536
-  isValidated: 0
-  isReaction: 0
 --- !u!95 &109544135939726293
 Animator:
   serializedVersion: 3
@@ -140,8 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectActionable: 131072
-  isValidated: 0
-  isReaction: 0
+  isValidated: 1
   _animator: {fileID: 109544135939726293}
   isGrow: 0
 --- !u!1001 &3976378464542811056

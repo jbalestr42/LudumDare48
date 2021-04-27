@@ -60,10 +60,10 @@ public class PlayerEnterObject : MonoBehaviour {
                     break;
                 }
             case PlayerState.ControllingObject: {
-                    if (Input.GetMouseButtonDown(0)) {
+                    if (Input.GetMouseButtonDown(1)) {
                         _controlledObject.TryDoAction();
                         OnDoAction.Invoke(_controlledObject);
-                    } else if (Input.GetMouseButtonDown(1)) {
+                    } else if (Input.GetMouseButtonDown(0)) {
                         Vector3 positionCamera = _camera.transform.position;
                         Vector3 controledPosition = _controlledObject.transform.position;
                         positionCamera.y = transform.position.y;

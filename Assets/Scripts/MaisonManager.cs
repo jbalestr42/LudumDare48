@@ -19,32 +19,32 @@ public class MaisonManager : MonoBehaviour {
     public bool CheckObjects(MaisonManager maison)
     {
         foreach (AControlable controlable in _controlables) {
-            if (!IsSamePosition(controlable, maison.GetObject(controlable.objectType)) ||
-                !IsSameReactionState(controlable, maison.GetObject(controlable.objectType))) {
+            if (!IsSameState(controlable, maison.GetObject(controlable.objectType)) ||
+                !IsValidated(controlable, maison.GetObject(controlable.objectType))) {
                 return false;
             }
         }
         return true;
     }
 
-    public bool CheckObjectPosisition(AControlable controlable)
+    public bool CheckObjectState(AControlable controlable)
     {
-        return IsSamePosition(GetObject(controlable.objectType), controlable);
+        return IsSameState(GetObject(controlable.objectType), controlable);
     }
 
-    public bool IsSamePosition(AControlable refControlable, AControlable controlable)
+    public bool IsSameState(AControlable refControlable, AControlable controlable)
     {
-        return refControlable.IsSamePosition(controlable);
+        return refControlable.IsSameState(controlable);
     }
 
-    public bool CheckObjectReactionState(AControlable controlable)
+    public bool CheckValidated(AControlable controlable)
     {
-        return IsSameReactionState(GetObject(controlable.objectType), controlable);
+        return IsValidated(GetObject(controlable.objectType), controlable);
     }
 
-    public bool IsSameReactionState(AControlable refControlable, AControlable controlable)
+    public bool IsValidated(AControlable refControlable, AControlable controlable)
     {
-        return refControlable.IsInSameReactionState(controlable);
+        return refControlable.IsValidated(controlable);
     }
 
     public AControlable GetObject(ObjectType type)

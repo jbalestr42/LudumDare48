@@ -45,8 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectActionable: 131072
-  isValidated: 0
-  isReaction: 0
 --- !u!114 &1767361920102654758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,8 +58,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectActionable: 131072
-  isValidated: 0
-  isReaction: 0
   particle: {fileID: 4466017804519319524}
 --- !u!95 &1472570373525526604
 Animator:
@@ -5152,7 +5148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178792, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: _actionRadius
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178792, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: _hasSelfAction
