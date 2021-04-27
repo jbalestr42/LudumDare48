@@ -21,6 +21,7 @@ public class MaisonManager : MonoBehaviour {
         foreach (AControlable controlable in _controlables) {
             if (!IsSamePosition(controlable, maison.GetObject(controlable.objectType)) ||
                 !IsSameReactionState(controlable, maison.GetObject(controlable.objectType))) {
+                    Debug.Log("FALSE" + controlable.name);
                 return false;
             }
         }

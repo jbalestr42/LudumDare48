@@ -13,6 +13,7 @@ public class InceptionManager : MonoBehaviour {
     PlayerEnterObject _player = null;
     int _currentHouse = 0;
 
+    public bool debugNextHouse = true;
     public bool closeDoorIfValidate = true;
 
     void Start()
@@ -35,12 +36,13 @@ public class InceptionManager : MonoBehaviour {
     void CheckObjectState(AControlable controlable)
     {
         Debug.Log("Check object " + _refMaison.GetObject(controlable.objectType).isReactionValidated + " " + controlable.isReactionValidated);
-        if (_refMaison.CheckObjectPosisition(controlable)) {
+        if (_refMaison.CheckObjectPosisition(controlable) || debugNextHouse) {
             Debug.Log("Object placed properly -> TODO add feedback");
             SnapObject(controlable);
             SoundManager.PlaySound(Random.value > 0.5 ? Random.value > 0.5f ? "snap_1" : "snap_2" : "snap_3", controlable.transform.position);
-            if (_refMaison.CheckObjectReactionState(controlable)) {
-                if (_refMaison.CheckObjects(_maisons[_currentHouse])) {
+            if (_refMaison.CheckObjectReactionState(controlable) || debugNextHouse) {
+                Debug.Log("Object CheckObjectReactionState -> check");
+                if (_refMaison.CheckObjects(_maisons[_currentHouse]) || debugNextHouse) {
                     Debug.Log("All objects are ok, opening next house.");
                     OpenNextHouse();
                     if (closeDoorIfValidate) {
@@ -57,9 +59,12 @@ public class InceptionManager : MonoBehaviour {
     {
         _currentHouse++;
         _maisons[_currentHouse - 1].OpenDoor();
-        _maisons[_currentHouse].ActivateObject();
         if (_currentHouse >= _maisons.Count) {
             Debug.Log("GAME Is DONE, yeaahhhhh");
+        }
+        else
+        {
+            _maisons[_currentHouse].ActivateObject();
         }
     }
 

@@ -847,7 +847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7993994245542201660, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: autoReaction
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7993994246226884859, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1661,11 +1661,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7993994245542201660, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: isLocked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7993994245542201660, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: autoReaction
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7993994245542201660, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: isReactionValidated
@@ -4101,6 +4101,7 @@ MonoBehaviour:
   - {fileID: 1661188771}
   - {fileID: 1117365053}
   _player: {fileID: 1099167114}
+  debugNextHouse: 0
   closeDoorIfValidate: 1
 --- !u!4 &1745761963
 Transform:

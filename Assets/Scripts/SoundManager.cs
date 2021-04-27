@@ -15,7 +15,7 @@ public class SoundManager : MonoBehaviour {
 
     public static void PlaySound(string name, Vector3 position)
     {
-        Debug.Log("Play sound " + name);
+        //Debug.Log("Play sound " + name);
         bool fouded = false;
         foreach (var clip in instance.audioClipList) {
             if (clip.name.Contains(name)) {
