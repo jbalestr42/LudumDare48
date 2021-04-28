@@ -1016,7 +1016,7 @@ PrefabInstance:
     - target: {fileID: 8428270464984303717, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 730019781}
+      objectReference: {fileID: 1920849050}
     - target: {fileID: 8428270464984303717, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: reciever
       value: 
@@ -1108,9 +1108,81 @@ PrefabInstance:
       propertyPath: portalTeleporterList.Array.data[4]
       value: 
       objectReference: {fileID: 1834545895}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[1].time
+      value: 0.6166687
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[2].time
+      value: 0.6166687
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[1].value
+      value: -0.00024414062
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[2].value
+      value: -0.00024414062
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[0].inSlope
+      value: 1.0189334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[1].inSlope
+      value: -0.019209627
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[2].inSlope
+      value: -0.019209627
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[0].outSlope
+      value: 1.0189334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[1].inWeight
+      value: 0.20833331
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[1].outSlope
+      value: -0.019209627
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[2].inWeight
+      value: 0.20833331
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[2].outSlope
+      value: -0.019209627
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[0].outWeight
+      value: 0.09583333
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[1].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099167114, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: lockedCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1817507780519801862, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817507780519801863, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: cameraRig
+      value: 
+      objectReference: {fileID: 505813152}
+    - target: {fileID: 1817507780519801863, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: playerMinus.height
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 1817507780519801863, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
       propertyPath: playerBase.stepOffset
@@ -1118,7 +1190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1817507780519801863, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
       propertyPath: playerMinus.stepOffset
-      value: 0.1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1817507780519801863, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
       propertyPath: portalTeleporterList.Array.data[0]
@@ -1147,6 +1219,10 @@ PrefabInstance:
     - target: {fileID: 3939432031520552666, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
       propertyPath: m_Name
       value: PlayerParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 5437528487229948122, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 5437528487230551470, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1368,7 +1444,7 @@ PrefabInstance:
     - target: {fileID: 8428270464984303717, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 730019781}
+      objectReference: {fileID: 1920849050}
     - target: {fileID: 8428270464984303717, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: reciever
       value: 
@@ -1452,7 +1528,7 @@ PrefabInstance:
     - target: {fileID: 2400616133912949118, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 730019781}
+      objectReference: {fileID: 1920849050}
     - target: {fileID: 2400616133912949118, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
       propertyPath: reciever
       value: 
@@ -1818,7 +1894,7 @@ PrefabInstance:
     - target: {fileID: 8428270464984303717, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 730019781}
+      objectReference: {fileID: 1920849050}
     - target: {fileID: 8428270464984303717, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: reciever
       value: 
@@ -2088,6 +2164,11 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3720837133761783831, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
   m_PrefabInstance: {fileID: 6362429097655166341}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &505813152 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5437528487230551470, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+  m_PrefabInstance: {fileID: 356446224}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &598646207 stripped
 Transform:
@@ -2424,7 +2505,7 @@ PrefabInstance:
     - target: {fileID: 2400616133912949118, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 730019781}
+      objectReference: {fileID: 1920849050}
     - target: {fileID: 2400616133912949118, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
       propertyPath: reciever
       value: 
@@ -2997,7 +3078,7 @@ PrefabInstance:
     - target: {fileID: 8428270464984303717, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 730019781}
+      objectReference: {fileID: 1920849050}
     - target: {fileID: 8428270464984303717, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: reciever
       value: 
@@ -4274,7 +4355,7 @@ PrefabInstance:
     - target: {fileID: 2400616133912949118, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 730019781}
+      objectReference: {fileID: 1920849050}
     - target: {fileID: 2400616133912949118, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
       propertyPath: reciever
       value: 
@@ -4363,6 +4444,11 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 4053201646578439556, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
   m_PrefabInstance: {fileID: 1819861456}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1920849050 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1817507780519650668, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+  m_PrefabInstance: {fileID: 356446224}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1996907395 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 419971295350575889, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
@@ -4382,7 +4468,7 @@ PrefabInstance:
     - target: {fileID: 2400616133912949118, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 730019781}
+      objectReference: {fileID: 1920849050}
     - target: {fileID: 2400616133912949118, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
       propertyPath: reciever
       value: 
@@ -4812,7 +4898,7 @@ PrefabInstance:
     - target: {fileID: 8428270464984303717, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 730019781}
+      objectReference: {fileID: 1920849050}
     - target: {fileID: 8428270464984303717, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: reciever
       value: 
@@ -4902,7 +4988,7 @@ PrefabInstance:
     - target: {fileID: 2400616133912949118, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 730019781}
+      objectReference: {fileID: 1920849050}
     - target: {fileID: 2400616133912949118, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
       propertyPath: reciever
       value: 

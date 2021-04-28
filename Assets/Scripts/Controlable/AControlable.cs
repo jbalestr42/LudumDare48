@@ -36,7 +36,7 @@ public class AControlable : MonoBehaviour {
     public bool isLocked = false;
 
     Animator _animator;
-    private float yPosition;
+    public float yPosition;
 
     void OnEnable()
     {
@@ -76,9 +76,9 @@ public class AControlable : MonoBehaviour {
     private void LateUpdate()
     {
         // Lock y
-        Vector3 position = transform.position;
-        position.y = yPosition;
-        transform.position = position;
+        // Vector3 position = transform.position;
+        // position.y = yPosition;
+        // transform.position = position;
 
         // if (ReactionableValidated()) {
         //     if (debugValidation == null) {

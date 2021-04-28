@@ -8,23 +8,25 @@ public class PortalTeleporter : MonoBehaviour {
 
     private bool playerIsOverlapping = false;
     private Transform overlappingPlayer;
-    public float imunePortal = 0f;
 
     public PortalTeleporter[] portalTeleporterList;
+    private PlayerScalePortal playerScalePortal;
 
     private void Start()
     {
         portalTeleporterList = FindObjectsOfType<PortalTeleporter>();
+        playerScalePortal = player.GetComponent<PlayerScalePortal>();
     }
 
-    void Update()
+    void LateUpdate()
     {
-        if (imunePortal >= 0f) {
-            imunePortal -= Time.deltaTime;
-            return;
-        }
-        if (playerIsOverlapping) {
-            Vector3 portalToPlayer = overlappingPlayer.position - transform.position;
+        Vector3 portalPosition = transform.position;
+        portalPosition.y = 0f;
+        Vector3 playerPosition = player.position;
+        playerPosition.y = 0f;
+        float distance = Vector3.Distance(portalPosition, playerPosition);
+        if (distance < 5f) {
+            Vector3 portalToPlayer = player.position - transform.position;
             float dotProduct = Vector3.Dot(transform.up, portalToPlayer);
 
             // If this is true: The player has moved across the portal
@@ -37,39 +39,18 @@ public class PortalTeleporter : MonoBehaviour {
 
                 Vector3 positionOffset = portalToPlayer;
                 positionOffset *= (reciever.lossyScale.x / transform.lossyScale.x);
-                // overlappingPlayer.position = reciever.position + positionOffset + reciever.forward;
+                // player.position = reciever.position + positionOffset + reciever.forward;
                 Vector3 position = reciever.position + positionOffset;
-                CharacterController controller = overlappingPlayer.GetComponent<CharacterController>();
+                // prevent glitch :/
+                position.y = player.position.y;
+                CharacterController controller = player.GetComponent<CharacterController>();
                 controller.enabled = false;
-                overlappingPlayer.position = position;
+                player.position = position;
                 controller.enabled = true;
 
                 playerIsOverlapping = false;
-                SetImunePortal();
+                playerScalePortal.OnEnterPortal();
             }
-        }
-    }
-
-    void SetImunePortal()
-    {
-        foreach (var portal in portalTeleporterList) {
-            portal.imunePortal = 1f;
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player") {
-            overlappingPlayer = other.transform;
-            playerIsOverlapping = true;
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player") {
-            overlappingPlayer = null;
-            playerIsOverlapping = false;
         }
     }
 }
