@@ -23,7 +23,7 @@ public class PortalCamera : MonoBehaviour {
         material.mainTexture = cam.targetTexture;
     }
 
-    void Update()
+    void LateUpdate()
     {
         float distance = Vector3.Distance(playerCamera.position, otherPortal.position);
         var angle = Tools.Radian(playerCamera.forward, otherPortal.position - playerCamera.position);
@@ -36,7 +36,6 @@ public class PortalCamera : MonoBehaviour {
         Vector3 playerOffsetFromPortal = playerCamera.position - otherPortal.position;
         playerOffsetFromPortal *= (portal.lossyScale.x / otherPortal.lossyScale.x);
         transform.position = (portal.position + playerOffsetFromPortal);
-
         float angularDifferenceBetweenPortalRotations = Quaternion.Angle(portal.rotation, otherPortal.rotation);
 
         Quaternion portalRotationalDifference = Quaternion.AngleAxis(angularDifferenceBetweenPortalRotations, Vector3.up);
@@ -45,5 +44,6 @@ public class PortalCamera : MonoBehaviour {
         if (isRevert) {
             transform.RotateAround(transform.position, Vector3.up, 180f);
         }
+
     }
 }
