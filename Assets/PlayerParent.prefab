@@ -618,6 +618,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  cursor: {fileID: 2108980157}
 --- !u!1 &3939432031520552666
 GameObject:
   m_ObjectHideFlags: 0

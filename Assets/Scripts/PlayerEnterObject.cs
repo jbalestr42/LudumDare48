@@ -16,11 +16,12 @@ public class PlayerEnterObject : MonoBehaviour {
     [SerializeField] Camera _camera = null;
     PlayerState _state = PlayerState.ControllingPlayer;
 
-    public UnityEvent<AControlable> OnObjectReleased = new UnityEvent<AControlable>();
-    public UnityEvent<AControlable> OnDoAction = new UnityEvent<AControlable>();
-
     [SerializeField] public float objectCameraDistance = 8f;
     [SerializeField] private AnimationCurve lockedCurve;
+    [SerializeField] private GameObject cursor;
+
+    public UnityEvent<AControlable> OnObjectReleased = new UnityEvent<AControlable>();
+    public UnityEvent<AControlable> OnDoAction = new UnityEvent<AControlable>();
 
     private void Start()
     {
@@ -72,6 +73,7 @@ public class PlayerEnterObject : MonoBehaviour {
                                     _state = PlayerState.ControllingObject;
                                     _controlledObject.SetWalking(true);
                                     SoundManager.PlaySound("control_1", _controlledObject.transform.position);
+                                    cursor.SetActive(false);
                                 } else {
                                     SoundManager.PlaySound(Random.value > 0.5 ? "lock_1" : "lock_2", hit.point);
                                     StartCoroutine(LockedCoroutine(controlable));
@@ -99,6 +101,7 @@ public class PlayerEnterObject : MonoBehaviour {
                         _state = PlayerState.ControllingPlayer;
                         SoundManager.PlaySound("release_1", _controlledObject.transform.position);
                         _controlledObject = null;
+                        cursor.SetActive(true);
                     }
                     break;
                 }
