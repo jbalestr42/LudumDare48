@@ -19,6 +19,7 @@ public class PlayerEnterObject : MonoBehaviour {
     public UnityEvent<AControlable> OnObjectReleased = new UnityEvent<AControlable>();
     public UnityEvent<AControlable> OnDoAction = new UnityEvent<AControlable>();
 
+    [SerializeField] public float objectCameraDistance = 8f;
     [SerializeField] private AnimationCurve lockedCurve;
 
     private void Start()
@@ -67,7 +68,7 @@ public class PlayerEnterObject : MonoBehaviour {
                                     _controlledObject.transform.SetParent(transform);
                                     _controlledObject.transform.forward = transform.forward;
                                     _controlledObject.transform.localPosition = Vector3.zero;
-                                    _camera.GetComponent<CameraOcclusionProtector>().distanceToTarget = 8f;
+                                    _camera.GetComponent<CameraOcclusionProtector>().distanceToTarget = objectCameraDistance;
                                     _state = PlayerState.ControllingObject;
                                     _controlledObject.SetWalking(true);
                                     SoundManager.PlaySound("control_1", _controlledObject.transform.position);

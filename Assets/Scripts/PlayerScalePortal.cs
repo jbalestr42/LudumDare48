@@ -18,6 +18,7 @@ public class PlayerScalePortal : MonoBehaviour {
     [SerializeField] private Transform head;
     [SerializeField] private Transform cameraRig;
     [SerializeField] private AnimationCurve curve;
+    [SerializeField] private CameraOcclusionProtector cameraOcclusionProtector;
 
     private CharacterController controller;
     private Camera cam;
@@ -60,6 +61,7 @@ public class PlayerScalePortal : MonoBehaviour {
             AControlable controlable = GetComponentInChildren<AControlable>();
             if (controlable != null) {
                 controlable.transform.localScale = Mathf.Lerp(playerMinus.height / playerBase.height, 1f, lerpValue) * Vector3.one * 10f;
+                cameraOcclusionProtector.distanceToTarget = Mathf.Lerp(playerMinus.height / playerBase.height, 8f, lerpValue);
             }
         }
     }
@@ -76,6 +78,7 @@ public class PlayerScalePortal : MonoBehaviour {
         AControlable controlable = GetComponentInChildren<AControlable>();
         if (controlable != null) {
             controlable.transform.localScale = Mathf.Lerp(playerMinus.height / playerBase.height, 1f, lerpValue) * Vector3.one * 10f;
+            cameraOcclusionProtector.distanceToTarget = Mathf.Lerp(playerMinus.height / playerBase.height, 8f, lerpValue);
         }
     }
 }
