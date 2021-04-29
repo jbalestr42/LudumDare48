@@ -46,7 +46,6 @@ public class PlayerEnterObject : MonoBehaviour {
 
                                     Vector3 positionControlledObject = _controlledObject.transform.position;
                                     CharacterController controller = GetComponent<CharacterController>();
-                                    positionControlledObject.y = _controlledObject.yPosition;
 
                                     controller.enabled = false;
                                     transform.position = positionControlledObject;

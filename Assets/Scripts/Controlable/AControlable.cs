@@ -31,12 +31,11 @@ public class AControlable : MonoBehaviour {
     public ObjectType objectType = ObjectType.Undefined;
     public List<AActionable> actionables { get; private set; } = new List<AActionable>();
     public List<AReactionable> reactionables { get; private set; } = new List<AReactionable>();
-    AActionable selfActionable = null;
+    public List<AActionable> selfActionables = new List<AActionable>();
     public bool _hasSelfAction = false;
     public bool isLocked = false;
 
     Animator _animator;
-    public float yPosition;
 
     void OnEnable()
     {
@@ -50,14 +49,13 @@ public class AControlable : MonoBehaviour {
                 reactionables.Add(reactionable);
             }
             if ((actionable.objectActionable & objectType) != ObjectType.Undefined) {
-                selfActionable = actionable;
+                selfActionables.Add(actionable);
             } else {
                 actionables.Add(actionable);
             }
         }
 
         _animator = GetComponentInChildren<Animator>();
-        yPosition = transform.position.y;
     }
 
     public bool ReactionableValidated()
@@ -72,14 +70,8 @@ public class AControlable : MonoBehaviour {
     }
 
     // private GameObject debugValidation;
-
     private void LateUpdate()
     {
-        // Lock y
-        // Vector3 position = transform.position;
-        // position.y = yPosition;
-        // transform.position = position;
-
         // if (ReactionableValidated()) {
         //     if (debugValidation == null) {
         //         debugValidation = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -98,33 +90,32 @@ public class AControlable : MonoBehaviour {
 
     public void TryDoAction()
     {
-        bool canDoAction = false;
+        Debug.Log("Try Do Action");
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, _actionRadius, Vector3.up, 10f);
         foreach (RaycastHit hit in hits) {
             AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
             if (controlable && hit.collider.gameObject != gameObject) {
                 foreach (AActionable destActionable in controlable.actionables) {
                     if ((objectType & destActionable.objectActionable) != ObjectType.Undefined) {
-                        canDoAction = true;
                         Debug.Log($"ACTION: '{objectType}' is actioning '{controlable.objectType}'.");
                         destActionable.DoAction();
+                        break;
                     }
                 }
             }
         }
 
 
-        // Use bool to avoid doing action multiple times
-        if (canDoAction || _hasSelfAction) {
-            DoAction();
-            DoChildAction();
-        }
+        DoAction();
+        DoChildAction();
     }
 
     public void DoAction()
     {
         Debug.Log($"ACTION: '{objectType}' is self actioning.");
-        selfActionable.DoAction();
+        foreach (var selfActionable in selfActionables) {
+            selfActionable.DoAction();
+        }
         TriggerAction();
     }
 

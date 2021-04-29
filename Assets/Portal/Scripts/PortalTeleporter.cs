@@ -6,10 +6,8 @@ public class PortalTeleporter : MonoBehaviour {
     public Transform player;
     public Transform reciever;
 
-    private bool playerIsOverlapping = false;
     private Transform overlappingPlayer;
-
-    public PortalTeleporter[] portalTeleporterList;
+    private PortalTeleporter[] portalTeleporterList;
     private PlayerScalePortal playerScalePortal;
 
     private void Start()
@@ -26,8 +24,8 @@ public class PortalTeleporter : MonoBehaviour {
         playerPosition.y = 0f;
         float distance = Vector3.Distance(portalPosition, playerPosition);
         if (distance < 1f) {
-            Vector3 portalToPlayer = player.position - transform.position;
-            float dotProduct = Vector3.Dot(transform.up, portalToPlayer);
+            Vector3 positionOffset = player.position - transform.position;
+            float dotProduct = Vector3.Dot(transform.up, positionOffset);
 
             // If this is true: The player has moved across the portal
             if (dotProduct < 0f) {
@@ -37,7 +35,6 @@ public class PortalTeleporter : MonoBehaviour {
                 // player.Rotate(Vector3.up, rotationDiff);
                 // Vector3 positionOffset = Quaternion.Euler(0f, rotationDiff, 0f) * portalToPlayer;
 
-                Vector3 positionOffset = portalToPlayer;
                 positionOffset *= (reciever.lossyScale.x / transform.lossyScale.x);
                 // player.position = reciever.position + positionOffset + reciever.forward;
                 Vector3 position = reciever.position + positionOffset;
@@ -48,7 +45,6 @@ public class PortalTeleporter : MonoBehaviour {
                 player.position = position;
                 controller.enabled = true;
 
-                playerIsOverlapping = false;
                 playerScalePortal.OnEnterPortal();
             }
         }
