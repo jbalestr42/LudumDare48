@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TVActionable : AReactionable {
     [SerializeField] private GameObject screen;
+    [SerializeField] private float delay;
 
     public override void Init()
     {
@@ -14,6 +15,12 @@ public class TVActionable : AReactionable {
     public override void DoAction()
     {
         base.DoAction();
-        screen.SetActive(isValidated);
+        StartCoroutine(OnOffCoroutine(isValidated));
+    }
+
+    IEnumerator OnOffCoroutine(bool isOn)
+    {
+        yield return new WaitForSeconds(delay);
+        screen.SetActive(isOn);
     }
 }
