@@ -57,14 +57,11 @@ public class PlayerScalePortal : MonoBehaviour {
             controller.height = Mathf.Lerp(playerMinus.height, playerBase.height, lerpValue);
             controller.stepOffset = Mathf.Lerp(playerMinus.stepOffset, playerBase.stepOffset, lerpValue);
             head.localPosition = new Vector3(0f, Mathf.Lerp(playerMinus.height, playerBase.height, lerpValue), 0f);
-        }// } else if (lerpValue < 1f) {
-        //     lerpValue = 1f;//Mathf.Min(1f, lerpValue + Time.deltaTime);
-        //     controller.center = new Vector3(0f, Mathf.Lerp(playerMinus.centerY, playerBase.centerY, lerpValue), 0f);
-        //     controller.radius = Mathf.Lerp(playerMinus.radius, playerBase.radius, lerpValue);
-        //     controller.height = Mathf.Lerp(playerMinus.height, playerBase.height, lerpValue);
-        //     controller.stepOffset = Mathf.Lerp(playerMinus.stepOffset, playerBase.stepOffset, lerpValue);
-        //     head.localPosition = new Vector3(0f, Mathf.Lerp(playerMinus.height, playerBase.height, lerpValue), 0f);
-        // }
+            AControlable controlable = GetComponentInChildren<AControlable>();
+            if (controlable != null) {
+                controlable.transform.localScale = Mathf.Lerp(playerMinus.height / playerBase.height, 1f, lerpValue) * Vector3.one * 10f;
+            }
+        }
     }
 
     public void OnEnterPortal()
@@ -76,5 +73,9 @@ public class PlayerScalePortal : MonoBehaviour {
         controller.stepOffset = Mathf.Lerp(playerMinus.stepOffset, playerBase.stepOffset, lerpValue);
         head.localPosition = new Vector3(0f, Mathf.Lerp(playerMinus.height, playerBase.height, lerpValue), 0f);
         cameraRig.transform.position = head.transform.position;
+        AControlable controlable = GetComponentInChildren<AControlable>();
+        if (controlable != null) {
+            controlable.transform.localScale = Mathf.Lerp(playerMinus.height / playerBase.height, 1f, lerpValue) * Vector3.one * 10f;
+        }
     }
 }

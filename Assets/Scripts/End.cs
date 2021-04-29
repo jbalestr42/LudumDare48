@@ -11,11 +11,9 @@ public class End : MonoBehaviour {
         title.SetActive(false);
     }
 
-    void OnTriggerEnter(Collider other)
+    public void Endind()
     {
-        if (other.tag == "Player") {
-            title.SetActive(true);
-            inceptionManager.End();
-        }
+        title.SetActive(true);
+        inceptionManager.End();
     }
 }

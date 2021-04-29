@@ -10,10 +10,13 @@ public class PortalTeleporter : MonoBehaviour {
     private PortalTeleporter[] portalTeleporterList;
     private PlayerScalePortal playerScalePortal;
 
+    private End end;
+
     private void Start()
     {
         portalTeleporterList = FindObjectsOfType<PortalTeleporter>();
         playerScalePortal = player.GetComponent<PlayerScalePortal>();
+        end = GetComponent<End>();
     }
 
     void LateUpdate()
@@ -46,6 +49,9 @@ public class PortalTeleporter : MonoBehaviour {
                 controller.enabled = true;
 
                 playerScalePortal.OnEnterPortal();
+                if (end) {
+                    end.Endind();
+                }
             }
         }
     }
