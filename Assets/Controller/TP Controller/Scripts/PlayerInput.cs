@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public static class PlayerInput {
     private static float lookAngle = 0f;
@@ -7,8 +8,8 @@ public static class PlayerInput {
     public static Vector3 GetMovementInput(Camera relativeCamera)
     {
         Vector3 moveVector;
-        float horizontalAxis = Input.GetAxis("Horizontal");
-        float verticalAxis = Input.GetAxis("Vertical");
+        float horizontalAxis = InputManager.movement.x;
+        float verticalAxis = InputManager.movement.y;
 
         if (relativeCamera != null) {
             // Calculate the move vector relative to camera rotation
@@ -35,11 +36,10 @@ public static class PlayerInput {
         //{
         //    return;
         //}
+        float mouseX = InputManager.mouse.x;
+        float mouseY = InputManager.mouse.y;
 
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
-
-        mouseSensitivity = 2f;
+        mouseSensitivity = 0.1f;
         // Adjust the look angle (Y Rotation)
         lookAngle += mouseX * mouseSensitivity;
         lookAngle %= 360f;

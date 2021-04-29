@@ -1,13 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Quit : MonoBehaviour {
 #if UNITY_WEBGL
 #else
-    private void Update()
+    [SerializeField] private InputAction inputAction;
+
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            Application.Quit();
-        }
+        inputAction.performed += OnQuit;
+        inputAction.Enable();
+    }
+
+    private void OnQuit(InputAction.CallbackContext context)
+    {
+        Application.Quit();
+        Debug.Log("Quit");
     }
 #endif
 }
