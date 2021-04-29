@@ -39,6 +39,7 @@ public static class PlayerInput {
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
+        mouseSensitivity = 2f;
         // Adjust the look angle (Y Rotation)
         lookAngle += mouseX * mouseSensitivity;
         lookAngle %= 360f;

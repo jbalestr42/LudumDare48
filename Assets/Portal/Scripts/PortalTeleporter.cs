@@ -25,7 +25,7 @@ public class PortalTeleporter : MonoBehaviour {
         Vector3 playerPosition = player.position;
         playerPosition.y = 0f;
         float distance = Vector3.Distance(portalPosition, playerPosition);
-        if (distance < 5f) {
+        if (distance < 1f) {
             Vector3 portalToPlayer = player.position - transform.position;
             float dotProduct = Vector3.Dot(transform.up, portalToPlayer);
 

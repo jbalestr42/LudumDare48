@@ -17,6 +17,7 @@ public class PlayerScalePortal : MonoBehaviour {
     [SerializeField] private List<PortalTeleporter> portalTeleporterList;
     [SerializeField] private Transform head;
     [SerializeField] private Transform cameraRig;
+    [SerializeField] private AnimationCurve curve;
 
     private CharacterController controller;
     private Camera cam;
@@ -44,7 +45,7 @@ public class PlayerScalePortal : MonoBehaviour {
         }
         if (isClosePortal) {
 
-            float lerpValueTarget = Mathf.Clamp((distance - maxDistance * 0.5f) / maxDistance, 0f, 1f);
+            float lerpValueTarget = curve.Evaluate(Mathf.Clamp(distance / maxDistance, 0f, 1f));// Mathf.Clamp((distance - maxDistance * 0.5f) / maxDistance, 0f, 1f);
             if (lerpValue < lerpValueTarget) {
                 lerpValue = Mathf.Max(lerpValue - Time.deltaTime * 0.2f, lerpValueTarget);
             } else {
