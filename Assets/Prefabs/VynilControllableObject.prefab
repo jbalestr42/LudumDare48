@@ -142,8 +142,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectActionable: 256
-  isValidated: 0
-  isReaction: 0
 --- !u!114 &734895062943169919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,8 +155,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectActionable: 256
-  isValidated: 0
-  isReaction: 0
   _gameObject: {fileID: 8582420270943956097}
 --- !u!1 &4692713751366095864
 GameObject:
@@ -390,7 +386,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178788, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.1212
       objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178788, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_LocalPosition.z

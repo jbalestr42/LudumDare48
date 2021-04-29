@@ -44,8 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectActionable: 64
-  isReaction: 0
-  isValidated: 0
 --- !u!1 &5030103028654712192
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a466e35376f964f9cbdcf35260787a47, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.06
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a466e35376f964f9cbdcf35260787a47, type: 3}
       propertyPath: m_LocalPosition.z

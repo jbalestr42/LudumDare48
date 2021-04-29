@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2525717258595178788}
   - component: {fileID: 2525717258595178792}
+  - component: {fileID: 1820836730947761906}
   m_Layer: 31
   m_Name: ControllableObject
   m_TagString: Untagged
@@ -45,10 +46,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _actionRadius: 4
-  _distanceSnapMinimum: 1.5
+  _distanceSnapMinimum: 2
   objectType: 1
   _hasSelfAction: 0
   isLocked: 0
+  yPosition: 0
+--- !u!114 &1820836730947761906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525717258595178793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8e7239358c1a348b274f455e8d0058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &7793558469910152145
 GameObject:
   m_ObjectHideFlags: 0

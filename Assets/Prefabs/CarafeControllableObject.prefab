@@ -59,25 +59,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectActionable: 131072
   particle: {fileID: 4466017804519319524}
---- !u!95 &1472570373525526604
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4611337771802974578}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a659bf38d32a846d4947c03d1bbc6a0e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3693448656437778099
 GameObject:
   m_ObjectHideFlags: 0
@@ -4913,6 +4894,25 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!95 &1472570373525526604
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4611337771802974578}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a659bf38d32a846d4947c03d1bbc6a0e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9019178697694048435
 GameObject:
   m_ObjectHideFlags: 0
@@ -5108,7 +5108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178788, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.1023
       objectReference: {fileID: 0}
     - target: {fileID: 2525717258595178788, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_LocalPosition.z

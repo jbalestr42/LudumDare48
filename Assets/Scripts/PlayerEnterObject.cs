@@ -54,7 +54,7 @@ public class PlayerEnterObject : MonoBehaviour {
                                     _controlledObjectParent = _controlledObject.transform.parent;
                                     _controlledObject.transform.SetParent(transform);
                                     _controlledObject.transform.forward = transform.forward;
-                                    _controlledObject.transform.localPosition = new Vector3(0f, _controlledObject.yPosition, 0f);
+                                    _controlledObject.transform.localPosition = Vector3.zero;
                                     _camera.GetComponent<CameraOcclusionProtector>().distanceToTarget = 8f;
                                     _state = PlayerState.ControllingObject;
                                     _controlledObject.SetWalking(true);

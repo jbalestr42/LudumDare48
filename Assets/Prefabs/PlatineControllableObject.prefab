@@ -220,8 +220,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectActionable: 128
-  isValidated: 0
-  isReaction: 0
 --- !u!95 &4591447396623537154
 Animator:
   serializedVersion: 3
@@ -289,7 +287,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectActionable: 256
   isValidated: 1
-  isReaction: 0
   _animator: {fileID: 4591447396623537154}
   isGrow: 1
 --- !u!114 &8601097075933810801
@@ -306,7 +303,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectActionable: 256
   isValidated: 1
-  isReaction: 0
   _animator: {fileID: 4591447396623537154}
   isGrow: 1
   vynil: {fileID: 802210477735124323}
@@ -324,7 +320,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectActionable: 256
   isValidated: 1
-  isReaction: 0
   audioSource: {fileID: 4471028155144400202}
 --- !u!82 &4471028155144400202
 AudioSource:
