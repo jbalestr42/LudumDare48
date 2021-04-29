@@ -14,6 +14,6 @@ public class TVActionable : AReactionable {
     public override void DoAction()
     {
         base.DoAction();
-        screen.SetActive(true);
+        screen.SetActive(isValidated);
     }
 }

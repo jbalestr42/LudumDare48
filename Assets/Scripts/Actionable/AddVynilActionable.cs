@@ -16,11 +16,10 @@ public class AddVynilActionable : AReactionable {
     public override void DoAction()
     {
         base.DoAction();
-        Debug.Log("DO 'REACTION " + transform.parent.name, this);
         if (isGrow) {
             _animator.SetTrigger("Grow");
         }
-        _animator.SetBool("IsOn", true);
+        _animator.SetBool("IsOn", isValidated);
         vynil.SetActive(true);
     }
 }

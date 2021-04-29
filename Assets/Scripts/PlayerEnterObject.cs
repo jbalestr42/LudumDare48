@@ -30,7 +30,20 @@ public class PlayerEnterObject : MonoBehaviour {
     {
         switch (_state) {
             case PlayerState.ControllingPlayer: {
-                    if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) {
+                    if (Input.GetMouseButtonDown(1)) {
+                        RaycastHit hit;
+                        if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity)) {
+                            AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
+                            if (controlable != null) {
+                                if (Input.GetMouseButtonDown(1)) {
+                                    controlable.TryDoAction();
+                                    OnDoAction.Invoke(controlable);
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                    if (Input.GetMouseButtonDown(0)) {
                         RaycastHit hit;
                         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity)) {
                             AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();

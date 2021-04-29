@@ -32,7 +32,6 @@ public class AControlable : MonoBehaviour {
     public List<AActionable> actionables { get; private set; } = new List<AActionable>();
     public List<AReactionable> reactionables { get; private set; } = new List<AReactionable>();
     public List<AActionable> selfActionables = new List<AActionable>();
-    public bool _hasSelfAction = false;
     public bool isLocked = false;
 
     Animator _animator;
@@ -48,11 +47,12 @@ public class AControlable : MonoBehaviour {
                 reactionable.Init();
                 reactionables.Add(reactionable);
             }
-            if ((actionable.objectActionable & objectType) != ObjectType.Undefined) {
-                selfActionables.Add(actionable);
-            } else {
-                actionables.Add(actionable);
-            }
+            actionables.Add(actionable);
+            // if ((actionable.objectActionable & objectType) != ObjectType.Undefined) {
+            //     Debug.Log(this.name + " " + actionable.name);
+            //     selfActionables.Add(actionable);
+            // } else {
+            // }
         }
 
         _animator = GetComponentInChildren<Animator>();
@@ -88,26 +88,27 @@ public class AControlable : MonoBehaviour {
         // }
     }
 
+    List<AActionable> actionableDoneList = new List<AActionable>();
     public void TryDoAction()
     {
         Debug.Log("Try Do Action");
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, _actionRadius, Vector3.up, 10f);
         foreach (RaycastHit hit in hits) {
             AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
-            if (controlable && hit.collider.gameObject != gameObject) {
+            if (controlable) {
+                // Prevent trigger if there is two collider for the same controlable
                 foreach (AActionable destActionable in controlable.actionables) {
-                    if ((objectType & destActionable.objectActionable) != ObjectType.Undefined) {
+                    if ((objectType & destActionable.objectActionable) != ObjectType.Undefined
+                        && !actionableDoneList.Contains(destActionable)) {
+                        actionableDoneList.Add(destActionable);
                         Debug.Log($"ACTION: '{objectType}' is actioning '{controlable.objectType}'.");
                         destActionable.DoAction();
-                        break;
                     }
                 }
             }
         }
-
-
-        DoAction();
-        DoChildAction();
+        actionableDoneList.Clear();
+        TriggerAction();
     }
 
     public void DoAction()
@@ -116,7 +117,6 @@ public class AControlable : MonoBehaviour {
         foreach (var selfActionable in selfActionables) {
             selfActionable.DoAction();
         }
-        TriggerAction();
     }
 
     public virtual void DoChildAction()
