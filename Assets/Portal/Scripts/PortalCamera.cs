@@ -27,7 +27,7 @@ public class PortalCamera : MonoBehaviour {
     {
         float distance = Vector3.Distance(playerCamera.position, otherPortal.position);
         var angle = Tools.Radian(playerCamera.forward, otherPortal.position - playerCamera.position);
-        if ((angle < Mathf.PI * 0.33f && distance < distanceDisableCamera)) {
+        if ((angle < Mathf.PI * 0.5f && distance < distanceDisableCamera)) {
             cam.enabled = true;
         } else {
             cam.enabled = false;
