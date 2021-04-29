@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour {
     private static InputActionAsset inputActionAsset;
     private static InputActionMap playerActionMap;
 
-    private void Start()
+    private void Awake()
     {
         inputActionAsset = Resources.Load("Inputs") as InputActionAsset;
         playerActionMap = inputActionAsset.FindActionMap("Player");
