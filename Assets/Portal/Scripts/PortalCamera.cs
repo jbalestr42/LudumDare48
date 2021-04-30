@@ -44,6 +44,5 @@ public class PortalCamera : MonoBehaviour {
         if (isRevert) {
             transform.RotateAround(transform.position, Vector3.up, 180f);
         }
-
     }
 }

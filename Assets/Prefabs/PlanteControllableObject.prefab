@@ -161,9 +161,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 6778464a1d02aa847a645e1c1ac85a7a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6778464a1d02aa847a645e1c1ac85a7a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 478c434c9ecaa42c995e1706113c3474, type: 2}
+    - target: {fileID: -7337984843794982428, guid: 6778464a1d02aa847a645e1c1ac85a7a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -7337984843794982428, guid: 6778464a1d02aa847a645e1c1ac85a7a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -171,6 +179,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6778464a1d02aa847a645e1c1ac85a7a, type: 3}
       propertyPath: m_Name
       value: Plant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189620869618779536, guid: 6778464a1d02aa847a645e1c1ac85a7a, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189620869618779536, guid: 6778464a1d02aa847a645e1c1ac85a7a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6778464a1d02aa847a645e1c1ac85a7a, type: 3}
