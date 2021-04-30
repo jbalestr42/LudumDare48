@@ -109,19 +109,24 @@ public class InceptionManager : MonoBehaviour {
         List<AControlable> controlableList = new List<AControlable>();
 
         foreach (var controlable in _refMaison._controlables) {
-            controlableList.Add(controlable);
-        }
-        foreach (var maison in _maisons) {
-            foreach (var controlable in maison._controlables) {
-                controlableList.Add(controlable);
-            }
-        }
-        foreach (var controlable in controlableList) {
+            // controlableList.Add(controlable);
             Animator animator = controlable.GetComponentInChildren<Animator>();
             if (animator != null) {
                 animator.SetBool("Walk", true);
             }
-            // controlable.isLocked = false;
         }
+        foreach (var maison in _maisons) {
+            foreach (var controlable in maison._controlables) {
+                controlable.isLocked = false;
+                controlable.isSnapped = false;
+            }
+        }
+        // foreach (var controlable in controlableList) {
+        //     Animator animator = controlable.GetComponentInChildren<Animator>();
+        //     if (animator != null) {
+        //         animator.SetBool("Walk", true);
+        //     }
+        //     // controlable.isLocked = false;
+        // }
     }
 }
