@@ -23,11 +23,14 @@ public class DisableOnInputMouse : MonoBehaviour {
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity)) {
             AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
             if (controlable != null) {
-                string[] split = textMesh.text.Split(' ');
-                if (split.Length > 1) {
-                    textMesh.text = textMesh.text.Split(' ')[0];
-                } else {
-                    textMesh.text = "";
+                // string[] split = textMesh.text.Split(' ');
+                // if (split.Length > 1) {
+                //     textMesh.text = textMesh.text.Split(' ')[0];
+                // } else {
+                //     textMesh.text = "";
+                // }
+                if (textMesh.text.Length > 0) {
+                    textMesh.text = textMesh.text.Remove(textMesh.text.Length - 1);
                 }
             }
         }

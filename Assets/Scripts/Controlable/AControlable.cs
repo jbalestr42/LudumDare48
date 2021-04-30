@@ -33,6 +33,7 @@ public class AControlable : MonoBehaviour {
     public List<AReactionable> reactionableList { get; private set; } = new List<AReactionable>();
     public List<AActionAvailable> actionAvailableList { get; private set; } = new List<AActionAvailable>();
     public bool isLocked = false;
+    public bool isActionAvailaible = false;
 
     Animator _animator;
     MaisonManager _maisonManager;
@@ -74,18 +75,22 @@ public class AControlable : MonoBehaviour {
 
     private void Update()
     {
-        foreach (AActionAvailable actionAvailable in actionAvailableList) {
-            actionAvailable.Disable();
-        }
-        foreach (var controlable in _maisonManager._controlables) {
-            foreach (AReactionable reactionable in controlable.reactionableList) {
-                if (controlable != this && (objectType & reactionable.objectActionable) != ObjectType.Undefined) {
-                    float distance = Vector3.Distance(controlable.transform.position, transform.position);
-                    if (distance < _actionRadius && !reactionable.isValidated) {
-                        foreach (AActionAvailable actionAvailable in actionAvailableList) {
-                            actionAvailable.Enable();
+        if (actionAvailableList.Count > 0) {
+            isActionAvailaible = false;
+            foreach (AActionAvailable actionAvailable in actionAvailableList) {
+                actionAvailable.Disable();
+            }
+            foreach (var controlable in _maisonManager._controlables) {
+                foreach (AReactionable reactionable in controlable.reactionableList) {
+                    if (controlable != this && (objectType & reactionable.objectActionable) != ObjectType.Undefined) {
+                        float distance = Vector3.Distance(controlable.transform.position, transform.position);
+                        if (distance < _actionRadius && !reactionable.isValidated) {
+                            foreach (AActionAvailable actionAvailable in actionAvailableList) {
+                                isActionAvailaible = true;
+                                actionAvailable.Enable();
+                            }
+                            return;
                         }
-                        return;
                     }
                 }
             }

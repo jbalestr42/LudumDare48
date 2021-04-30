@@ -51,8 +51,10 @@ public class InceptionManager : MonoBehaviour {
             if (!_refMaison.CheckValidated(controlable)) {
                 return;
             }
-            controlable.isLocked = true;
-            SoundManager.PlaySound(Random.value > 0.5 ? Random.value > 0.5f ? "snap_1" : "snap_2" : "snap_3", controlable.transform.position);
+            if (!controlable.isLocked) {
+                controlable.isLocked = true;
+                SoundManager.PlaySound(Random.value > 0.5 ? Random.value > 0.5f ? "snap_1" : "snap_2" : "snap_3", controlable.transform.position);
+            }
             if (_refMaison.CheckObjects(_maisons[_currentHouse])) {
                 Debug.Log("All objects are ok, opening next house.");
                 OpenNextHouse();

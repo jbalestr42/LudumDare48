@@ -4,7 +4,7 @@ using UnityEngine;
 
 // [ExecuteInEditMode]
 public class SetAnimationFrame : MonoBehaviour {
-    [SerializeField] private Animator animator;
+    // [SerializeField] private Animator animator;
 
     // [ExecuteInEditMode]
     // void Update()

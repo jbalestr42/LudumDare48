@@ -30,8 +30,10 @@ public class PlayerEnterObject : MonoBehaviour {
         _cameraController = _camera.GetComponent<CameraController>();
         _cameraOcclustionProtector = _camera.GetComponent<CameraOcclusionProtector>();
         Cursor.lockState = CursorLockMode.Locked;
+        InputManager.RegisterCallback("Object", ObjectExit, true);
         InputManager.RegisterCallback("Object", ObjectEnter, false);
-        InputManager.RegisterCallback("Action", ActionAsPlayer, false);
+        InputManager.RegisterCallback("Object", ActionAsObject, true);
+        InputManager.RegisterCallback("Object", ActionAsPlayer, false);
     }
 
     private void OnDestroy()
@@ -47,10 +49,9 @@ public class PlayerEnterObject : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity)) {
             AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
-            if (controlable != null) {
+            if (controlable != null && controlable.isLocked) {
                 controlable.TryDoAction();
                 OnDoAction.Invoke(controlable);
-                return;
             }
         }
     }
@@ -96,16 +97,13 @@ public class PlayerEnterObject : MonoBehaviour {
 
                     InputManager.RegisterCallback("Object", ObjectExit, false);
                     InputManager.RegisterCallback("Object", ObjectEnter, true);
-                    // InputManager.RegisterCallback("Action", ActionAsObject, false);
-                    // InputManager.RegisterCallback("Action", ActionAsPlayer, true);
                     InputManager.RegisterCallback("Object", ActionAsObject, false);
                     InputManager.RegisterCallback("Object", ActionAsPlayer, true);
 
                     _cameraOcclustionProtector.distanceToTarget = objectCameraDistance;
                     _cameraController.catchSpeedDamp = 0.4f;
                 } else {
-                    SoundManager.PlaySound(Random.value > 0.5 ? "lock_1" : "lock_2", hit.point);
-                    StartCoroutine(LockedCoroutine(controlable));
+                    SoundManager.PlaySound("lock_1", hit.point);
                 }
             }
         }
@@ -113,6 +111,9 @@ public class PlayerEnterObject : MonoBehaviour {
 
     private void ObjectExit(InputAction.CallbackContext context)
     {
+        if (_controlledObject.isActionAvailaible) {
+            return;
+        }
         Vector3 positionCamera = _camera.transform.position;
         Vector3 controledPosition = _controlledObject.transform.position;
         positionCamera.y = transform.position.y;
@@ -123,13 +124,11 @@ public class PlayerEnterObject : MonoBehaviour {
         _controlledObject.SetWalking(false);
         OnObjectReleased.Invoke(_controlledObject);
         _state = PlayerState.ControllingPlayer;
-        SoundManager.PlaySound("release_1", _controlledObject.transform.position);
+        SoundManager.PlaySound("release_2", _controlledObject.transform.position);
         _controlledObject = null;
         cursor.SetActive(true);
         InputManager.RegisterCallback("Object", ObjectExit, true);
         InputManager.RegisterCallback("Object", ObjectEnter, false);
-        // InputManager.RegisterCallback("Action", ActionAsObject, true);
-        // InputManager.RegisterCallback("Action", ActionAsPlayer, false);
         InputManager.RegisterCallback("Object", ActionAsObject, true);
         InputManager.RegisterCallback("Object", ActionAsPlayer, false);
     }
