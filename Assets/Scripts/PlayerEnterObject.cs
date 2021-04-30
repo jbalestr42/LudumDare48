@@ -20,6 +20,7 @@ public class PlayerEnterObject : MonoBehaviour {
     [SerializeField] private GameObject cursor;
 
     public UnityEvent<AControlable> OnObjectReleased = new UnityEvent<AControlable>();
+    public UnityEvent<AControlable> OnObjectEnter = new UnityEvent<AControlable>();
     public UnityEvent<AControlable> OnDoAction = new UnityEvent<AControlable>();
 
     private void Start()
@@ -86,6 +87,8 @@ public class PlayerEnterObject : MonoBehaviour {
                     InputManager.RegisterCallback("Object", ObjectEnter, true);
                     InputManager.RegisterCallback("Action", ActionAsObject, false);
                     InputManager.RegisterCallback("Action", ActionAsPlayer, true);
+
+                    _camera.GetComponent<CameraController>().catchSpeedDamp = 0.4f;
                 } else {
                     SoundManager.PlaySound(Random.value > 0.5 ? "lock_1" : "lock_2", hit.point);
                     StartCoroutine(LockedCoroutine(controlable));
@@ -114,6 +117,9 @@ public class PlayerEnterObject : MonoBehaviour {
         InputManager.RegisterCallback("Object", ObjectEnter, false);
         InputManager.RegisterCallback("Action", ActionAsObject, true);
         InputManager.RegisterCallback("Action", ActionAsPlayer, false);
+
+        _camera.GetComponent<CameraController>().catchSpeedDamp = 0f;
+
     }
 
     private IEnumerator LockedCoroutine(AControlable controlable)

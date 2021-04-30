@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-public class CameraController : MonoBehaviour
-{
+public class CameraController : MonoBehaviour {
     // Const variables
     private const float MIN_CATCH_SPEED_DAMP = 0f;
     private const float MAX_CATCH_SPEED_DAMP = 1f;
@@ -14,7 +13,7 @@ public class CameraController : MonoBehaviour
 
     [SerializeField]
     [Range(MIN_CATCH_SPEED_DAMP, MAX_CATCH_SPEED_DAMP)]
-    private float catchSpeedDamp = MIN_CATCH_SPEED_DAMP;
+    public float catchSpeedDamp = MIN_CATCH_SPEED_DAMP;
 
     [SerializeField]
     [Range(MIN_ROTATION_SMOOTHING, MAX_ROTATION_SMOOTHING)]
@@ -56,8 +55,7 @@ public class CameraController : MonoBehaviour
 
     private void FollowTarget()
     {
-        if (this.target == null)
-        {
+        if (this.target == null) {
             return;
         }
 
@@ -66,24 +64,20 @@ public class CameraController : MonoBehaviour
 
     private void UpdateRotation(Quaternion controlRotation)
     {
-        if (this.target != null)
-        {
+        if (this.target != null) {
             // Y Rotation (Look Rotation)
             this.rigTargetLocalRotation = Quaternion.Euler(0f, controlRotation.eulerAngles.y, 0f);
 
             // X Rotation (Tilt Rotation)
             this.pivotTargetLocalRotation = Quaternion.Euler(controlRotation.eulerAngles.x, 0f, 0f);
 
-            if (this.rotationSmoothing > 0.0f)
-            {
+            if (this.rotationSmoothing > 0.0f) {
                 this.pivot.localRotation =
                     Quaternion.Slerp(this.pivot.localRotation, this.pivotTargetLocalRotation, this.rotationSmoothing * Time.deltaTime);
 
                 this.rig.localRotation =
                     Quaternion.Slerp(this.rig.localRotation, this.rigTargetLocalRotation, this.rotationSmoothing * Time.deltaTime);
-            }
-            else
-            {
+            } else {
                 this.pivot.localRotation = this.pivotTargetLocalRotation;
                 this.rig.localRotation = this.rigTargetLocalRotation;
             }

@@ -243,6 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectActionable: 256
   isValidated: 1
+  stayValidated: 0
   _animator: {fileID: 4591447396623537154}
 --- !u!114 &8601097075933810801
 MonoBehaviour:
@@ -258,6 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectActionable: 256
   isValidated: 1
+  stayValidated: 0
   _animator: {fileID: 4591447396623537154}
   isGrow: 1
   vynil: {fileID: 802210477735124323}
@@ -275,6 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectActionable: 256
   isValidated: 1
+  stayValidated: 0
   audioSource: {fileID: 4471028155144400202}
 --- !u!82 &4471028155144400202
 AudioSource:
@@ -461,19 +464,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.17230001
+      value: 0.15611587
       objectReference: {fileID: 0}
     - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1178696
+      value: 0.08655282
       objectReference: {fileID: 0}
     - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.24199289
+      value: 0.21451944
       objectReference: {fileID: 0}
     - target: {fileID: 4089301491522992889, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.078
+      value: 0.0571
+      objectReference: {fileID: 0}
+    - target: {fileID: 8531040111536775119, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9ce97e6c8dcfeb458a295e5c39c4b3a, type: 3}
