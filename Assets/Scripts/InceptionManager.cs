@@ -33,7 +33,7 @@ public class InceptionManager : MonoBehaviour {
     bool IsNeeded(AControlable controlable)
     {
         foreach (AControlable houseControlable in _maisons[_currentHouse]._controlables) {
-            if (!houseControlable.ReactionableValidated()) {
+            if (!houseControlable.ReactionableValidated() && controlable.objectType != houseControlable.objectType) {
                 foreach (AReactionable reactionable in houseControlable.reactionableList) {
                     if (reactionable.objectActionable == controlable.objectType) {
                         return true;
@@ -48,6 +48,7 @@ public class InceptionManager : MonoBehaviour {
     {
         if (_refMaison.CheckObjectState(controlable) && !IsNeeded(controlable)) {
             SnapObject(controlable);
+            controlable.isSnapped = true;
             if (!_refMaison.CheckValidated(controlable)) {
                 return;
             }

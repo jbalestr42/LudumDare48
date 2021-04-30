@@ -49,7 +49,7 @@ public class PlayerEnterObject : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity)) {
             AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
-            if (controlable != null && controlable.isLocked) {
+            if (controlable != null && (controlable.isLocked || controlable.isSnapped)) {
                 controlable.TryDoAction();
                 OnDoAction.Invoke(controlable);
             }
@@ -58,8 +58,10 @@ public class PlayerEnterObject : MonoBehaviour {
 
     private void ActionAsObject(InputAction.CallbackContext context)
     {
-        _controlledObject.TryDoAction();
-        OnDoAction.Invoke(_controlledObject);
+        if (_controlledObject.isLocked || _controlledObject.isActionAvailaible) {
+            _controlledObject.TryDoAction();
+            OnDoAction.Invoke(_controlledObject);
+        }
     }
 
     private void Update()
@@ -76,7 +78,7 @@ public class PlayerEnterObject : MonoBehaviour {
         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity)) {
             AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
             if (controlable != null) {
-                if (!controlable.isLocked) {
+                if (!controlable.isLocked && !controlable.isSnapped) {
                     Debug.Log("Object Selected: " + controlable);
                     _controlledObject = controlable;
 

@@ -34,6 +34,7 @@ public class AControlable : MonoBehaviour {
     public List<AActionAvailable> actionAvailableList { get; private set; } = new List<AActionAvailable>();
     public bool isLocked = false;
     public bool isActionAvailaible = false;
+    public bool isSnapped = false;
 
     Animator _animator;
     MaisonManager _maisonManager;
@@ -60,6 +61,7 @@ public class AControlable : MonoBehaviour {
 
         _animator = GetComponentInChildren<Animator>();
         _maisonManager = GetComponentInParent<MaisonManager>();
+        isSnapped = isLocked;
     }
 
     public bool ReactionableValidated()
