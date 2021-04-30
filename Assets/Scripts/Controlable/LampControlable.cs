@@ -5,11 +5,11 @@ using UnityEngine;
 public class LampControlable : AControlable {
     public bool isTurnedOn = false;
 
-    public override void DoChildAction()
-    {
-        isTurnedOn = !isTurnedOn;
-        Debug.Log("Lamp state : isTurnedOn=" + isTurnedOn);
-    }
+    // public override void DoChildAction()
+    // {
+    //     isTurnedOn = !isTurnedOn;
+    //     Debug.Log("Lamp state : isTurnedOn=" + isTurnedOn);
+    // }
 
     // public override bool IsSameState(AControlable controlable)
     // {

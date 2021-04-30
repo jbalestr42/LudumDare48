@@ -13,7 +13,7 @@ public class MaisonManager : MonoBehaviour {
     void Start()
     {
         _controlables.AddRange(GetComponentsInChildren<AControlable>());
-        _originObject.SetActive(false);
+        // _originObject.SetActive(false);
     }
 
     public bool CheckObjects(MaisonManager maison)

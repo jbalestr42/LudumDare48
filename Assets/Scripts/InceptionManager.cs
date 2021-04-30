@@ -34,7 +34,7 @@ public class InceptionManager : MonoBehaviour {
     {
         foreach (AControlable houseControlable in _maisons[_currentHouse]._controlables) {
             if (!houseControlable.ReactionableValidated()) {
-                foreach (AReactionable reactionable in houseControlable.reactionables) {
+                foreach (AReactionable reactionable in houseControlable.reactionableList) {
                     if (reactionable.objectActionable == controlable.objectType) {
                         return true;
                     }

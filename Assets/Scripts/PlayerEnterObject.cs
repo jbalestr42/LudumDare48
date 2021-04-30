@@ -10,11 +10,7 @@ public class PlayerEnterObject : MonoBehaviour {
         ControllingObject,
     }
 
-    AControlable _controlledObject = null;
-    Transform _controlledObjectParent = null;
-    [SerializeField] Camera _camera = null;
-    PlayerState _state = PlayerState.ControllingPlayer;
-
+    [SerializeField] private Camera _camera = null;
     [SerializeField] public float objectCameraDistance = 8f;
     [SerializeField] private AnimationCurve lockedCurve;
     [SerializeField] private GameObject cursor;
@@ -23,8 +19,16 @@ public class PlayerEnterObject : MonoBehaviour {
     public UnityEvent<AControlable> OnObjectEnter = new UnityEvent<AControlable>();
     public UnityEvent<AControlable> OnDoAction = new UnityEvent<AControlable>();
 
+    AControlable _controlledObject = null;
+    Transform _controlledObjectParent = null;
+    PlayerState _state = PlayerState.ControllingPlayer;
+    CameraController _cameraController;
+    CameraOcclusionProtector _cameraOcclustionProtector;
+
     private void Start()
     {
+        _cameraController = _camera.GetComponent<CameraController>();
+        _cameraOcclustionProtector = _camera.GetComponent<CameraOcclusionProtector>();
         Cursor.lockState = CursorLockMode.Locked;
         InputManager.RegisterCallback("Object", ObjectEnter, false);
         InputManager.RegisterCallback("Action", ActionAsPlayer, false);
@@ -57,6 +61,14 @@ public class PlayerEnterObject : MonoBehaviour {
         OnDoAction.Invoke(_controlledObject);
     }
 
+    private void Update()
+    {
+        if (_state == PlayerState.ControllingPlayer) {
+            _cameraOcclustionProtector.distanceToTarget = Mathf.Max(0f, _cameraOcclustionProtector.distanceToTarget - Time.deltaTime * 20f);
+            _cameraController.catchSpeedDamp = Mathf.Max(0f, _cameraController.catchSpeedDamp - Time.deltaTime);
+        }
+    }
+
     private void ObjectEnter(InputAction.CallbackContext context)
     {
         RaycastHit hit;
@@ -77,7 +89,6 @@ public class PlayerEnterObject : MonoBehaviour {
                     _controlledObject.transform.SetParent(transform);
                     _controlledObject.transform.forward = transform.forward;
                     _controlledObject.transform.localPosition = Vector3.zero;
-                    _camera.GetComponent<CameraOcclusionProtector>().distanceToTarget = objectCameraDistance;
                     _state = PlayerState.ControllingObject;
                     _controlledObject.SetWalking(true);
                     SoundManager.PlaySound("control_1", _controlledObject.transform.position);
@@ -85,10 +96,13 @@ public class PlayerEnterObject : MonoBehaviour {
 
                     InputManager.RegisterCallback("Object", ObjectExit, false);
                     InputManager.RegisterCallback("Object", ObjectEnter, true);
-                    InputManager.RegisterCallback("Action", ActionAsObject, false);
-                    InputManager.RegisterCallback("Action", ActionAsPlayer, true);
+                    // InputManager.RegisterCallback("Action", ActionAsObject, false);
+                    // InputManager.RegisterCallback("Action", ActionAsPlayer, true);
+                    InputManager.RegisterCallback("Object", ActionAsObject, false);
+                    InputManager.RegisterCallback("Object", ActionAsPlayer, true);
 
-                    _camera.GetComponent<CameraController>().catchSpeedDamp = 0.4f;
+                    _cameraOcclustionProtector.distanceToTarget = objectCameraDistance;
+                    _cameraController.catchSpeedDamp = 0.4f;
                 } else {
                     SoundManager.PlaySound(Random.value > 0.5 ? "lock_1" : "lock_2", hit.point);
                     StartCoroutine(LockedCoroutine(controlable));
@@ -106,7 +120,6 @@ public class PlayerEnterObject : MonoBehaviour {
         // transform.position = positionCamera;
         _controlledObject.transform.SetParent(_controlledObjectParent);
         _controlledObject.transform.position = controledPosition;
-        _camera.GetComponent<CameraOcclusionProtector>().distanceToTarget = 0f;
         _controlledObject.SetWalking(false);
         OnObjectReleased.Invoke(_controlledObject);
         _state = PlayerState.ControllingPlayer;
@@ -115,11 +128,10 @@ public class PlayerEnterObject : MonoBehaviour {
         cursor.SetActive(true);
         InputManager.RegisterCallback("Object", ObjectExit, true);
         InputManager.RegisterCallback("Object", ObjectEnter, false);
-        InputManager.RegisterCallback("Action", ActionAsObject, true);
-        InputManager.RegisterCallback("Action", ActionAsPlayer, false);
-
-        _camera.GetComponent<CameraController>().catchSpeedDamp = 0f;
-
+        // InputManager.RegisterCallback("Action", ActionAsObject, true);
+        // InputManager.RegisterCallback("Action", ActionAsPlayer, false);
+        InputManager.RegisterCallback("Object", ActionAsObject, true);
+        InputManager.RegisterCallback("Object", ActionAsPlayer, false);
     }
 
     private IEnumerator LockedCoroutine(AControlable controlable)

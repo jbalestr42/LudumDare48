@@ -29,39 +29,42 @@ public class AControlable : MonoBehaviour {
     [SerializeField] float _actionRadius = 1f;
     [SerializeField] float _distanceSnapMinimum = 1f;
     public ObjectType objectType = ObjectType.Undefined;
-    public List<AActionable> actionables { get; private set; } = new List<AActionable>();
-    public List<AReactionable> reactionables { get; private set; } = new List<AReactionable>();
-    public List<AActionable> selfActionables = new List<AActionable>();
+    public List<AActionable> actionableList { get; private set; } = new List<AActionable>();
+    public List<AReactionable> reactionableList { get; private set; } = new List<AReactionable>();
+    public List<AActionAvailable> actionAvailableList { get; private set; } = new List<AActionAvailable>();
     public bool isLocked = false;
 
     Animator _animator;
+    MaisonManager _maisonManager;
+    List<AActionable> actionableDoneList = new List<AActionable>();
+    List<AActionable> actionableCloseList = new List<AActionable>();
 
     void OnEnable()
     {
-        // Get all actionables in children only
+        // Get all actionableList in children only
         AActionable[] actionablesArray = GetComponentsInChildren<AActionable>();
         foreach (AActionable actionable in actionablesArray) {
-            // If the object type is this one, it's the self action
             if (actionable is AReactionable) {
                 AReactionable reactionable = actionable as AReactionable;
                 reactionable.Init();
-                reactionables.Add(reactionable);
+                reactionableList.Add(reactionable);
             }
-            actionables.Add(actionable);
-            // if ((actionable.objectActionable & objectType) != ObjectType.Undefined) {
-            //     Debug.Log(this.name + " " + actionable.name);
-            //     selfActionables.Add(actionable);
-            // } else {
-            // }
+            if (actionable is AActionAvailable) {
+                AActionAvailable actionAvailable = actionable as AActionAvailable;
+                actionAvailableList.Add(actionAvailable);
+            } else {
+                actionableList.Add(actionable);
+            }
         }
 
         _animator = GetComponentInChildren<Animator>();
+        _maisonManager = GetComponentInParent<MaisonManager>();
     }
 
     public bool ReactionableValidated()
     {
         bool isValidated = true;
-        foreach (var reactionable in reactionables) {
+        foreach (var reactionable in reactionableList) {
             if (!reactionable.isValidated) {
                 isValidated = false;
             }
@@ -69,26 +72,45 @@ public class AControlable : MonoBehaviour {
         return isValidated;
     }
 
-    // private GameObject debugValidation;
-    private void LateUpdate()
+    private void Update()
     {
-        // if (ReactionableValidated()) {
-        //     if (debugValidation == null) {
-        //         debugValidation = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //         debugValidation.transform.localScale = Vector3.one * 0.1f + Vector3.up * 10f;
-        //         Destroy(debugValidation.GetComponent<Collider>());
-        //     }
-        // } else {
-        //     if (debugValidation != null) {
-        //         Destroy(debugValidation);
-        //     }
-        // }
-        // if (debugValidation != null) {
-        //     debugValidation.transform.position = transform.position;
-        // }
+        foreach (AActionAvailable actionAvailable in actionAvailableList) {
+            actionAvailable.Disable();
+        }
+        foreach (var controlable in _maisonManager._controlables) {
+            foreach (AReactionable reactionable in controlable.reactionableList) {
+                if (controlable != this && (objectType & reactionable.objectActionable) != ObjectType.Undefined) {
+                    float distance = Vector3.Distance(controlable.transform.position, transform.position);
+                    if (distance < _actionRadius && !reactionable.isValidated) {
+                        foreach (AActionAvailable actionAvailable in actionAvailableList) {
+                            actionAvailable.Enable();
+                        }
+                        return;
+                    }
+                }
+            }
+        }
     }
 
-    List<AActionable> actionableDoneList = new List<AActionable>();
+    // private GameObject debugValidation;
+    // private void LateUpdate()
+    // {
+    // if (ReactionableValidated()) {
+    //     if (debugValidation == null) {
+    //         debugValidation = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+    //         debugValidation.transform.localScale = Vector3.one * 0.1f + Vector3.up * 10f;
+    //         Destroy(debugValidation.GetComponent<Collider>());
+    //     }
+    // } else {
+    //     if (debugValidation != null) {
+    //         Destroy(debugValidation);
+    //     }
+    // }
+    // if (debugValidation != null) {
+    //     debugValidation.transform.position = transform.position;
+    // }
+    // }
+
     public void TryDoAction()
     {
         Debug.Log("Try Do Action");
@@ -97,7 +119,7 @@ public class AControlable : MonoBehaviour {
             AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
             if (controlable) {
                 // Prevent trigger if there is two collider for the same controlable
-                foreach (AActionable destActionable in controlable.actionables) {
+                foreach (AActionable destActionable in controlable.actionableList) {
                     if ((objectType & destActionable.objectActionable) != ObjectType.Undefined
                         && !actionableDoneList.Contains(destActionable)) {
                         actionableDoneList.Add(destActionable);
@@ -109,19 +131,6 @@ public class AControlable : MonoBehaviour {
         }
         actionableDoneList.Clear();
         TriggerAction();
-    }
-
-    public void DoAction()
-    {
-        Debug.Log($"ACTION: '{objectType}' is self actioning.");
-        foreach (var selfActionable in selfActionables) {
-            selfActionable.DoAction();
-        }
-    }
-
-    public virtual void DoChildAction()
-    {
-        Debug.Log("Inehrit in child class if needed");
     }
 
     public virtual bool IsSameState(AControlable controlable)

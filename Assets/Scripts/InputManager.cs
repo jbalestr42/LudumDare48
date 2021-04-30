@@ -28,7 +28,7 @@ public class InputManager : MonoBehaviour {
         var objectAction = playerActionMap.FindAction("Object");
         objectAction.Enable();
 
-        var actionAction = playerActionMap.FindAction("Action");
+        var actionAction = playerActionMap.FindAction("Object");
         actionAction.Enable();
     }
 
