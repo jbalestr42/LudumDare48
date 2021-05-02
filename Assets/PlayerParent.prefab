@@ -231,6 +231,9 @@ MonoBehaviour:
   OnObjectReleased:
     m_PersistentCalls:
       m_Calls: []
+  OnObjectEnter:
+    m_PersistentCalls:
+      m_Calls: []
   OnDoAction:
     m_PersistentCalls:
       m_Calls: []
@@ -452,6 +455,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 5437528488984459770}
+    - target: {fileID: 9082717541075765882, guid: 80844b2319340044da27db99208a9eac, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80844b2319340044da27db99208a9eac, type: 3}
 --- !u!4 &5437528487230551470 stripped

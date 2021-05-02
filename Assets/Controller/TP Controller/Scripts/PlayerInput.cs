@@ -39,7 +39,7 @@ public static class PlayerInput {
         float mouseX = InputManager.mouse.x;
         float mouseY = InputManager.mouse.y;
 
-        mouseSensitivity = 0.1f;
+        mouseSensitivity = 0.07f;
         // Adjust the look angle (Y Rotation)
         lookAngle += mouseX * mouseSensitivity;
         lookAngle %= 360f;

@@ -49,6 +49,14 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Button"",
+                    ""id"": ""c748d4aa-c4b5-4327-930f-9cb49aebe7d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -59,6 +67,50 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard And Mouse"",
+                    ""action"": ""Object"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9254155-b0de-4522-9914-07feda57de7f"",
+                    ""path"": ""<Touchscreen>/touch0/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Object"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""906bc08c-8969-4d3d-8971-0daed1a3c960"",
+                    ""path"": ""<Touchscreen>/touch1/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Object"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d1f68694-5a7a-45e4-b2c9-a011857371fc"",
+                    ""path"": ""<Touchscreen>/touch2/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Object"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee5f9b14-1b8a-4508-a6e2-52991224180c"",
+                    ""path"": ""<Touchscreen>/touch3/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
                     ""action"": ""Object"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -194,6 +246,94 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""action"": ""Mouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d03245f-28c9-414b-a448-99ed95922e61"",
+                    ""path"": ""<Touchscreen>/touch0/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8e4b639-10f8-4365-bfa7-43c57f97fe34"",
+                    ""path"": ""<Touchscreen>/touch1/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce60e5c8-d2d5-4500-93f1-a21038af9ccb"",
+                    ""path"": ""<Touchscreen>/touch2/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55ca5a14-46db-48fc-9c2f-b23e7e281217"",
+                    ""path"": ""<Touchscreen>/touch3/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f808ff56-006f-4183-9e39-2c32cc4506a3"",
+                    ""path"": ""<Touchscreen>/primaryTouch/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f5ffb38-8f5b-47c9-84ed-a3b32e88d65e"",
+                    ""path"": ""<Touchscreen>/touch1/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2b26a542-79c4-4fb9-9899-27064a283a63"",
+                    ""path"": ""<Touchscreen>/touch2/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""724b5d43-b6fa-45fb-97c3-680bdec923eb"",
+                    ""path"": ""<Touchscreen>/touch3/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -214,6 +354,17 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Touch"",
+            ""bindingGroup"": ""Touch"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Touchscreen>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -223,6 +374,7 @@ public class @Inputs : IInputActionCollection, IDisposable
         m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Mouse = m_Player.FindAction("Mouse", throwIfNotFound: true);
+        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -276,6 +428,7 @@ public class @Inputs : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Action;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Mouse;
+    private readonly InputAction m_Player_Move;
     public struct PlayerActions
     {
         private @Inputs m_Wrapper;
@@ -284,6 +437,7 @@ public class @Inputs : IInputActionCollection, IDisposable
         public InputAction @Action => m_Wrapper.m_Player_Action;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Mouse => m_Wrapper.m_Player_Mouse;
+        public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -305,6 +459,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @Mouse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouse;
                 @Mouse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouse;
                 @Mouse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouse;
+                @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -321,6 +478,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @Mouse.started += instance.OnMouse;
                 @Mouse.performed += instance.OnMouse;
                 @Mouse.canceled += instance.OnMouse;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
             }
         }
     }
@@ -334,11 +494,21 @@ public class @Inputs : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_KeyboardAndMouseSchemeIndex];
         }
     }
+    private int m_TouchSchemeIndex = -1;
+    public InputControlScheme TouchScheme
+    {
+        get
+        {
+            if (m_TouchSchemeIndex == -1) m_TouchSchemeIndex = asset.FindControlSchemeIndex("Touch");
+            return asset.controlSchemes[m_TouchSchemeIndex];
+        }
+    }
     public interface IPlayerActions
     {
         void OnObject(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnMouse(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
     }
 }

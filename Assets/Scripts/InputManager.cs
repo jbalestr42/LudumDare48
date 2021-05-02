@@ -14,11 +14,17 @@ public class InputManager : MonoBehaviour {
     {
         inputActionAsset = Resources.Load("Inputs") as InputActionAsset;
         playerActionMap = inputActionAsset.FindActionMap("Player");
-
+        // #if ANDROID
+        // var move = inputActionAsset.FindAction("Move");
+        // move.performed += OnMovePerformed;
+        // move.canceled += OnMoveCanceled;
+        // move.Enable();
+        // #else
         var movement = inputActionAsset.FindAction("Movement");
         movement.performed += OnMovementChanged;
         movement.canceled += OnMovementChanged;
         movement.Enable();
+        // #endif
 
         var mouse = inputActionAsset.FindAction("Mouse");
         mouse.performed += OnMouseChanged;
@@ -47,8 +53,25 @@ public class InputManager : MonoBehaviour {
         movement = context.ReadValue<Vector2>();
     }
 
+    private void OnMovePerformed(InputAction.CallbackContext context)
+    {
+        if (Mouse.current.position.ReadValue().x < Screen.width * 0.2f) {
+            movement = new Vector2(0f, 100f);
+        }
+    }
+
+    private void OnMoveCanceled(InputAction.CallbackContext context)
+    {
+        movement = Vector2.zero;
+    }
+
     private void OnMouseChanged(InputAction.CallbackContext context)
     {
+        // if (Mouse.current.position.ReadValue().x > Screen.width * 0.2f) {
+        //     mouse = context.ReadValue<Vector2>();
+        // } else {
+        //     mouse = Vector2.zero;
+        // }
         mouse = context.ReadValue<Vector2>();
     }
 }
