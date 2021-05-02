@@ -67,7 +67,7 @@ public class MaisonManager : MonoBehaviour {
     IEnumerator OpenDoorCor()
     {
         _doorSound.Play();
-        while (_door.transform.localRotation.y > -0.60f) {
+        while (_door.transform.localRotation.y > -0.6f) {
             _door.transform.RotateAround(_door.transform.position, transform.up, -Time.deltaTime * 20f);
             yield return new WaitForEndOfFrame();
         }
