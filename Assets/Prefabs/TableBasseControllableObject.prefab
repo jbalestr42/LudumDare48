@@ -117,6 +117,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoffeeTable
       objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: ad3ec22b66404ae4eb03b348116cded8, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad3ec22b66404ae4eb03b348116cded8, type: 3}
 --- !u!1 &1189070738769019831 stripped

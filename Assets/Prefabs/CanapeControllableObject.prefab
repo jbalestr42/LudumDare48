@@ -429,6 +429,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Couch
       objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: 2a84c3795d9bac640922aa905e8b2a76, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a84c3795d9bac640922aa905e8b2a76, type: 3}
 --- !u!1 &7092206000100393110 stripped

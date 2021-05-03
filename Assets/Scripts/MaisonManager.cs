@@ -10,9 +10,16 @@ public class MaisonManager : MonoBehaviour {
     public AudioSource _doorSound;
     public GameObject _originObject;
 
+    public int originLockedObject = 0;
+
     void Start()
     {
         _controlables.AddRange(GetComponentsInChildren<AControlable>());
+        foreach (var controlable in _controlables) {
+            if (controlable.isLocked) {
+                originLockedObject++;
+            }
+        }
         // _originObject.SetActive(false);
     }
 

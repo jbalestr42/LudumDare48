@@ -46,9 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _actionRadius: 4
-  _distanceSnapMinimum: 2
+  _distanceSnapMinimum: 3
   objectType: 1
   isLocked: 0
+  isActionAvailaible: 0
+  isSnapped: 0
 --- !u!114 &1820836730947761906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +63,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b8e7239358c1a348b274f455e8d0058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
 --- !u!1 &7793558469910152145
 GameObject:
   m_ObjectHideFlags: 0

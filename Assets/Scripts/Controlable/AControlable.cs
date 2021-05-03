@@ -35,6 +35,7 @@ public class AControlable : MonoBehaviour {
     public bool isLocked = false;
     public bool isActionAvailaible = false;
     public bool isSnapped = false;
+    public Rigidbody rigidbody;
 
     Animator _animator;
     MaisonManager _maisonManager;
@@ -62,6 +63,9 @@ public class AControlable : MonoBehaviour {
         _animator = GetComponentInChildren<Animator>();
         _maisonManager = GetComponentInParent<MaisonManager>();
         isSnapped = isLocked;
+        rigidbody = gameObject.AddComponent<Rigidbody>();
+        rigidbody.centerOfMass = Vector3.zero;
+        rigidbody.mass = 3f;
     }
 
     public bool ReactionableValidated()
@@ -156,6 +160,9 @@ public class AControlable : MonoBehaviour {
 
     public void SetWalking(bool isWalking)
     {
+        if (isWalking == true) {
+            rigidbody.isKinematic = true;
+        }
         _animator?.SetBool("Walk", isWalking);
     }
 

@@ -15,6 +15,7 @@ public class InceptionManager : MonoBehaviour {
 
     public bool debugNextHouse = true;
     public bool closeDoorIfValidate = true;
+    public AnimationCurve animationCurve;
 
     void Start()
     {
@@ -44,6 +45,34 @@ public class InceptionManager : MonoBehaviour {
         return false;
     }
 
+
+    public bool IsLost()
+    {
+        int currentLockedObject = 0;
+        foreach (var controlable in _maisons[_currentHouse]._controlables) {
+            if (_refMaison.CheckObjectState(controlable)) {
+                currentLockedObject++;
+            } else {
+                controlable.isSnapped = false;
+                controlable.isLocked = false;
+            }
+        }
+        Debug.Log(currentLockedObject, this.gameObject);
+        if (currentLockedObject < _maisons[_currentHouse].originLockedObject - 1) {
+            return true;
+        }
+        return false;
+    }
+
+    private void Update()
+    {
+        if (IsLost()) {
+            foreach (var controlable in _maisons[_currentHouse]._controlables) {
+                SnapObject(controlable);
+            }
+        }
+    }
+
     void CheckObjectState(AControlable controlable)
     {
         if (_refMaison.CheckObjectState(controlable) && !IsNeeded(controlable)) {
@@ -65,11 +94,15 @@ public class InceptionManager : MonoBehaviour {
                     }
                 }
             }
+        } else {
+            controlable.isSnapped = false;
+            controlable.isLocked = false;
         }
     }
 
     void OpenNextHouse()
     {
+        StartCoroutine(ObjectLockCoroutine());
         _currentHouse++;
         _maisons[_currentHouse - 1].OpenDoor();
         if (_currentHouse >= _maisons.Count) {
@@ -97,11 +130,31 @@ public class InceptionManager : MonoBehaviour {
 
         while (time > 0f) {
             time -= Time.deltaTime;
+
             controlable.transform.localRotation = Quaternion.Lerp(refRotation, originRotation, time);
-            controlable.transform.localPosition = Vector3.Lerp(refPosition, originPosition, time);
+            Vector3 localPosition = Vector3.Lerp(refPosition, originPosition, time);
+            // localPosition.y += animationCurve.Evaluate(time);
+            controlable.transform.localPosition = localPosition;
+
             yield return null;
         }
+        controlable.rigidbody.isKinematic = true;
         yield return null;
+    }
+
+    IEnumerator ObjectLockCoroutine()
+    {
+        int i = 6;
+        while (i > 0) {
+            foreach (var otherControlable in _maisons[_currentHouse]._controlables) {
+                Animator animator = otherControlable.GetComponentInChildren<Animator>();
+                if (animator != null) {
+                    animator.SetTrigger("Action");
+                }
+            }
+            i--;
+            yield return new WaitForSeconds(0.25f);
+        }
     }
 
     public void End()
