@@ -99,10 +99,9 @@ public class AControlable : MonoBehaviour {
                                 isActionAvailaible = true;
                                 actionAvailable.Enable();
                             }
-                            Debug.Log(controlable.objectType);
+                            // Make receiver emit too
                             var receiverActionControlable = _maisonManager.GetObject(controlable.objectType);
                             foreach (AActionAvailable actionAvailable in receiverActionControlable.actionAvailableList) {
-                                Debug.Log(actionAvailable, actionAvailable.gameObject);
                                 actionAvailable.Enable();
                             }
                             return;

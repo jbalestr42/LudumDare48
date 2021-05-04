@@ -23,6 +23,7 @@ public class InceptionManager : MonoBehaviour {
         _player.OnDoAction.AddListener(CheckObjectState);
         _refMaison.ActivateObject();
         _maisons[0].ActivateObject();
+        StartCoroutine(SnapOnMoveCoroutine());
     }
 
     void Destroy()
@@ -74,15 +75,15 @@ public class InceptionManager : MonoBehaviour {
         return false;
     }
 
-    private void Update()
-    {
-        if (IsLost()) {
-            foreach (var controlable in _maisons[_currentHouse]._controlables) {
-                SnapObject(controlable, true);
-            }
-            _player.ObjectExit(new UnityEngine.InputSystem.InputAction.CallbackContext());
-        }
-    }
+    // private void Update()
+    // {
+    //     if (IsLost()) {
+    //         foreach (var controlable in _maisons[_currentHouse]._controlables) {
+    //             SnapObject(controlable, true);
+    //         }
+    //         _player.ObjectExit(new UnityEngine.InputSystem.InputAction.CallbackContext());
+    //     }
+    // }
 
     void CheckObjectState(AControlable controlable)
     {
@@ -145,6 +146,7 @@ public class InceptionManager : MonoBehaviour {
 
         controlable.rb.isKinematic = true;
         controlable.rb.detectCollisions = false;
+        isSnappingCoroutine = true;
 
         while (time > 0f) {
             time -= Time.deltaTime;
@@ -159,6 +161,7 @@ public class InceptionManager : MonoBehaviour {
         controlable.rb.isKinematic = false;
         controlable.rb.detectCollisions = true;
         controlable.rb.velocity = Vector3.zero;
+        isSnappingCoroutine = false;
         yield return null;
     }
 
@@ -177,6 +180,26 @@ public class InceptionManager : MonoBehaviour {
             }
             i--;
             yield return new WaitForSeconds(0.25f);
+        }
+    }
+
+    bool isSnappingCoroutine = false;
+    IEnumerator SnapOnMoveCoroutine()
+    {
+        float time = 0f;
+        while (true) {
+            if (time < 0f || !isSnappingCoroutine) {
+                time = 2f;
+                if (IsLost()) {
+                    foreach (var controlable in _maisons[_currentHouse]._controlables) {
+                        SnapObject(controlable, true);
+                    }
+                    _player.ObjectExit(new UnityEngine.InputSystem.InputAction.CallbackContext());
+                }
+            } else {
+                time -= Time.deltaTime;
+            }
+            yield return null;
         }
     }
 
