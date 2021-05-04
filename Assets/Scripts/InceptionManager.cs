@@ -173,7 +173,7 @@ public class InceptionManager : MonoBehaviour {
             Vector3 position2 = controlable.transform.root.position - controlable.transform.position;
             float distance = Vector3.Distance(position1, position2);
 
-            if (distance < 1f || controlable.isSnapping) {
+            if (distance < 1f || controlable.isLocked) {
                 currentLockedObject++;
             }
         }
