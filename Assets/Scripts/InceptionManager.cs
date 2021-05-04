@@ -33,6 +33,9 @@ public class InceptionManager : MonoBehaviour {
 
     bool IsNeeded(AControlable controlable)
     {
+        if (_currentHouse >= _maisons.Count) {
+            return false;
+        }
         foreach (AControlable houseControlable in _maisons[_currentHouse]._controlables) {
             if (!houseControlable.ReactionableValidated() && controlable.objectType != houseControlable.objectType) {
                 foreach (AReactionable reactionable in houseControlable.reactionableList) {
@@ -49,15 +52,22 @@ public class InceptionManager : MonoBehaviour {
     public bool IsLost()
     {
         int currentLockedObject = 0;
+        if (_currentHouse >= _maisons.Count) {
+            return false;
+        }
         foreach (var controlable in _maisons[_currentHouse]._controlables) {
-            if (_refMaison.CheckObjectState(controlable)) {
+            AControlable refControlable = _refMaison.GetObject(controlable.objectType);
+            Vector3 position1 = refControlable.transform.root.position - refControlable.transform.position;
+            Vector3 position2 = controlable.transform.root.position - controlable.transform.position;
+            float distance = Vector3.Distance(position1, position2);
+
+            if (distance < 1f) {
                 currentLockedObject++;
             } else {
                 controlable.isSnapped = false;
                 controlable.isLocked = false;
             }
         }
-        Debug.Log(currentLockedObject, this.gameObject);
         if (currentLockedObject < _maisons[_currentHouse].originLockedObject - 1) {
             return true;
         }
@@ -122,43 +132,41 @@ public class InceptionManager : MonoBehaviour {
 
     IEnumerator SnapObjectCoroutine(AControlable controlable, AControlable refControlable, bool isReset)
     {
-        Vector3 originPosition = controlable.transform.localPosition;
-        Quaternion originRotation = controlable.transform.localRotation;
+        Vector3 originPosition = controlable.controlableParent.InverseTransformPoint(controlable.transform.position);
+        Quaternion originRotation = controlable.transform.rotation;
         Vector3 refPosition = refControlable.transform.localPosition;
-        Quaternion refRotation = refControlable.transform.localRotation;
+        Quaternion refRotation = refControlable.transform.rotation;
         if (isReset) {
-            refRotation = controlable.originLocalRotation;
             refPosition = controlable.originLocalPosition;
+            refRotation = controlable.originRotation;
         }
         float time = 1f;
         Renderer renderer = GetComponent<Renderer>();
-        Collider[] colliderArray = GetComponentsInChildren<MeshCollider>();
 
-        controlable.rigidbody.isKinematic = true;
-        controlable.rigidbody.detectCollisions = false;
-        foreach (var collider in colliderArray) {
-            collider.enabled = false;
-        }
+        controlable.rb.isKinematic = true;
+        controlable.rb.detectCollisions = false;
+
         while (time > 0f) {
             time -= Time.deltaTime;
 
-            controlable.transform.localRotation = Quaternion.Lerp(refRotation, originRotation, time);
+            controlable.transform.rotation = Quaternion.Lerp(refRotation, originRotation, time);
             Vector3 localPosition = Vector3.Lerp(refPosition, originPosition, time);
             // localPosition.y += animationCurve.Evaluate(time);
             controlable.transform.localPosition = localPosition;
 
             yield return null;
         }
-        foreach (var collider in colliderArray) {
-            collider.enabled = true;
-        }
-        controlable.rigidbody.isKinematic = false;
-        controlable.rigidbody.detectCollisions = true;
+        controlable.rb.isKinematic = false;
+        controlable.rb.detectCollisions = true;
+        controlable.rb.velocity = Vector3.zero;
         yield return null;
     }
 
     IEnumerator ObjectLockCoroutine()
     {
+        if (_currentHouse >= _maisons.Count) {
+            yield return null;
+        }
         int i = 6;
         while (i > 0) {
             foreach (var otherControlable in _maisons[_currentHouse]._controlables) {

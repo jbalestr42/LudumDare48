@@ -35,14 +35,14 @@ public class AControlable : MonoBehaviour {
     public bool isLocked = false;
     public bool isActionAvailaible = false;
     public bool isSnapped = false;
-    public Rigidbody rigidbody;
+    public Rigidbody rb;
     public Vector3 originLocalPosition;
-    public Quaternion originLocalRotation;
+    public Quaternion originRotation;
+    public Transform controlableParent;
 
     Animator _animator;
     MaisonManager _maisonManager;
     List<AActionable> actionableDoneList = new List<AActionable>();
-    List<AActionable> actionableCloseList = new List<AActionable>();
 
     void OnEnable()
     {
@@ -65,13 +65,14 @@ public class AControlable : MonoBehaviour {
         _animator = GetComponentInChildren<Animator>();
         _maisonManager = GetComponentInParent<MaisonManager>();
         isSnapped = isLocked;
-        rigidbody = gameObject.AddComponent<Rigidbody>();
-        rigidbody.centerOfMass = Vector3.zero;
-        rigidbody.mass = 5f;
-        rigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
-        rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+        rb = gameObject.AddComponent<Rigidbody>();
+        rb.centerOfMass = Vector3.zero;
+        rb.mass = 2f;
+        rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
         originLocalPosition = transform.localPosition;
-        originLocalRotation = transform.localRotation;
+        originRotation = transform.rotation;
+        controlableParent = transform.parent;
     }
 
     public bool ReactionableValidated()
@@ -89,9 +90,6 @@ public class AControlable : MonoBehaviour {
     {
         if (actionAvailableList.Count > 0) {
             isActionAvailaible = false;
-            foreach (AActionAvailable actionAvailable in actionAvailableList) {
-                actionAvailable.Disable();
-            }
             foreach (var controlable in _maisonManager._controlables) {
                 foreach (AReactionable reactionable in controlable.reactionableList) {
                     if (controlable != this && (objectType & reactionable.objectActionable) != ObjectType.Undefined) {
@@ -101,11 +99,24 @@ public class AControlable : MonoBehaviour {
                                 isActionAvailaible = true;
                                 actionAvailable.Enable();
                             }
+                            Debug.Log(controlable.objectType);
+                            var receiverActionControlable = _maisonManager.GetObject(controlable.objectType);
+                            foreach (AActionAvailable actionAvailable in receiverActionControlable.actionAvailableList) {
+                                Debug.Log(actionAvailable, actionAvailable.gameObject);
+                                actionAvailable.Enable();
+                            }
                             return;
                         }
                     }
                 }
             }
+        }
+    }
+
+    private void LateUpdate()
+    {
+        foreach (AActionAvailable actionAvailable in actionAvailableList) {
+            actionAvailable.Disable();
         }
     }
 
@@ -167,7 +178,7 @@ public class AControlable : MonoBehaviour {
     public void SetWalking(bool isWalking)
     {
         if (isWalking == true) {
-            rigidbody.isKinematic = true;
+            rb.isKinematic = true;
         }
         _animator?.SetBool("Walk", isWalking);
     }

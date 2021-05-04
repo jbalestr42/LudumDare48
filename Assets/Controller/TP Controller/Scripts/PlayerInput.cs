@@ -30,7 +30,7 @@ public static class PlayerInput {
         return moveVector;
     }
 
-    public static Quaternion GetMouseRotationInput(float mouseSensitivity = 3f, float minTiltAngle = -75f, float maxTiltAngle = 45f)
+    public static Quaternion GetMouseRotationInput(float mouseSensitivity = 3f, float minTiltAngle = -85f, float maxTiltAngle = 45f)
     {
         //if (!Input.GetMouseButton(1))
         //{

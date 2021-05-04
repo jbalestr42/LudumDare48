@@ -121,7 +121,7 @@ MonoBehaviour:
     maxFallSpeed: 38
     groundedGravityForce: 9
   rotationSettings:
-    rotationSmoothing: 15
+    rotationSmoothing: 5
     orientRotationToMovement: 1
     useControlRotation: 0
 --- !u!114 &1817507780519801863
@@ -414,10 +414,6 @@ PrefabInstance:
     - target: {fileID: 423682, guid: 80844b2319340044da27db99208a9eac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 423682, guid: 80844b2319340044da27db99208a9eac, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.86
       objectReference: {fileID: 0}
     - target: {fileID: 423682, guid: 80844b2319340044da27db99208a9eac, type: 3}
       propertyPath: m_LocalPosition.z

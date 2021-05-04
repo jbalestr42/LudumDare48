@@ -35,7 +35,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - CameraCollider
   - Controlable
   m_SortingLayers:
   - name: Default

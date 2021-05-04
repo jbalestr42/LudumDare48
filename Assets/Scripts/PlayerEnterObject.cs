@@ -20,7 +20,6 @@ public class PlayerEnterObject : MonoBehaviour {
     public UnityEvent<AControlable> OnDoAction = new UnityEvent<AControlable>();
 
     AControlable _controlledObject = null;
-    Transform _controlledObjectParent = null;
     PlayerState _state = PlayerState.ControllingPlayer;
     CameraController _cameraController;
     CameraOcclusionProtector _cameraOcclustionProtector;
@@ -75,6 +74,7 @@ public class PlayerEnterObject : MonoBehaviour {
         }
         if (_controlledObject != null) {
             _controlledObject.transform.position = transform.position;
+            _controlledObject.transform.rotation = transform.rotation;
         }
     }
 
@@ -95,7 +95,6 @@ public class PlayerEnterObject : MonoBehaviour {
                     controller.enabled = false;
                     transform.position = positionControlledObject;
                     controller.enabled = true;
-                    _controlledObjectParent = _controlledObject.transform.parent;
                     _controlledObject.transform.SetParent(transform);
                     _controlledObject.transform.forward = transform.forward;
                     _controlledObject.transform.localPosition = Vector3.zero;
@@ -129,7 +128,7 @@ public class PlayerEnterObject : MonoBehaviour {
         positionCamera.y = transform.position.y;
         gameObject.GetComponent<CharacterController>().Move(positionCamera - transform.position);
         // transform.position = positionCamera;
-        _controlledObject.transform.SetParent(_controlledObjectParent);
+        _controlledObject.transform.SetParent(_controlledObject.controlableParent);
         _controlledObject.transform.position = controledPosition;
         _controlledObject.SetWalking(false);
         OnObjectReleased.Invoke(_controlledObject);
