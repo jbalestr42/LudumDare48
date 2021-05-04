@@ -36,6 +36,8 @@ public class AControlable : MonoBehaviour {
     public bool isActionAvailaible = false;
     public bool isSnapped = false;
     public Rigidbody rigidbody;
+    public Vector3 originLocalPosition;
+    public Quaternion originLocalRotation;
 
     Animator _animator;
     MaisonManager _maisonManager;
@@ -65,7 +67,11 @@ public class AControlable : MonoBehaviour {
         isSnapped = isLocked;
         rigidbody = gameObject.AddComponent<Rigidbody>();
         rigidbody.centerOfMass = Vector3.zero;
-        rigidbody.mass = 3f;
+        rigidbody.mass = 5f;
+        rigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+        originLocalPosition = transform.localPosition;
+        originLocalRotation = transform.localRotation;
     }
 
     public bool ReactionableValidated()

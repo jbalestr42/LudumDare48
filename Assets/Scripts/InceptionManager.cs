@@ -68,8 +68,9 @@ public class InceptionManager : MonoBehaviour {
     {
         if (IsLost()) {
             foreach (var controlable in _maisons[_currentHouse]._controlables) {
-                SnapObject(controlable);
+                SnapObject(controlable, true);
             }
+            _player.ObjectExit(new UnityEngine.InputSystem.InputAction.CallbackContext());
         }
     }
 
@@ -112,22 +113,32 @@ public class InceptionManager : MonoBehaviour {
         }
     }
 
-    void SnapObject(AControlable controlable)
+    void SnapObject(AControlable controlable, bool isReset = false)
     {
         Debug.Log("Snap Object");
         AControlable refControlable = _refMaison.GetObject(controlable.objectType);
-        StartCoroutine(SnapObjectCoroutine(controlable, refControlable));
+        StartCoroutine(SnapObjectCoroutine(controlable, refControlable, isReset));
     }
 
-    IEnumerator SnapObjectCoroutine(AControlable controlable, AControlable refControlable)
+    IEnumerator SnapObjectCoroutine(AControlable controlable, AControlable refControlable, bool isReset)
     {
         Vector3 originPosition = controlable.transform.localPosition;
-        Vector3 refPosition = refControlable.transform.localPosition;
         Quaternion originRotation = controlable.transform.localRotation;
+        Vector3 refPosition = refControlable.transform.localPosition;
         Quaternion refRotation = refControlable.transform.localRotation;
+        if (isReset) {
+            refRotation = controlable.originLocalRotation;
+            refPosition = controlable.originLocalPosition;
+        }
         float time = 1f;
         Renderer renderer = GetComponent<Renderer>();
+        Collider[] colliderArray = GetComponentsInChildren<MeshCollider>();
 
+        controlable.rigidbody.isKinematic = true;
+        controlable.rigidbody.detectCollisions = false;
+        foreach (var collider in colliderArray) {
+            collider.enabled = false;
+        }
         while (time > 0f) {
             time -= Time.deltaTime;
 
@@ -138,7 +149,11 @@ public class InceptionManager : MonoBehaviour {
 
             yield return null;
         }
-        controlable.rigidbody.isKinematic = true;
+        foreach (var collider in colliderArray) {
+            collider.enabled = true;
+        }
+        controlable.rigidbody.isKinematic = false;
+        controlable.rigidbody.detectCollisions = true;
         yield return null;
     }
 

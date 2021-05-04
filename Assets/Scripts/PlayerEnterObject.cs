@@ -73,6 +73,9 @@ public class PlayerEnterObject : MonoBehaviour {
             _cameraOcclustionProtector.distanceToTarget = Mathf.Max(0f, _cameraOcclustionProtector.distanceToTarget - Time.deltaTime * 20f);
             _cameraController.catchSpeedDamp = Mathf.Max(0f, _cameraController.catchSpeedDamp - Time.deltaTime);
         }
+        if (_controlledObject != null) {
+            _controlledObject.transform.position = transform.position;
+        }
     }
 
     private void ObjectEnter(InputAction.CallbackContext context)
@@ -115,7 +118,7 @@ public class PlayerEnterObject : MonoBehaviour {
         }
     }
 
-    private void ObjectExit(InputAction.CallbackContext context)
+    public void ObjectExit(InputAction.CallbackContext context)
     {
         Debug.Log("On object exit");
         if (_controlledObject.isActionAvailaible) {
