@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HouseFloor_Toon 2
+  m_Name: HouseFloor_Toon 3
   m_Shader: {fileID: 4800000, guid: 1d6e561d2a2bdae46a0884077d1708ba, type: 3}
   m_ShaderKeywords: _BLENDRIM _ENVIRONMENTREFLECTIONS_OFF _NORMALMAP _RIMLIGHT _SPECULARHIGHLIGHTS_OFF
     _SPECULAR_SETUP
@@ -23,7 +23,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 2fcb0bf6b08b6f943b799cbc8b8e4137, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -121,11 +121,11 @@ Material:
     - _UseSmoothNormal: 0
     - _WorkflowMode: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Shadow1Color: {r: 0.6320754, g: 0.61120504, b: 0.61120504, a: 0.5}
+    - _Shadow1Color: {r: 0, g: 0, b: 0, a: 0.5}
     - _Shadow2Color: {r: 0, g: 0, b: 0, a: 0}
-    - _SpecColor: {r: 1, g: 0.8191595, b: 0.4575472, a: 1}
+    - _SpecColor: {r: 1, g: 0.66666675, b: 0, a: 1}
   m_BuildTextureStacks: []

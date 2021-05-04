@@ -121,8 +121,10 @@ public class InceptionManager : MonoBehaviour {
         float time = 1f;
         Renderer renderer = GetComponent<Renderer>();
 
-        controlable.rb.isKinematic = true;
-        controlable.rb.detectCollisions = false;
+        if (controlable.hasRigidbody) {
+            controlable.rb.isKinematic = true;
+            controlable.rb.detectCollisions = false;
+        }
         controlable.isSnapping = true;
 
         while (time > 0f) {
@@ -135,10 +137,12 @@ public class InceptionManager : MonoBehaviour {
 
             yield return null;
         }
-        controlable.rb.isKinematic = false;
-        controlable.rb.detectCollisions = true;
-        controlable.rb.velocity = Vector3.zero;
-        controlable.isSnapping = false;
+        if (controlable.hasRigidbody) {
+            controlable.rb.isKinematic = false;
+            controlable.rb.detectCollisions = true;
+            controlable.rb.velocity = Vector3.zero;
+            controlable.isSnapping = false;
+        }
         yield return null;
     }
 

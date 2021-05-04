@@ -36,6 +36,7 @@ public class AControlable : MonoBehaviour {
     public bool isActionAvailaible = false;
     public bool isSnapped = false;
     public Rigidbody rb;
+    public bool hasRigidbody = true;
     public Vector3 originLocalPosition;
     public Quaternion originRotation;
     public Transform controlableParent;
@@ -66,11 +67,13 @@ public class AControlable : MonoBehaviour {
         _animator = GetComponentInChildren<Animator>();
         _maisonManager = GetComponentInParent<MaisonManager>();
         isSnapped = isLocked;
-        rb = gameObject.AddComponent<Rigidbody>();
-        rb.centerOfMass = Vector3.zero;
-        rb.mass = 2f;
-        rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
-        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        if (hasRigidbody) {
+            rb = gameObject.AddComponent<Rigidbody>();
+            rb.centerOfMass = Vector3.zero;
+            rb.mass = 2f;
+            rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+        }
         originLocalPosition = transform.localPosition;
         originRotation = transform.rotation;
         controlableParent = transform.parent;
@@ -177,7 +180,7 @@ public class AControlable : MonoBehaviour {
 
     public void SetWalking(bool isWalking)
     {
-        if (isWalking == true) {
+        if (isWalking == true && hasRigidbody) {
             rb.isKinematic = true;
         }
         _animator?.SetBool("Walk", isWalking);
