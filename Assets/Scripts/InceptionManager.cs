@@ -49,32 +49,6 @@ public class InceptionManager : MonoBehaviour {
         return false;
     }
 
-
-    public bool IsLost()
-    {
-        int currentLockedObject = 0;
-        if (_currentHouse >= _maisons.Count) {
-            return false;
-        }
-        foreach (var controlable in _maisons[_currentHouse]._controlables) {
-            AControlable refControlable = _refMaison.GetObject(controlable.objectType);
-            Vector3 position1 = refControlable.transform.root.position - refControlable.transform.position;
-            Vector3 position2 = controlable.transform.root.position - controlable.transform.position;
-            float distance = Vector3.Distance(position1, position2);
-
-            if (distance < 1f) {
-                currentLockedObject++;
-            } else {
-                controlable.isSnapped = false;
-                controlable.isLocked = false;
-            }
-        }
-        if (currentLockedObject < _maisons[_currentHouse].originLockedObject - 1) {
-            return true;
-        }
-        return false;
-    }
-
     // private void Update()
     // {
     //     if (IsLost()) {
@@ -95,6 +69,7 @@ public class InceptionManager : MonoBehaviour {
             }
             if (!controlable.isLocked) {
                 controlable.isLocked = true;
+                _maisons[_currentHouse].originLockedObject++;
                 SoundManager.PlaySound(Random.value > 0.5 ? Random.value > 0.5f ? "snap_1" : "snap_2" : "snap_3", controlable.transform.position);
             }
             if (_refMaison.CheckObjects(_maisons[_currentHouse])) {
@@ -108,7 +83,6 @@ public class InceptionManager : MonoBehaviour {
             }
         } else {
             controlable.isSnapped = false;
-            controlable.isLocked = false;
         }
     }
 
@@ -133,6 +107,9 @@ public class InceptionManager : MonoBehaviour {
 
     IEnumerator SnapObjectCoroutine(AControlable controlable, AControlable refControlable, bool isReset)
     {
+        if (controlable.isSnapping) {
+            yield return null;
+        }
         Vector3 originPosition = controlable.controlableParent.InverseTransformPoint(controlable.transform.position);
         Quaternion originRotation = controlable.transform.rotation;
         Vector3 refPosition = refControlable.transform.localPosition;
@@ -146,7 +123,7 @@ public class InceptionManager : MonoBehaviour {
 
         controlable.rb.isKinematic = true;
         controlable.rb.detectCollisions = false;
-        isSnappingCoroutine = true;
+        controlable.isSnapping = true;
 
         while (time > 0f) {
             time -= Time.deltaTime;
@@ -161,7 +138,7 @@ public class InceptionManager : MonoBehaviour {
         controlable.rb.isKinematic = false;
         controlable.rb.detectCollisions = true;
         controlable.rb.velocity = Vector3.zero;
-        isSnappingCoroutine = false;
+        controlable.isSnapping = false;
         yield return null;
     }
 
@@ -183,16 +160,39 @@ public class InceptionManager : MonoBehaviour {
         }
     }
 
-    bool isSnappingCoroutine = false;
+
+    public bool IsLost()
+    {
+        int currentLockedObject = 0;
+        if (_currentHouse >= _maisons.Count) {
+            return false;
+        }
+        foreach (var controlable in _maisons[_currentHouse]._controlables) {
+            AControlable refControlable = _refMaison.GetObject(controlable.objectType);
+            Vector3 position1 = refControlable.transform.root.position - refControlable.transform.position;
+            Vector3 position2 = controlable.transform.root.position - controlable.transform.position;
+            float distance = Vector3.Distance(position1, position2);
+
+            if (distance < 1f || controlable.isSnapping) {
+                currentLockedObject++;
+            }
+        }
+        Debug.Log(currentLockedObject + "/" + _maisons[_currentHouse].originLockedObject);
+        if (currentLockedObject < _maisons[_currentHouse].originLockedObject - 1) {
+            return true;
+        }
+        return false;
+    }
+
     IEnumerator SnapOnMoveCoroutine()
     {
         float time = 0f;
         while (true) {
-            if (time < 0f || !isSnappingCoroutine) {
+            if (time < 0f) {
                 time = 2f;
                 if (IsLost()) {
                     foreach (var controlable in _maisons[_currentHouse]._controlables) {
-                        SnapObject(controlable, true);
+                        SnapObject(controlable, !controlable.isLocked);
                     }
                     _player.ObjectExit(new UnityEngine.InputSystem.InputAction.CallbackContext());
                 }

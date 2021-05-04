@@ -120,7 +120,7 @@ public class PlayerEnterObject : MonoBehaviour {
     public void ObjectExit(InputAction.CallbackContext context)
     {
         Debug.Log("On object exit");
-        if (_controlledObject.isActionAvailaible) {
+        if (_controlledObject == null || _controlledObject.isActionAvailaible) {
             return;
         }
         Vector3 positionCamera = _camera.transform.position;

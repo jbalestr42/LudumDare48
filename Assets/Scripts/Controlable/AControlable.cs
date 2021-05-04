@@ -39,6 +39,7 @@ public class AControlable : MonoBehaviour {
     public Vector3 originLocalPosition;
     public Quaternion originRotation;
     public Transform controlableParent;
+    public bool isSnapping = false;
 
     Animator _animator;
     MaisonManager _maisonManager;
