@@ -1050,6 +1050,30 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2879755738374092839, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.291
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879755738374092839, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.291
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879755738374092839, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.291
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879755738374092839, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0031
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879755738374092839, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0364
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879755738374092839, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0405
+      objectReference: {fileID: 0}
     - target: {fileID: 2925833454926496461, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_CullingMode
       value: 0
