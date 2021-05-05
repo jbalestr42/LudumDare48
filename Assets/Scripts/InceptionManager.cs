@@ -182,8 +182,7 @@ public class InceptionManager : MonoBehaviour {
                 currentLockedObject++;
             }
         }
-        Debug.Log(currentLockedObject + "/" + _maisons[_currentHouse].originLockedObject);
-        if (currentLockedObject < _maisons[_currentHouse].originLockedObject - 1) {
+        if (currentLockedObject < _maisons[_currentHouse].originLockedObject) {
             return true;
         }
         return false;
