@@ -69,6 +69,7 @@ public class InceptionManager : MonoBehaviour {
             }
             if (!controlable.isLocked) {
                 controlable.isLocked = true;
+                controlable.startedLocked = true;
                 _maisons[_currentHouse].originLockedObject++;
                 SoundManager.PlaySound(Random.value > 0.5 ? Random.value > 0.5f ? "snap_1" : "snap_2" : "snap_3", controlable.transform.position);
             }
@@ -177,7 +178,7 @@ public class InceptionManager : MonoBehaviour {
             Vector3 position2 = controlable.transform.root.position - controlable.transform.position;
             float distance = Vector3.Distance(position1, position2);
 
-            if (distance < 1f || controlable.isLocked) {
+            if (distance < 1f && controlable.startedLocked) {
                 currentLockedObject++;
             }
         }

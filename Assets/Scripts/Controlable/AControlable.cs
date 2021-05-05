@@ -41,6 +41,7 @@ public class AControlable : MonoBehaviour {
     public Quaternion originRotation;
     public Transform controlableParent;
     public bool isSnapping = false;
+    public bool startedLocked = false;
 
     Animator _animator;
     MaisonManager _maisonManager;
@@ -77,6 +78,7 @@ public class AControlable : MonoBehaviour {
         originLocalPosition = transform.localPosition;
         originRotation = transform.rotation;
         controlableParent = transform.parent;
+        startedLocked = isLocked;
     }
 
     public bool ReactionableValidated()
