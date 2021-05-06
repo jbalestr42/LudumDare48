@@ -4501,6 +4501,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5351382210977106328, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5395479815180033998, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -4616,6 +4620,14 @@ PrefabInstance:
     - target: {fileID: 6822079988828852626, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825374307163210859, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_Volume
+      value: 0.007
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825374307163210859, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.25555557
       objectReference: {fileID: 0}
     - target: {fileID: 6890821872207841292, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_LocalRotation.w

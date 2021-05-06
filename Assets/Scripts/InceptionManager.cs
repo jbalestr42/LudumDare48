@@ -113,7 +113,8 @@ public class InceptionManager : MonoBehaviour {
         }
         Vector3 originPosition = controlable.controlableParent.InverseTransformPoint(controlable.transform.position);
         Quaternion originRotation = controlable.transform.rotation;
-        Vector3 refPosition = refControlable.transform.localPosition;
+        Vector3 refPosition = refControlable.controlableParent.InverseTransformPoint(refControlable.transform.position);
+        // Vector3 refPosition = refControlable.transform.localPosition;
         Quaternion refRotation = refControlable.transform.rotation;
         if (isReset) {
             refPosition = controlable.originLocalPosition;
@@ -134,7 +135,7 @@ public class InceptionManager : MonoBehaviour {
             controlable.transform.rotation = Quaternion.Lerp(refRotation, originRotation, time);
             Vector3 localPosition = Vector3.Lerp(refPosition, originPosition, time);
             // localPosition.y += animationCurve.Evaluate(time);
-            controlable.transform.localPosition = localPosition;
+            controlable.transform.position = controlable.controlableParent.TransformPoint(localPosition);
 
             yield return null;
         }
@@ -142,8 +143,8 @@ public class InceptionManager : MonoBehaviour {
             controlable.rb.isKinematic = false;
             controlable.rb.detectCollisions = true;
             controlable.rb.velocity = Vector3.zero;
-            controlable.isSnapping = false;
         }
+        controlable.isSnapping = false;
         yield return null;
     }
 
@@ -174,8 +175,8 @@ public class InceptionManager : MonoBehaviour {
         }
         foreach (var controlable in _maisons[_currentHouse]._controlables) {
             AControlable refControlable = _refMaison.GetObject(controlable.objectType);
-            Vector3 position1 = refControlable.transform.root.position - refControlable.transform.position;
-            Vector3 position2 = controlable.transform.root.position - controlable.transform.position;
+            Vector3 position1 = refControlable.controlableParent.InverseTransformPointUnscaled(refControlable.transform.position);
+            Vector3 position2 = controlable.controlableParent.InverseTransformPointUnscaled(controlable.transform.position);
             float distance = Vector3.Distance(position1, position2);
 
             if (distance < 1f && controlable.startedLocked) {

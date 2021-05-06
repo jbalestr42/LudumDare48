@@ -75,9 +75,11 @@ public class AControlable : MonoBehaviour {
             rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
         }
-        originLocalPosition = transform.localPosition;
+        if (controlableParent == null) {
+            controlableParent = transform.parent;
+        }
+        originLocalPosition = controlableParent.InverseTransformPoint(transform.position);
         originRotation = transform.rotation;
-        controlableParent = transform.parent;
         startedLocked = isLocked;
     }
 
@@ -168,9 +170,10 @@ public class AControlable : MonoBehaviour {
 
     public virtual bool IsSameState(AControlable controlable)
     {
-        Vector3 position1 = transform.root.position - transform.position;
-        Vector3 position2 = controlable.transform.root.position - controlable.transform.position;
+        Vector3 position1 = controlableParent.InverseTransformPointUnscaled(transform.position);
+        Vector3 position2 = controlable.controlableParent.InverseTransformPointUnscaled(controlable.transform.position);
         float distance = Vector3.Distance(position1, position2);
+        Debug.Log(this + " " + controlable + " " + distance);
 
         return distance < _distanceSnapMinimum;
     }

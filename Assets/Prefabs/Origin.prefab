@@ -408,6 +408,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1451224860280093336, guid: 43f6a6858850e4d40ad2fc88bfcc740b, type: 3}
+      propertyPath: controlableParent
+      value: 
+      objectReference: {fileID: 8990686564129059104}
     - target: {fileID: 1451224860280093337, guid: 43f6a6858850e4d40ad2fc88bfcc740b, type: 3}
       propertyPath: m_Name
       value: CarafeControllableObject
@@ -479,6 +483,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1451224860280093336, guid: ac2841d942191f3488b138316d616e00, type: 3}
+      propertyPath: controlableParent
+      value: 
+      objectReference: {fileID: 8170336385299262918}
     - target: {fileID: 1451224860280093337, guid: ac2841d942191f3488b138316d616e00, type: 3}
       propertyPath: m_Name
       value: VentiloControllableObject
@@ -703,6 +711,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1451224860280093336, guid: 5d333d773054a6547b81774cbf1d986c, type: 3}
+      propertyPath: controlableParent
+      value: 
+      objectReference: {fileID: 8990686564129059104}
     - target: {fileID: 1451224860280093337, guid: 5d333d773054a6547b81774cbf1d986c, type: 3}
       propertyPath: m_Name
       value: VerreControllableObject
@@ -884,6 +896,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1451224860280093336, guid: 715436f650a8d7e4fa278ea2631778c3, type: 3}
+      propertyPath: controlableParent
+      value: 
+      objectReference: {fileID: 8170336385299262918}
     - target: {fileID: 1451224860280093337, guid: 715436f650a8d7e4fa278ea2631778c3, type: 3}
       propertyPath: m_Name
       value: VynilControllableObject

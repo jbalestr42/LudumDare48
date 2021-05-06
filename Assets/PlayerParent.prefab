@@ -375,6 +375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5437528488984459770}
+  - component: {fileID: 910265567643682704}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -396,6 +397,14 @@ Transform:
   m_Father: {fileID: 1817507780519650668}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &910265567643682704
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5437528488984459769}
+  m_Enabled: 1
 --- !u!1001 &5437528487230948012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -455,7 +464,8 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3019991025339266597, guid: 80844b2319340044da27db99208a9eac, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 80844b2319340044da27db99208a9eac, type: 3}
 --- !u!4 &5437528487230551470 stripped
 Transform:
