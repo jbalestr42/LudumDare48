@@ -195,11 +195,18 @@ public class InceptionManager : MonoBehaviour {
         while (true) {
             if (time < 0f) {
                 time = 2f;
-                if (IsLost()) {
-                    foreach (var controlable in _maisons[_currentHouse]._controlables) {
-                        SnapObject(controlable, !controlable.isLocked);
+                if (_currentHouse >= _maisons.Count) {
+                    yield return null;
+                }
+                foreach (var controlable in _maisons[_currentHouse]._controlables) {
+                    AControlable refControlable = _refMaison.GetObject(controlable.objectType);
+                    Vector3 position1 = refControlable.controlableParent.InverseTransformPointUnscaled(refControlable.transform.position);
+                    Vector3 position2 = controlable.controlableParent.InverseTransformPointUnscaled(controlable.transform.position);
+                    float distance = Vector3.Distance(position1, position2);
+
+                    if (distance > 1f && controlable.isLocked) {
+                        SnapObject(controlable);
                     }
-                    _player.ObjectExit(new UnityEngine.InputSystem.InputAction.CallbackContext());
                 }
             } else {
                 time -= Time.deltaTime;
