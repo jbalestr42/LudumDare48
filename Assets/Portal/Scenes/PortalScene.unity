@@ -855,10 +855,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerParent
       objectReference: {fileID: 0}
-    - target: {fileID: 5437528487229948122, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
-      propertyPath: far clip plane
-      value: 35
-      objectReference: {fileID: 0}
     - target: {fileID: 5437528487230551470, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -4389,6 +4385,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1256224651341033138, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.386
+      objectReference: {fileID: 0}
     - target: {fileID: 1321180189449760295, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_UpdateMode
       value: 0
@@ -4489,6 +4489,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3767721962216855422, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.447
+      objectReference: {fileID: 0}
     - target: {fileID: 3944113987372330311, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4532,6 +4536,10 @@ PrefabInstance:
     - target: {fileID: 5351382210977106328, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5359916829383274858, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.375
       objectReference: {fileID: 0}
     - target: {fileID: 5395479815180033998, guid: e4514232bdc9ad341b85f446c96d7f07, type: 3}
       propertyPath: m_CastShadows

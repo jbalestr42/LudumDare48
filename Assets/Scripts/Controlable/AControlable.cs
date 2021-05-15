@@ -42,6 +42,7 @@ public class AControlable : MonoBehaviour {
     public Transform controlableParent;
     public bool isSnapping = false;
     public bool startedLocked = false;
+    public bool looseRigidbodyWhenSnapped = false;
 
     Animator _animator;
     MaisonManager _maisonManager;
@@ -72,7 +73,7 @@ public class AControlable : MonoBehaviour {
             rb = gameObject.AddComponent<Rigidbody>();
             rb.centerOfMass = Vector3.zero;
             rb.mass = 2f;
-            rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+            rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
         }
         if (controlableParent == null) {

@@ -125,7 +125,7 @@ public class InceptionManager : MonoBehaviour {
 
         if (controlable.hasRigidbody) {
             controlable.rb.isKinematic = true;
-            controlable.rb.detectCollisions = false;
+            controlable.rb.detectCollisions = !controlable.looseRigidbodyWhenSnapped;
         }
         controlable.isSnapping = true;
 
