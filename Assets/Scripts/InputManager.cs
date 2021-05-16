@@ -1,3 +1,101 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class InputManager : MonoBehaviour {
+    public static bool IsTouch;
+    public static Vector2 TapPosition;
+    [SerializeField] bool isTouch = false;
+
+    public static Vector2 mouse;
+    public static Vector2 movement;
+
+    private static InputActionAsset inputActionAsset;
+    private static InputActionMap playerActionMap;
+
+    private static System.Action<InputAction.CallbackContext> inputAction;
+
+    private UnityEngine.InputSystem.Controls.TouchControl moveControl = null;
+    private UnityEngine.InputSystem.Controls.TouchControl mouseControl = null;
+
+    private void Update()
+    {
+        IsTouch = isTouch;
+        if (isTouch) {
+            if (Keyboard.current.anyKey.wasPressedThisFrame) {
+                isTouch = false;
+                return;
+            }
+            UpdateTouch();
+        } else {
+            var touchArray = Touchscreen.current.touches;
+            foreach (var touch in touchArray) {
+                if (touch.isInProgress) {
+                    isTouch = true;
+                    return;
+                }
+            }
+            UpdateKeyboardMouse();
+        }
+    }
+
+    private void UpdateTouch()
+    {
+        var touchArray = Touchscreen.current.touches;
+        foreach (var touch in touchArray) {
+            if (touch.isInProgress) {
+                Vector2 position = touch.position.ReadValue();
+                if (position.x > Screen.width * 0.2f) {
+                    mouse = touch.delta.ReadValue();
+                    mouseControl = touch;
+                }
+                if (position.x < Screen.width * 0.2f) {
+                    movement.y = 1f;
+                    moveControl = touch;
+                }
+            } else {
+                if (mouseControl == touch) {
+                    mouse = Vector2.zero;
+                    mouseControl = null;
+                }
+                if (moveControl == touch) {
+                    movement.y = 0f;
+                    moveControl = null;
+                }
+            }
+            if (touch.tapCount.ReadValue() != 0) {
+                if (inputAction != null) {
+                    TapPosition = touch.position.ReadValue();
+                    inputAction.Invoke(new InputAction.CallbackContext());
+                    Debug.Log("Click");
+                }
+            }
+        }
+    }
+
+    private void UpdateKeyboardMouse()
+    {
+        mouse = Mouse.current.delta.ReadValue();
+        movement.y = Keyboard.current.wKey.ReadValue() - Keyboard.current.sKey.ReadValue();
+        movement.x = Keyboard.current.dKey.ReadValue() - Keyboard.current.aKey.ReadValue();
+        if (Mouse.current.leftButton.wasPressedThisFrame) {
+            if (inputAction != null) {
+                inputAction.Invoke(new InputAction.CallbackContext());
+            }
+        }
+    }
+
+    public static void RegisterCallback(string action, System.Action<InputAction.CallbackContext> callback, bool remove)
+    {
+        if (remove) {
+            inputAction -= callback;
+        } else {
+            inputAction += callback;
+        }
+    }
+}
+
 // using System.Collections;
 // using System.Collections.Generic;
 // using UnityEngine;
@@ -105,85 +203,3 @@
 //         mouse = context.ReadValue<Vector2>();
 //     }
 // }
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
-
-public class InputManager : MonoBehaviour {
-    [SerializeField] bool isTouch = false;
-
-    public static Vector2 mouse;
-    public static Vector2 movement;
-
-    private static InputActionAsset inputActionAsset;
-    private static InputActionMap playerActionMap;
-
-    private static System.Action<InputAction.CallbackContext> inputAction;
-
-    private UnityEngine.InputSystem.Controls.TouchControl moveControl = null;
-    private UnityEngine.InputSystem.Controls.TouchControl mouseControl = null;
-
-    private void Update()
-    {
-        if (isTouch) {
-            UpdateTouch();
-        } else {
-            UpdateKeyboardMouse();
-        }
-    }
-
-    private void UpdateTouch()
-    {
-        var touchArray = Touchscreen.current.touches;
-        foreach (var touch in touchArray) {
-            if (touch.isInProgress) {
-                Vector2 position = touch.position.ReadValue();
-                if (position.x > Screen.width * 0.2f) {
-                    mouse = touch.delta.ReadValue();
-                    mouseControl = touch;
-                }
-                if (position.x < Screen.width * 0.2f) {
-                    movement.y = 1f;
-                    moveControl = touch;
-                }
-            } else {
-                if (mouseControl == touch) {
-                    mouse = Vector2.zero;
-                    mouseControl = null;
-                }
-                if (moveControl == touch) {
-                    movement.y = 0f;
-                    moveControl = null;
-                }
-            }
-            if (touch.tapCount.ReadValue() != 0) {
-                if (inputAction != null) {
-                    inputAction.Invoke(new InputAction.CallbackContext());
-                }
-            }
-        }
-    }
-
-    private void UpdateKeyboardMouse()
-    {
-        mouse = Mouse.current.delta.ReadValue();
-        movement.y = Keyboard.current.wKey.ReadValue() - Keyboard.current.sKey.ReadValue();
-        movement.x = Keyboard.current.dKey.ReadValue() - Keyboard.current.aKey.ReadValue();
-        if (Mouse.current.leftButton.wasPressedThisFrame) {
-            if (inputAction != null) {
-                inputAction.Invoke(new InputAction.CallbackContext());
-            }
-        }
-    }
-
-    public static void RegisterCallback(string action, System.Action<InputAction.CallbackContext> callback, bool remove)
-    {
-        if (remove) {
-            inputAction -= callback;
-        } else {
-            inputAction += callback;
-        }
-    }
-}

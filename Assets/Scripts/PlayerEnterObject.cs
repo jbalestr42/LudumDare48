@@ -30,18 +30,36 @@ public class PlayerEnterObject : MonoBehaviour {
         _cameraController = _camera.GetComponent<CameraController>();
         _cameraOcclustionProtector = _camera.GetComponent<CameraOcclusionProtector>();
         Cursor.lockState = CursorLockMode.Locked;
-        InputManager.RegisterCallback("Object", ActionAsObject, true);
-        InputManager.RegisterCallback("Object", ActionAsPlayer, false);
-        InputManager.RegisterCallback("Object", ObjectExit, true);
-        InputManager.RegisterCallback("Object", ObjectEnter, false);
+        InputManager.RegisterCallback("", CallBack, false);
+        // InputManager.RegisterCallback("Object", ActionAsObject, true);
+        // InputManager.RegisterCallback("Object", ActionAsPlayer, false);
+        // InputManager.RegisterCallback("Object", ObjectExit, true);
+        // InputManager.RegisterCallback("Object", ObjectEnter, false);
     }
 
     private void OnDestroy()
     {
-        InputManager.RegisterCallback("Object", ObjectEnter, true);
-        InputManager.RegisterCallback("Object", ObjectExit, true);
-        InputManager.RegisterCallback("Action", ActionAsPlayer, true);
-        InputManager.RegisterCallback("Action", ActionAsObject, true);
+        InputManager.RegisterCallback("", CallBack, true);
+        // InputManager.RegisterCallback("Object", ObjectEnter, true);
+        // InputManager.RegisterCallback("Object", ObjectExit, true);
+        // InputManager.RegisterCallback("Action", ActionAsPlayer, true);
+        // InputManager.RegisterCallback("Action", ActionAsObject, true);
+    }
+
+    private void CallBack(InputAction.CallbackContext context)
+    {
+        switch (_state) {
+            case PlayerState.ControllingPlayer: {
+                    ActionAsPlayer(context);
+                    ObjectEnter(context);
+                }
+                break;
+            case PlayerState.ControllingObject: {
+                    ActionAsObject(context);
+                    ObjectExit(context);
+                }
+                break;
+        }
     }
 
     private void ActionAsPlayer(InputAction.CallbackContext context)
@@ -49,7 +67,15 @@ public class PlayerEnterObject : MonoBehaviour {
         Debug.Log("Action as player");
 
         RaycastHit hit;
-        if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity)) {
+        Vector3 position = _camera.transform.position;
+        Vector3 direction = _camera.transform.forward;
+        if (InputManager.IsTouch) {
+            Ray ray = _camera.ScreenPointToRay(InputManager.TapPosition);
+            direction = ray.direction;
+            Debug.Log(direction);
+        }
+
+        if (Physics.Raycast(position, direction, out hit, Mathf.Infinity)) {
             AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
             if (controlable != null && (controlable.isLocked || controlable.isSnapped)) {
                 controlable.TryDoAction();
@@ -83,7 +109,13 @@ public class PlayerEnterObject : MonoBehaviour {
     {
         Debug.Log("On object enter");
         RaycastHit hit;
-        if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out hit, Mathf.Infinity)) {
+        Vector3 position = _camera.transform.position;
+        Vector3 direction = _camera.transform.forward;
+        if (InputManager.IsTouch) {
+            Ray ray = _camera.ScreenPointToRay(InputManager.TapPosition);
+            direction = ray.direction;
+        }
+        if (Physics.Raycast(position, direction, out hit, Mathf.Infinity)) {
             AControlable controlable = hit.collider.gameObject.GetComponentInParent<AControlable>();
             if (controlable != null) {
                 if (!controlable.isLocked && !controlable.isSnapped) {
@@ -104,10 +136,10 @@ public class PlayerEnterObject : MonoBehaviour {
                     SoundManager.PlaySound("control_1", _controlledObject.transform.position);
                     cursor.SetActive(false);
 
-                    InputManager.RegisterCallback("Object", ActionAsObject, false);
-                    InputManager.RegisterCallback("Object", ActionAsPlayer, true);
-                    InputManager.RegisterCallback("Object", ObjectExit, false);
-                    InputManager.RegisterCallback("Object", ObjectEnter, true);
+                    // InputManager.RegisterCallback("Object", ActionAsObject, false);
+                    // InputManager.RegisterCallback("Object", ActionAsPlayer, true);
+                    // InputManager.RegisterCallback("Object", ObjectExit, false);
+                    // InputManager.RegisterCallback("Object", ObjectEnter, true);
 
                     _cameraOcclustionProtector.distanceToTarget = objectCameraDistance;
                     _cameraController.catchSpeedDamp = 0.4f;
@@ -142,11 +174,11 @@ public class PlayerEnterObject : MonoBehaviour {
         _state = PlayerState.ControllingPlayer;
         SoundManager.PlaySound("release_2", _controlledObject.transform.position);
         _controlledObject = null;
-        cursor.SetActive(true);
-        InputManager.RegisterCallback("Object", ActionAsObject, true);
-        InputManager.RegisterCallback("Object", ActionAsPlayer, false);
-        InputManager.RegisterCallback("Object", ObjectExit, true);
-        InputManager.RegisterCallback("Object", ObjectEnter, false);
+        cursor.SetActive(!InputManager.IsTouch);
+        // InputManager.RegisterCallback("Object", ActionAsObject, true);
+        // InputManager.RegisterCallback("Object", ActionAsPlayer, false);
+        // InputManager.RegisterCallback("Object", ObjectExit, true);
+        // InputManager.RegisterCallback("Object", ObjectEnter, false);
     }
 
     private IEnumerator LockedCoroutine(AControlable controlable)
