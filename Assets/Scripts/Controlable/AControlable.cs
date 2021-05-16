@@ -43,6 +43,7 @@ public class AControlable : MonoBehaviour {
     public bool isSnapping = false;
     public bool startedLocked = false;
     public bool looseRigidbodyWhenSnapped = false;
+    public Transform cameraTarget;
 
     Animator _animator;
     MaisonManager _maisonManager;

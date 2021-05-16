@@ -9,7 +9,9 @@ public class CameraController : MonoBehaviour {
 
     // Serializable fields
     [SerializeField]
-    private Transform target = null; // The target to follow
+    public Transform target = null; // The target to follow
+
+    public bool lockRotationX;
 
     [SerializeField]
     [Range(MIN_CATCH_SPEED_DAMP, MAX_CATCH_SPEED_DAMP)]
@@ -37,7 +39,13 @@ public class CameraController : MonoBehaviour {
 
     protected virtual void Update()
     {
-        var controlRotation = PlayerInput.GetMouseRotationInput();
+        Quaternion controlRotation = Quaternion.identity;
+        if (lockRotationX) {
+            controlRotation = PlayerInput.GetMouseRotationInput(1f, -40f, 0f);
+        } else {
+            controlRotation = PlayerInput.GetMouseRotationInput(1f);
+        }
+
         this.UpdateRotation(controlRotation);
     }
 

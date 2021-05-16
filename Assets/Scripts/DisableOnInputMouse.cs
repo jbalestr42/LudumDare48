@@ -32,6 +32,7 @@ public class DisableOnInputMouse : MonoBehaviour {
                 if (textMesh.text.Length > 0) {
                     textMesh.text = textMesh.text.Remove(textMesh.text.Length - 1);
                 }
+                textMesh.text = "";
             }
         }
     }

@@ -241,7 +241,7 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""id"": ""34de487a-67af-4201-ab19-7a14bf7bac31"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""groups"": ""Keyboard And Mouse"",
                     ""action"": ""Mouse"",
                     ""isComposite"": false,

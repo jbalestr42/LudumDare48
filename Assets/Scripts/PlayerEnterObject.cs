@@ -11,6 +11,7 @@ public class PlayerEnterObject : MonoBehaviour {
     }
 
     [SerializeField] private Camera _camera = null;
+    [SerializeField] private Transform _playerHead;
     [SerializeField] public float objectCameraDistance = 8f;
     [SerializeField] private AnimationCurve lockedCurve;
     [SerializeField] private GameObject cursor;
@@ -110,6 +111,10 @@ public class PlayerEnterObject : MonoBehaviour {
 
                     _cameraOcclustionProtector.distanceToTarget = objectCameraDistance;
                     _cameraController.catchSpeedDamp = 0.4f;
+                    _cameraController.lockRotationX = true;
+                    if (controlable.cameraTarget != null) {
+                        _cameraController.target = controlable.cameraTarget;
+                    }
                 } else {
                     SoundManager.PlaySound("lock_1", hit.point);
                 }
@@ -132,6 +137,8 @@ public class PlayerEnterObject : MonoBehaviour {
         _controlledObject.transform.position = controledPosition;
         _controlledObject.SetWalking(false);
         OnObjectReleased.Invoke(_controlledObject);
+        _cameraController.target = _playerHead;
+        _cameraController.lockRotationX = false;
         _state = PlayerState.ControllingPlayer;
         SoundManager.PlaySound("release_2", _controlledObject.transform.position);
         _controlledObject = null;
