@@ -112,6 +112,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour {
+    [SerializeField] bool isTouch = false;
+
     public static Vector2 mouse;
     public static Vector2 movement;
 
@@ -120,7 +122,51 @@ public class InputManager : MonoBehaviour {
 
     private static System.Action<InputAction.CallbackContext> inputAction;
 
+    private UnityEngine.InputSystem.Controls.TouchControl moveControl = null;
+    private UnityEngine.InputSystem.Controls.TouchControl mouseControl = null;
+
     private void Update()
+    {
+        if (isTouch) {
+            UpdateTouch();
+        } else {
+            UpdateKeyboardMouse();
+        }
+    }
+
+    private void UpdateTouch()
+    {
+        var touchArray = Touchscreen.current.touches;
+        foreach (var touch in touchArray) {
+            if (touch.isInProgress) {
+                Vector2 position = touch.position.ReadValue();
+                if (position.x > Screen.width * 0.2f) {
+                    mouse = touch.delta.ReadValue();
+                    mouseControl = touch;
+                }
+                if (position.x < Screen.width * 0.2f) {
+                    movement.y = 1f;
+                    moveControl = touch;
+                }
+            } else {
+                if (mouseControl == touch) {
+                    mouse = Vector2.zero;
+                    mouseControl = null;
+                }
+                if (moveControl == touch) {
+                    movement.y = 0f;
+                    moveControl = null;
+                }
+            }
+            if (touch.tapCount.ReadValue() != 0) {
+                if (inputAction != null) {
+                    inputAction.Invoke(new InputAction.CallbackContext());
+                }
+            }
+        }
+    }
+
+    private void UpdateKeyboardMouse()
     {
         mouse = Mouse.current.delta.ReadValue();
         movement.y = Keyboard.current.wKey.ReadValue() - Keyboard.current.sKey.ReadValue();

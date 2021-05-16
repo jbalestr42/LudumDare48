@@ -819,6 +819,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1762792497, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
+      propertyPath: isTouch
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1817507780519650668, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2406,61 +2410,6 @@ MonoBehaviour:
   _doorSound: {fileID: 1900721815}
   _originObject: {fileID: 1147414337}
   originLockedObject: 0
---- !u!1 &454207039 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1762792495, guid: f52e88a95fd260b4aa19d484131d9206, type: 3}
-  m_PrefabInstance: {fileID: 356446224}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &454207042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 454207039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 536773987d3603f4a94817d12cf56969, type: 3}
-  m_NotificationBehavior: 3
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3927afb6-7243-4629-83c8-3fff30773f51
-    m_ActionName: Player/Object[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 321f26d3-a557-4f6b-880d-993c9e8b7ea3
-    m_ActionName: Player/Action[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 816b3e38-33e1-41d6-b62b-ae196dcf26d1
-    m_ActionName: Player/Movement[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e365d51b-f0f9-4d29-a5dd-0b7475f50ce6
-    m_ActionName: Player/Mouse[/Mouse/delta,/Touchscreen/delta]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c748d4aa-c4b5-4327-930f-9cb49aebe7d5
-    m_ActionName: Player/Move[/Touchscreen/press]
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Keyboard And Mouse
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!4 &501463191 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3720837133761783831, guid: 1aeef548003415041a7d04e6e88d391b, type: 3}
