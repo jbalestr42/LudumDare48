@@ -21,23 +21,37 @@ public class InputManager : MonoBehaviour {
 
     private void Update()
     {
+        if (isTouch) {
+            UpdateTouch();
+        } else {
+            UpdateKeyboardMouse();
+        }
+    }
+
+    private void LateUpdate()
+    {
+        InputCheck();
         IsTouch = isTouch;
+    }
+
+    private void InputCheck()
+    {
         if (isTouch) {
             if (Keyboard.current.anyKey.wasPressedThisFrame) {
                 isTouch = false;
-                return;
             }
-            UpdateTouch();
         } else {
             var touchArray = Touchscreen.current.touches;
             foreach (var touch in touchArray) {
                 if (touch.isInProgress) {
                     isTouch = true;
-                    return;
                 }
             }
-            UpdateKeyboardMouse();
         }
+        mouse = Vector2.zero;
+        movement = Vector2.zero;
+        moveControl = null;
+        mouseControl = null;
     }
 
     private void UpdateTouch()
