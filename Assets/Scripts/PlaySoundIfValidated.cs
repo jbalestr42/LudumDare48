@@ -7,18 +7,28 @@ public class PlaySoundIfValidated : MonoBehaviour {
     [SerializeField] AudioSource audioSource;
     [SerializeField] bool needSnap = false;
 
+    private float originVolume;
+
+    private void Start()
+    {
+        audioSource.Play();
+        originVolume = audioSource.volume;
+    }
+
     private void Update()
     {
+        bool isOn = true;
         if (controlable.isSnapped) {
             foreach (var reactionable in controlable.reactionableList) {
                 if (!reactionable.isValidated) {
-                    return;
+                    isOn = false;
                 }
             }
-            if (!audioSource.isPlaying) {
-                Debug.Log("Play sound " + audioSource.clip.name);
-                audioSource.Play();
-            }
+        }
+        if (isOn) {
+            audioSource.volume = Mathf.Min(originVolume, audioSource.volume + Time.deltaTime * 10f);
+        } else {
+            audioSource.volume = Mathf.Max(0f, audioSource.volume - Time.deltaTime * 10f);
         }
     }
 }

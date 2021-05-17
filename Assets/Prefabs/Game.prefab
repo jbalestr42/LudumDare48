@@ -95,6 +95,12 @@ MonoBehaviour:
   _player: {fileID: 0}
   debugNextHouse: 1
   closeDoorIfValidate: 1
+  animationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3551290604148537056
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClipList:
-  - {fileID: 8300000, guid: 7dbec3bacb5de69488c3bb8d32a084ff, type: 3}
+  - {fileID: 8300000, guid: 249060b1f3d6d6942a0efe873be2c4d5, type: 3}
   - {fileID: 8300000, guid: 2e3717f2801495244a242b2a5604f897, type: 3}
   - {fileID: 8300000, guid: 3252ebe218622024fb1e091e3ecd9421, type: 3}
   - {fileID: 8300000, guid: 2ed163265153ecb41babda835670edda, type: 3}
