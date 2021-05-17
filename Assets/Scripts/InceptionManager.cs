@@ -70,7 +70,6 @@ public class InceptionManager : MonoBehaviour {
             if (!controlable.isLocked) {
                 controlable.isLocked = true;
                 controlable.startedLocked = true;
-                _maisons[_currentHouse].originLockedObject++;
                 SoundManager.PlaySound(Random.value > 0.5 ? Random.value > 0.5f ? "snap_1" : "snap_2" : "snap_3", controlable.transform.position);
             }
             if (_refMaison.CheckObjects(_maisons[_currentHouse])) {
@@ -90,6 +89,9 @@ public class InceptionManager : MonoBehaviour {
     void OpenNextHouse()
     {
         StartCoroutine(ObjectLockCoroutine());
+        foreach (var houseControlable in _maisons[_currentHouse]._controlables) {
+            SnapObject(houseControlable);
+        }
         _currentHouse++;
         _maisons[_currentHouse - 1].OpenDoor();
         if (_currentHouse >= _maisons.Count) {
@@ -164,29 +166,6 @@ public class InceptionManager : MonoBehaviour {
             i--;
             yield return new WaitForSeconds(0.25f);
         }
-    }
-
-
-    public bool IsLost()
-    {
-        int currentLockedObject = 0;
-        if (_currentHouse >= _maisons.Count) {
-            return false;
-        }
-        foreach (var controlable in _maisons[_currentHouse]._controlables) {
-            AControlable refControlable = _refMaison.GetObject(controlable.objectType);
-            Vector3 position1 = refControlable.controlableParent.InverseTransformPointUnscaled(refControlable.transform.position);
-            Vector3 position2 = controlable.controlableParent.InverseTransformPointUnscaled(controlable.transform.position);
-            float distance = Vector3.Distance(position1, position2);
-
-            if (distance < 1f && controlable.startedLocked) {
-                currentLockedObject++;
-            }
-        }
-        if (currentLockedObject < _maisons[_currentHouse].originLockedObject) {
-            return true;
-        }
-        return false;
     }
 
     IEnumerator SnapOnMoveCoroutine()
